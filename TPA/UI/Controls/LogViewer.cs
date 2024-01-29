@@ -1,0 +1,54 @@
+﻿using DevExpress.XtraEditors;
+using TPA.Schemas;
+using MvUtils;
+using System;
+using DevExpress.XtraEditors.Senders;
+
+namespace TPA.UI.Controls
+{
+    public partial class LogViewer : XtraUserControl
+    {
+        private LocalizationLogs 번역 = new LocalizationLogs();
+
+        public LogViewer()
+        {
+            InitializeComponent();
+        }
+
+        public void Init()
+        {
+            this.BindLocalization.DataSource = 번역;
+            Localization.SetColumnCaption(this.GridView1, typeof(로그정보));
+
+            e시작.DateTime = DateTime.Today;
+            e종료.DateTime = DateTime.Today;
+            GridView1.Init();
+            GridControl1.DataSource = Global.로그자료;
+            this.b검색.Click += 검색클릭;
+        }
+
+        public void Close() { }
+
+        private void 검색클릭(object sender, EventArgs e)
+        {
+            Global.로그자료.Load(this.e시작.DateTime, this.e종료.DateTime);
+        }
+
+        private class LocalizationLogs
+        {
+            private enum Items
+            {
+                [Translation("Start Day", "시작일자")]
+                시작일자,
+                [Translation("End Day", "종료일자")]
+                종료일자,
+                [Translation("Search", "조  회")]
+                조회버튼,
+            }
+
+            public String 시작일자 { get { return Localization.GetString(Items.시작일자); } }
+            public String 종료일자 { get { return Localization.GetString(Items.종료일자); } }
+            public String 조회버튼 { get { return Localization.GetString(Items.조회버튼); } }
+        }
+    }
+}
