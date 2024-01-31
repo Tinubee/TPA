@@ -84,37 +84,41 @@ namespace TPA.UI.Controls
         private void e강제OK배출_Toggled(object sender, EventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch.IsOn && Global.환경설정.강제NG배출여부) {
-                this.e강제NG배출.Toggle();
-                Global.환경설정.강제NG배출여부 = false;
-            }
+            Global.환경설정.강제OK배출여부 = toggleSwitch.IsOn;
+            //if (toggleSwitch.IsOn && Global.환경설정.강제NG배출여부) {
+            //    this.e강제NG배출.Toggle();
+            //    Global.환경설정.강제NG배출여부 = false;
+            //}
         }
 
         private void e강제NG배출_Toggled(object sender, EventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch.IsOn && Global.환경설정.강제OK배출여부) {
-                this.e강제OK배출.Toggle();
-                Global.환경설정.강제OK배출여부 = false;
-            }
+            Global.환경설정.강제NG배출여부 = toggleSwitch.IsOn;
+            //if (toggleSwitch.IsOn && Global.환경설정.강제OK배출여부) {
+            //    this.e강제OK배출.Toggle();
+            //    Global.환경설정.강제OK배출여부 = false;
+            //}
         }
 
         private void e강제커버조립O_Toggled(object sender, EventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch.IsOn && Global.환경설정.강제커버조립X) {
-                this.e강제커버조립X.Toggle();
-                Global.환경설정.강제커버조립X = false;
-            }
+            Global.환경설정.강제커버조립O = toggleSwitch.IsOn;
+            //if (toggleSwitch.IsOn && Global.환경설정.강제커버조립X) {
+            //    this.e강제커버조립X.Toggle();
+            //    Global.환경설정.강제커버조립X = false;
+            //}
         }
 
         private void e강제커버조립X_Toggled(object sender, EventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if (toggleSwitch.IsOn && Global.환경설정.강제커버조립O) {
-                this.e강제커버조립O.Toggle();
-                Global.환경설정.강제커버조립O = false;
-            }
+            Global.환경설정.강제커버조립X = toggleSwitch.IsOn;
+            //if (toggleSwitch.IsOn && Global.환경설정.강제커버조립O) {
+            //    this.e강제커버조립O.Toggle();
+            //    Global.환경설정.강제커버조립O = false;
+            //}
         }
     }
 }

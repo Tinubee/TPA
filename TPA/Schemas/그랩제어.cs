@@ -168,6 +168,7 @@ namespace TPA.Schemas
                         }
                         else if (카메라 == 카메라구분.Cam07)
                         {
+                            Debug.WriteLine($"{카메라구분.Cam07} 그랩완료시 들어오는 else if문 들어옴");
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 1);
                             Thread.Sleep(50);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].Busy주소, 0);

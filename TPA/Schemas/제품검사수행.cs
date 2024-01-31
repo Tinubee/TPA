@@ -357,12 +357,16 @@ namespace TPA.Schemas
             검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
 
             if (Global.환경설정.강제커버조립O) {
+                Debug.WriteLine("강제커버조립O 들어옴");
+                Debug.WriteLine($"강제커버조립O PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].완료주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                 Thread.Sleep(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 return;
             }
             else if (Global.환경설정.강제커버조립X) {
+                Debug.WriteLine("강제커버조립X 들어옴");
+                Debug.WriteLine($"강제커버조립X PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].Busy주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
                 Thread.Sleep(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);

@@ -36,6 +36,20 @@ namespace TPA.Schemas
 
         private void PLC커맨드정보초기화()
         {
+            foreach (var item in Global.장치통신.PLC커맨드.Values)
+            {
+                //Debug.WriteLine($"완료주소 : {item.완료주소}");
+                //Debug.WriteLine($"완료주소 : {item.Busy주소}");
+                //if(item.완료주소 != "")
+                //{
+                Debug.WriteLine($"{item.완료주소} Off");
+                Global.장치통신.강제쓰기(item.완료주소, 0);
+                //}else if(item.Busy주소 != "")
+                //{
+                Debug.WriteLine($"{item.Busy주소} Off");
+                Global.장치통신.강제쓰기(item.Busy주소, 0);
+                //}
+            }
         }
 
         private void 검사위치별제품인덱스버퍼초기화()
@@ -105,17 +119,20 @@ namespace TPA.Schemas
                             "  PLC Trigger index");
 
             Debug.WriteLine($"셔틀01제품인덱스=>{정보읽기(PLC커맨드목록.셔틀01제품인덱스)}, 셔틀02제품인덱스=>{정보읽기(PLC커맨드목록.셔틀02제품인덱스)}, 셔틀03제품인덱스=>{정보읽기(PLC커맨드목록.셔틀03제품인덱스)}, 셔틀04제품인덱스=>{정보읽기(PLC커맨드목록.셔틀04제품인덱스)}, " +
-                            $"셔틀05제품인덱스=>{정보읽기(PLC커맨드목록.셔틀05제품인덱스)}, 셔틀06제품인덱스=>{정보읽기(PLC커맨드목록.셔틀06제품인덱스)}, 셔틀07제품인덱스=>{정보읽기(PLC커맨드목록.셔틀07제품인덱스)}, 셔틀08제품인덱스=>{정보읽기(PLC커맨드목록.셔틀08제품인덱스)}, " + 
+                            $"셔틀05제품인덱스=>{정보읽기(PLC커맨드목록.셔틀05제품인덱스)}, 셔틀06제품인덱스=>{정보읽기(PLC커맨드목록.셔틀06제품인덱스)}, 셔틀07제품인덱스=>{정보읽기(PLC커맨드목록.셔틀07제품인덱스)}, 셔틀08제품인덱스=>{정보읽기(PLC커맨드목록.셔틀08제품인덱스)}, " +
                             $"셔틀09제품인덱스=>{정보읽기(PLC커맨드목록.셔틀09제품인덱스)}, 셔틀10제품인덱스=>{정보읽기(PLC커맨드목록.셔틀10제품인덱스)}" + "  PLC Product index \n");
 
-            foreach (KeyValuePair<PLC커맨드목록, Int32> item in 트리거변경) {
+            foreach (KeyValuePair<PLC커맨드목록, Int32> item in 트리거변경)
+            {
                 if (item.Value <= 0) continue;
 
-                if (Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[item.Key].요청주소) == 0) {
+                if (Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[item.Key].요청주소) == 0)
+                {
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[item.Key].Busy주소, 0);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[item.Key].완료주소, 0);
                 }
-                if (Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[item.Key].요청주소) == 1) {
+                if (Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[item.Key].요청주소) == 1)
+                {
                     // 20231201 PLC에서 값을 요청하는 주소들은 Busy/Complete이 아닌 NG/OK 개념이기에 아래 코드 진입하면 안됨
                     if (!(item.Key == PLC커맨드목록.커버조립트리거 || item.Key == PLC커맨드목록.라벨발행트리거 || item.Key == PLC커맨드목록.결과요청트리거))
                     {
@@ -149,7 +166,8 @@ namespace TPA.Schemas
                 return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀08제품인덱스].요청주소);
             else if (커맨드 == PLC커맨드목록.결과요청트리거) // 결과컨베이어
                 return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀09제품인덱스].요청주소);
-            else {
+            else
+            {
                 Debug.WriteLine($"[{커맨드.ToString()}] : Global.장치통신.프로세스의 GetIndex 함수에서 정의하지 않은 검사위치 정보 전달받음");
                 return 0;
             }
@@ -161,7 +179,8 @@ namespace TPA.Schemas
             List<Int32> 대상 = new List<Int32>();
             Int32 시작 = (Int32)PLC커맨드목록.하부큐알트리거;
             Int32 종료 = (Int32)PLC커맨드목록.결과요청트리거;
-            for (Int32 i = 종료; i >= 시작; i--) {
+            for (Int32 i = 종료; i >= 시작; i--)
+            {
                 PLC커맨드목록 구분 = (PLC커맨드목록)i;
                 if (this.PLC커맨드[구분].데이터값 <= 0) continue;
                 대상.Add(this.PLC커맨드[구분].데이터값);
@@ -173,7 +192,7 @@ namespace TPA.Schemas
         {
             if (this.PLC커맨드.Changed(PLC커맨드목록.시작정지))
                 Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")} => {this.PLC커맨드.Changed(PLC커맨드목록.시작정지)}", "시작정지");
-            
+
             if (this.PLC커맨드.Changed(PLC커맨드목록.자동수동) || this.PLC커맨드.Changed(PLC커맨드목록.시작정지))
                 this.동작상태알림?.Invoke();
         }
@@ -181,7 +200,8 @@ namespace TPA.Schemas
         private void 통신핑퐁수행()
         {
             if (!this.PLC커맨드[PLC커맨드목록.통신핑퐁].Passed()) return;
-            if (this.시작일시.Day != DateTime.Today.Day) {
+            if (this.시작일시.Day != DateTime.Today.Day)
+            {
                 this.시작일시 = DateTime.Now;
                 // org this.검사번호리셋 = true;
                 Global.모델자료.선택모델.날짜변경();
