@@ -94,7 +94,8 @@ namespace TPA.Schemas
         public Boolean 강제커버조립O { get; set; } = false;
         [JsonProperty("ForceCoverAssyNG")]
         public Boolean 강제커버조립X { get; set; } = false;
-
+        [JsonIgnore, Description("Only어퍼하우징검사")]
+        public Boolean Only어퍼하우징검사 = false;
         [JsonIgnore, Description("슈퍼유저")]
         public const String 시스템관리자 = "ivmadmin";
 

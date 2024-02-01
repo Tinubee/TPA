@@ -35,7 +35,6 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.e트리거보드포트 = new DevExpress.XtraEditors.TextEdit();
-            this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             this.GroupBasic = new DevExpress.XtraEditors.GroupControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.e강제커버조립X = new DevExpress.XtraEditors.ToggleSwitch();
@@ -91,11 +90,14 @@
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
             this.e라벨기포트 = new DevExpress.XtraEditors.TextEdit();
             this.e라벨기스위치 = new DevExpress.XtraEditors.ToggleSwitch();
-            this.e유저관리 = new TPA.UI.Controls.Users();
             this.d기본경로 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.d문서저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.d사진저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
+            this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
+            this.e유저관리 = new TPA.UI.Controls.Users();
+            this.eOnly어퍼하우징 = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.g환경설정)).BeginInit();
             this.g환경설정.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -103,7 +105,6 @@
             this.GroupTriggerBoard.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e트리거보드포트.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupBasic)).BeginInit();
             this.GroupBasic.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -144,6 +145,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e라벨기포트.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e라벨기스위치.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eOnly어퍼하우징.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // g환경설정
@@ -233,10 +236,6 @@
             this.e트리거보드포트.Size = new System.Drawing.Size(171, 30);
             this.e트리거보드포트.TabIndex = 1;
             // 
-            // Bind환경설정
-            // 
-            this.Bind환경설정.DataSource = typeof(TPA.Schemas.환경설정);
-            // 
             // GroupBasic
             // 
             this.GroupBasic.Controls.Add(this.tableLayoutPanel2);
@@ -278,6 +277,8 @@
             this.tableLayoutPanel2.Controls.Add(this.e기본경로, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.e양품이미지저장, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.e결과보관, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.labelControl22, 2, 5);
+            this.tableLayoutPanel2.Controls.Add(this.eOnly어퍼하우징, 3, 5);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 27);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 9;
@@ -298,14 +299,14 @@
             this.e강제커버조립X.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "강제커버조립X", true));
             this.e강제커버조립X.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e강제커버조립X.EnterMoveNextControl = true;
-            this.e강제커버조립X.Location = new System.Drawing.Point(397, 227);
+            this.e강제커버조립X.Location = new System.Drawing.Point(413, 227);
             this.e강제커버조립X.Name = "e강제커버조립X";
             this.e강제커버조립X.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e강제커버조립X.Properties.Appearance.Options.UseFont = true;
             this.e강제커버조립X.Properties.AutoHeight = false;
             this.e강제커버조립X.Properties.OffText = "Off";
             this.e강제커버조립X.Properties.OnText = "On";
-            this.e강제커버조립X.Size = new System.Drawing.Size(179, 26);
+            this.e강제커버조립X.Size = new System.Drawing.Size(163, 26);
             this.e강제커버조립X.TabIndex = 23;
             this.e강제커버조립X.Toggled += new System.EventHandler(this.e강제커버조립X_Toggled);
             // 
@@ -321,7 +322,7 @@
             this.e강제커버조립O.Properties.AutoHeight = false;
             this.e강제커버조립O.Properties.OffText = "Off";
             this.e강제커버조립O.Properties.OnText = "On";
-            this.e강제커버조립O.Size = new System.Drawing.Size(179, 26);
+            this.e강제커버조립O.Size = new System.Drawing.Size(163, 26);
             this.e강제커버조립O.TabIndex = 22;
             this.e강제커버조립O.Toggled += new System.EventHandler(this.e강제커버조립O_Toggled);
             // 
@@ -333,9 +334,9 @@
             this.labelControl21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelControl21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControl21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl21.Location = new System.Drawing.Point(295, 227);
+            this.labelControl21.Location = new System.Drawing.Point(279, 227);
             this.labelControl21.Name = "labelControl21";
-            this.labelControl21.Size = new System.Drawing.Size(96, 26);
+            this.labelControl21.Size = new System.Drawing.Size(128, 26);
             this.labelControl21.TabIndex = 21;
             this.labelControl21.Text = "강제 커버조립 X";
             // 
@@ -358,14 +359,14 @@
             this.e강제NG배출.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "강제NG배출여부", true));
             this.e강제NG배출.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e강제NG배출.EnterMoveNextControl = true;
-            this.e강제NG배출.Location = new System.Drawing.Point(397, 195);
+            this.e강제NG배출.Location = new System.Drawing.Point(413, 195);
             this.e강제NG배출.Name = "e강제NG배출";
             this.e강제NG배출.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e강제NG배출.Properties.Appearance.Options.UseFont = true;
             this.e강제NG배출.Properties.AutoHeight = false;
             this.e강제NG배출.Properties.OffText = "Off";
             this.e강제NG배출.Properties.OnText = "On";
-            this.e강제NG배출.Size = new System.Drawing.Size(179, 26);
+            this.e강제NG배출.Size = new System.Drawing.Size(163, 26);
             this.e강제NG배출.TabIndex = 19;
             this.e강제NG배출.Toggled += new System.EventHandler(this.e강제NG배출_Toggled);
             // 
@@ -381,7 +382,7 @@
             this.e강제OK배출.Properties.AutoHeight = false;
             this.e강제OK배출.Properties.OffText = "Off";
             this.e강제OK배출.Properties.OnText = "On";
-            this.e강제OK배출.Size = new System.Drawing.Size(179, 26);
+            this.e강제OK배출.Size = new System.Drawing.Size(163, 26);
             this.e강제OK배출.TabIndex = 18;
             this.e강제OK배출.Toggled += new System.EventHandler(this.e강제OK배출_Toggled);
             // 
@@ -393,9 +394,9 @@
             this.labelControl19.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelControl19.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControl19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl19.Location = new System.Drawing.Point(295, 195);
+            this.labelControl19.Location = new System.Drawing.Point(279, 195);
             this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(96, 26);
+            this.labelControl19.Size = new System.Drawing.Size(128, 26);
             this.labelControl19.TabIndex = 17;
             this.labelControl19.Text = "강제 NG 배출";
             // 
@@ -432,7 +433,7 @@
             this.e소수자리.Properties.AutoHeight = false;
             this.e소수자리.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e소수자리.Size = new System.Drawing.Size(179, 26);
+            this.e소수자리.Size = new System.Drawing.Size(163, 26);
             this.e소수자리.TabIndex = 15;
             // 
             // e로그보관
@@ -445,7 +446,7 @@
             0,
             0});
             this.e로그보관.EnterMoveNextControl = true;
-            this.e로그보관.Location = new System.Drawing.Point(397, 131);
+            this.e로그보관.Location = new System.Drawing.Point(413, 131);
             this.e로그보관.Name = "e로그보관";
             this.e로그보관.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e로그보관.Properties.Appearance.Options.UseFont = true;
@@ -454,7 +455,7 @@
             this.e로그보관.Properties.AutoHeight = false;
             this.e로그보관.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e로그보관.Size = new System.Drawing.Size(179, 26);
+            this.e로그보관.Size = new System.Drawing.Size(163, 26);
             this.e로그보관.TabIndex = 14;
             // 
             // e불량이미지저장
@@ -462,14 +463,14 @@
             this.e불량이미지저장.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "사진저장NG", true));
             this.e불량이미지저장.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e불량이미지저장.EnterMoveNextControl = true;
-            this.e불량이미지저장.Location = new System.Drawing.Point(397, 99);
+            this.e불량이미지저장.Location = new System.Drawing.Point(413, 99);
             this.e불량이미지저장.Name = "e불량이미지저장";
             this.e불량이미지저장.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e불량이미지저장.Properties.Appearance.Options.UseFont = true;
             this.e불량이미지저장.Properties.AutoHeight = false;
             this.e불량이미지저장.Properties.OffText = "Off";
             this.e불량이미지저장.Properties.OnText = "On";
-            this.e불량이미지저장.Size = new System.Drawing.Size(179, 26);
+            this.e불량이미지저장.Size = new System.Drawing.Size(163, 26);
             this.e불량이미지저장.TabIndex = 12;
             // 
             // e사진저장
@@ -593,9 +594,9 @@
             this.labelControl7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelControl7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl7.Location = new System.Drawing.Point(295, 99);
+            this.labelControl7.Location = new System.Drawing.Point(279, 99);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(96, 26);
+            this.labelControl7.Size = new System.Drawing.Size(128, 26);
             this.labelControl7.TabIndex = 6;
             this.labelControl7.Text = "NG 이미지 저장";
             // 
@@ -607,9 +608,9 @@
             this.labelControl8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelControl8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl8.Location = new System.Drawing.Point(295, 131);
+            this.labelControl8.Location = new System.Drawing.Point(279, 131);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(96, 26);
+            this.labelControl8.Size = new System.Drawing.Size(128, 26);
             this.labelControl8.TabIndex = 7;
             this.labelControl8.Text = "로그 보관일";
             // 
@@ -640,7 +641,7 @@
             this.e양품이미지저장.Properties.AutoHeight = false;
             this.e양품이미지저장.Properties.OffText = "Off";
             this.e양품이미지저장.Properties.OnText = "On";
-            this.e양품이미지저장.Size = new System.Drawing.Size(179, 26);
+            this.e양품이미지저장.Size = new System.Drawing.Size(163, 26);
             this.e양품이미지저장.TabIndex = 11;
             // 
             // e결과보관
@@ -662,7 +663,7 @@
             this.e결과보관.Properties.AutoHeight = false;
             this.e결과보관.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e결과보관.Size = new System.Drawing.Size(179, 26);
+            this.e결과보관.Size = new System.Drawing.Size(163, 26);
             this.e결과보관.TabIndex = 13;
             // 
             // GroupCodeReader1
@@ -977,7 +978,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.31579F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
             this.tableLayoutPanel7.Controls.Add(this.labelControl10, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.e라벨기주소, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.labelControl17, 2, 0);
@@ -1049,6 +1050,24 @@
             this.e라벨기스위치.Size = new System.Drawing.Size(120, 30);
             this.e라벨기스위치.TabIndex = 4;
             // 
+            // labelControl22
+            // 
+            this.labelControl22.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labelControl22.Appearance.Options.UseFont = true;
+            this.labelControl22.Appearance.Options.UseTextOptions = true;
+            this.labelControl22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.labelControl22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl22.Location = new System.Drawing.Point(279, 163);
+            this.labelControl22.Name = "labelControl22";
+            this.labelControl22.Size = new System.Drawing.Size(128, 26);
+            this.labelControl22.TabIndex = 24;
+            this.labelControl22.Text = "Only 어퍼하우징 검사";
+            // 
+            // Bind환경설정
+            // 
+            this.Bind환경설정.DataSource = typeof(TPA.Schemas.환경설정);
+            // 
             // e유저관리
             // 
             this.e유저관리.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1056,6 +1075,19 @@
             this.e유저관리.Name = "e유저관리";
             this.e유저관리.Size = new System.Drawing.Size(583, 186);
             this.e유저관리.TabIndex = 6;
+            // 
+            // eOnly어퍼하우징
+            // 
+            this.eOnly어퍼하우징.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eOnly어퍼하우징.EnterMoveNextControl = true;
+            this.eOnly어퍼하우징.Location = new System.Drawing.Point(413, 163);
+            this.eOnly어퍼하우징.Name = "eOnly어퍼하우징";
+            this.eOnly어퍼하우징.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.eOnly어퍼하우징.Properties.Appearance.Options.UseFont = true;
+            this.eOnly어퍼하우징.Properties.OffText = "Off";
+            this.eOnly어퍼하우징.Properties.OnText = "On";
+            this.eOnly어퍼하우징.Size = new System.Drawing.Size(163, 26);
+            this.eOnly어퍼하우징.TabIndex = 25;
             // 
             // Config
             // 
@@ -1072,7 +1104,6 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e트리거보드포트.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupBasic)).EndInit();
             this.GroupBasic.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1118,6 +1149,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e라벨기포트.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e라벨기스위치.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eOnly어퍼하우징.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1191,5 +1224,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl20;
         private DevExpress.XtraEditors.ToggleSwitch e강제커버조립X;
         private DevExpress.XtraEditors.ToggleSwitch e강제커버조립O;
+        private DevExpress.XtraEditors.LabelControl labelControl22;
+        private DevExpress.XtraEditors.ToggleSwitch eOnly어퍼하우징;
     }
 }

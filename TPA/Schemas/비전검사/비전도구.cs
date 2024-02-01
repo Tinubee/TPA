@@ -182,24 +182,34 @@ namespace TPA.Schemas
         public Boolean Run(ICogImage image, Dictionary<String, Object> inputs)
         {
             try {
+                Debug.WriteLine("Cognex Run Fails : Run 들어옴");
                 this.검사시작 = DateTime.Now;
+                Debug.WriteLine("Cognex Run Fails : InputImage 진행전");
                 this.InputImage = image;
+                Debug.WriteLine("Cognex Run Fails : SetInputs 진행전 ");
                 this.SetInputs(inputs);
+                Debug.WriteLine("Cognex Run Fails : SetInputs 진행완료 ");
+                Debug.WriteLine("Cognex Run Fails : ToolBlock Run 진행전 ");
                 this.ToolBlock.Run();
+                Debug.WriteLine("Cognex Run Fails : ToolBlock Run 진행완료 ");
 
                 //foreach (ICogTool tool in this.ToolBlock.Tools) {
                 //    if (tool == this.ToolBlock.Tools.)
                 //    if (tool.RunStatus.Result != CogToolResultConstants.Accept)
                 //        ;
                 //}
-                    
+
 
                 if (카메라 == 카메라구분.Cam08) {
                     DisplayResult(null);
                 }
                 else {
+                    Debug.WriteLine("Cognex Run Fails :GetResults 진행전 ");
                     검사결과 검사 = Global.검사자료.카메라검사(this.카메라, GetResults());
+                    Debug.WriteLine("Cognex Run Fails :GetResults 진행완료 ");
+                    Debug.WriteLine("Cognex Run Fails :DisplayResult 진행전 ");
                     DisplayResult(검사);
+                    Debug.WriteLine("Cognex Run Fails :DisplayResult 진행완료. ");
                 }
 
                 this.검사종료 = DateTime.Now;

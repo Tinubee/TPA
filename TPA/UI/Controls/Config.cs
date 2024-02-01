@@ -23,7 +23,16 @@ namespace TPA.UI.Controls
             this.e문서저장.ButtonClick += E문서저장_ButtonClick;
             this.e사진저장.ButtonClick += E사진저장_ButtonClick;
             this.b설정저장.Click += B설정저장_Click;
+
+            this.eOnly어퍼하우징.Toggled += EOnly어퍼하우징_Toggled;
+
             this.e유저관리.Init();
+        }
+
+        private void EOnly어퍼하우징_Toggled(object sender, EventArgs e)
+        {
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            Global.환경설정.Only어퍼하우징검사 = toggleSwitch.IsOn;
         }
 
         public void Close()

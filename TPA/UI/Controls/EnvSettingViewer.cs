@@ -27,10 +27,10 @@ namespace TPA.UI.Controls
         public void Init()
         {
             this.Bind환경설정정보.DataSource = Global.환경설정;
-            this.e디버깅로그창.ResetText();
-            this.Refresh();
+            //this.e디버깅로그창.ResetText();
+            //this.Refresh();
 
-            Global.로그알람 += 로그출력;
+            //Global.로그알람 += 로그출력;
         }
 
         private void 로그출력(String 내용)
