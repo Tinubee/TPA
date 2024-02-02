@@ -23,7 +23,8 @@ namespace TPA.Schemas
         {
             Int32 카메라대수 = Enum.GetValues(typeof(카메라구분)).Length;
             제품인덱스큐 = new Queue<Int32>[카메라대수];
-            for (Int32 구분 = 0; 구분 < 카메라대수; 구분++) {
+            for (Int32 구분 = 0; 구분 < 카메라대수; 구분++)
+            {
                 제품인덱스큐[구분] = new Queue<Int32>();
             }
         }
@@ -51,7 +52,8 @@ namespace TPA.Schemas
 
         private void 재검사여부확인(PLC커맨드목록 커맨드)
         {
-            if (Global.장치통신.재검사여부) {
+            if (Global.장치통신.재검사여부)
+            {
                 재검사 = 재검사여부.TRUE;
             }
         }
@@ -62,7 +64,8 @@ namespace TPA.Schemas
 
             제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀01제품인덱스];
 
-            if (제품인덱스 <= 0) {
+            if (제품인덱스 <= 0)
+            {
                 Global.오류로그(로그영역, "하부큐알리딩", $"제품인덱스가 없습니다.", true);
                 return;
             }
@@ -78,23 +81,24 @@ namespace TPA.Schemas
             //    return;
             //}
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 검사결과 검사 = Global.검사자료.검사시작(제품인덱스);
                 검사.재검사여부 = this.재검사;
 
                 큐알리더.큐알리딩결과 하부큐알1결과 = Global.큐알제어.하부큐알리더1.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
                 큐알리더.큐알리딩결과 하부큐알2결과 = Global.큐알제어.하부큐알리더2.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
-                
+
                 if (하부큐알1결과.결과자료.정상여부)
                 {
                     검사.큐알정보검사(검사항목.하부큐알코드1, 하부큐알1결과.결과자료.응답내용);
-                    
+
                     //Char[] FFC_rear = new char[하부큐알1결과.결과자료.응답내용.Length];
                     //FFC_rear = 하부큐알1결과.결과자료.응답내용.ToCharArray();
                     //for (int i = 0; i < FFC_rear.Length; i += 2) {
                     //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보R_1 + (i/2)].요청주소, (Int32)(FFC_rear[i]<<8) | (Int32)FFC_rear[i+1]);
                     //}
-                
+
                     Global.정보로그(로그영역, "하부큐알1리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알1결과.결과자료.응답내용}", false);
                 }
                 else
@@ -102,19 +106,19 @@ namespace TPA.Schemas
                     Global.정보로그(로그영역, "하부큐알1리딩수행", $"큐알리딩실패 : {하부큐알1결과.결과자료.오류내용}", false);
                     Global.큐알제어.하부큐알리더1.리딩종료();
                 }
-                
+
                 if (하부큐알2결과.결과자료.정상여부)
                 {
                     검사.큐알정보검사(검사항목.하부큐알코드2, 하부큐알2결과.결과자료.응답내용);
-                
+
                     //Char[] FFC_front = new char[하부큐알2결과.결과자료.응답내용.Length];
                     //FFC_front = 하부큐알2결과.결과자료.응답내용.ToCharArray();
                     //for (int i = 0; i < FFC_front.Length; i += 2) {
                     //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보F_1 + (i / 2)].요청주소, (Int32)(FFC_front[i] << 8) | (Int32)FFC_front[i + 1]);
                     //}
-                
+
                     Global.정보로그(로그영역, "하부큐알2리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알2결과.결과자료.응답내용}", false);
-                
+
                     //Int32 NG여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].Busy주소);
                     //Int32 OK여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].완료주소);
                     //
@@ -125,7 +129,7 @@ namespace TPA.Schemas
                     //else if (OK여부 > 0) {
                     //    검사.MES응답 = MES응답.OK;
                     //}
-                
+
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                     Thread.Sleep(50);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
@@ -145,7 +149,8 @@ namespace TPA.Schemas
 
             제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
 
-            if (제품인덱스 <= 0) {
+            if (제품인덱스 <= 0)
+            {
                 Global.오류로그(로그영역, "바닥평면센서수행", $"제품인덱스가 없습니다.", true);
                 return;
             }
@@ -159,11 +164,13 @@ namespace TPA.Schemas
                 return;
             }
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
                 if (검사 == null) return;
                 Dictionary<변위센서구분, Single> 자료 = new Dictionary<변위센서구분, Single>();
-                if (Global.변위센서제어.Read(센서구분.FRONT1, out 자료)) {
+                if (Global.변위센서제어.Read(센서구분.FRONT1, out 자료))
+                {
                     foreach (var s in 자료)
                     {
                         검사.SetResult(s.Key.ToString(), s.Value);
@@ -227,7 +234,8 @@ namespace TPA.Schemas
 
             제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
 
-            if (제품인덱스 <= 0) {
+            if (제품인덱스 <= 0)
+            {
                 Global.오류로그(로그영역, "측면촬영수행", $"제품인덱스가 없습니다.", true);
                 return;
             }
@@ -235,14 +243,16 @@ namespace TPA.Schemas
             this.제품인덱스큐[(Int32)카메라구분.Cam01].Enqueue(제품인덱스);
             this.제품인덱스큐[(Int32)카메라구분.Cam02].Enqueue(제품인덱스);
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam01);
                 Global.그랩제어.Ready(카메라구분.Cam01);
 
                 Debug.WriteLine($"측면촬영수행(L) : 제품인덱스 {제품인덱스}");
             }).Start();
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam02);
                 Global.그랩제어.Ready(카메라구분.Cam02);
 
@@ -256,7 +266,8 @@ namespace TPA.Schemas
 
             제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
 
-            if (제품인덱스 <= 0) {
+            if (제품인덱스 <= 0)
+            {
                 Global.오류로그(로그영역, "상부촬영수행", $"제품인덱스가 없습니다.", true);
                 return;
             }
@@ -264,7 +275,8 @@ namespace TPA.Schemas
             this.제품인덱스큐[(Int32)카메라구분.Cam03].Enqueue(제품인덱스);
             this.제품인덱스큐[(Int32)카메라구분.Cam08].Enqueue(제품인덱스);
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam03);
                 Global.그랩제어.Ready(카메라구분.Cam03);
                 Debug.WriteLine($"상부촬영수행 : 제품인덱스 {제품인덱스}");
@@ -283,8 +295,6 @@ namespace TPA.Schemas
                 return;
             }
 
-            
-
             if (Global.환경설정.Only어퍼하우징검사)
             {
                 Task.Run(() =>
@@ -298,7 +308,8 @@ namespace TPA.Schemas
             }
             else
             {
-                Task.Run(() => {
+                Task.Run(() =>
+                {
                     검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
                     if (검사 == null) return;
 
@@ -319,6 +330,11 @@ namespace TPA.Schemas
                     {
                         Global.정보로그(로그영역, "상부큐알리딩수행", $"큐알리딩실패 : {상부큐알결과.결과자료.오류내용}", false);
                         Global.큐알제어.상부큐알리더.리딩종료();
+                        //리딩실패시 NG로 빼자.
+                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                        Thread.Sleep(50);
+                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                     }
                 });
             }
@@ -339,13 +355,15 @@ namespace TPA.Schemas
             this.제품인덱스큐[(Int32)카메라구분.Cam04].Enqueue(제품인덱스);
             this.제품인덱스큐[(Int32)카메라구분.Cam05].Enqueue(제품인덱스);
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam04);
                 Global.그랩제어.Ready(카메라구분.Cam04);
                 Debug.WriteLine($"하부촬영수행(L) : 제품인덱스 {제품인덱스}");
             }).Start();
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam05);
                 Global.그랩제어.Ready(카메라구분.Cam05);
                 Debug.WriteLine($"하부촬영수행(R) : 제품인덱스 {제품인덱스}");
@@ -367,7 +385,8 @@ namespace TPA.Schemas
             this.제품인덱스큐[(Int32)카메라구분.Cam06].Enqueue(제품인덱스);
             this.제품인덱스큐[(Int32)카메라구분.Cam07].Enqueue(제품인덱스);
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 Global.조명제어.TurnOn(카메라구분.Cam06);
                 Global.조명제어.TurnOn(카메라구분.Cam07);
                 Global.그랩제어.Ready(카메라구분.Cam06);
@@ -392,7 +411,8 @@ namespace TPA.Schemas
 
             검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
 
-            if (Global.환경설정.강제커버조립O) {
+            if (Global.환경설정.강제커버조립O)
+            {
                 Debug.WriteLine("강제커버조립O 들어옴");
                 Debug.WriteLine($"강제커버조립O PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].완료주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
@@ -400,7 +420,8 @@ namespace TPA.Schemas
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 return;
             }
-            else if (Global.환경설정.강제커버조립X) {
+            else if (Global.환경설정.강제커버조립X)
+            {
                 Debug.WriteLine("강제커버조립X 들어옴");
                 Debug.WriteLine($"강제커버조립X PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].Busy주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
@@ -431,19 +452,23 @@ namespace TPA.Schemas
 
             제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀06제품인덱스];
 
-            if (제품인덱스 <= 0) {
+            if (제품인덱스 <= 0)
+            {
                 Global.오류로그(로그영역, "커버들뜸수행", $"제품인덱스가 없습니다.", true);
                 return;
             }
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
                 if (검사 == null) return;
 
                 Dictionary<변위센서구분, Single> 자료 = new Dictionary<변위센서구분, Single>();
+                Dictionary<변위센서구분, Single> 자료2 = new Dictionary<변위센서구분, Single>();
                 if (Global.변위센서제어.Read(센서구분.REAR1, out 자료))
                 {
-                    foreach (var s in 자료) {
+                    foreach (var s in 자료)
+                    {
                         검사.SetResult(s.Key.ToString(), s.Value);
                     }
                 }
@@ -452,11 +477,10 @@ namespace TPA.Schemas
                     Global.오류로그(로그영역, "커버센서수행", "변위센서 읽기 오류", true);
                     return;
                 }
-
-                자료 = new Dictionary<변위센서구분, Single>();
-                if (Global.변위센서제어.Read(센서구분.REAR2, out 자료))
+                if (Global.변위센서제어.Read(센서구분.REAR2, out 자료2))
                 {
-                    foreach (var s in 자료) {
+                    foreach (var s in 자료2)
+                    {
                         검사.SetResult(s.Key.ToString(), s.Value);
                     }
                 }
@@ -472,11 +496,13 @@ namespace TPA.Schemas
                     {  90, -230, (Single)검사.GetItem(검사항목.데이텀A3_R).결과값 },
                     { -90, -230, (Single)검사.GetItem(검사항목.데이텀A4_R).결과값 },
                 };
+
                 Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
                     { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
                     { 0,  -60, (Single)검사.GetItem(검사항목.커버상m2).결과값 },
                     { 0, -125, (Single)검사.GetItem(검사항목.커버상m3).결과값 },
                 };
+
                 Single[,] 커버윤곽위치 = {
                     {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.커버들뜸k1).결과값 },
                     {  26.7f,  -12.62f, (Single)검사.GetItem(검사항목.커버들뜸k2).결과값 },
@@ -526,30 +552,35 @@ namespace TPA.Schemas
                 검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
                 if (검사 != null)
                 {
-                    if (Global.큐알인쇄.명령가능()) {
-                        if (검사.측정결과 == 결과구분.NG) {
+                    if (Global.큐알인쇄.명령가능())
+                    {
+                        if (검사.측정결과 == 결과구분.NG)
+                        {
                             //Global.큐알인쇄.자료전송(검사.검사일시, 검사.모델구분, 검사.검사코드);
                             Global.큐알인쇄.라벨발행(검사.검사일시, 검사.모델구분, 검사.검사코드);
                             Thread.Sleep(50);
                             Global.정보로그(로그영역, "라벨부착수행", $"라벨부착커맨드 전송", false);
-                
+
                             // 라벨부착수행 O
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
                             Thread.Sleep(50);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                         }
-                        else {
+                        else
+                        {
                             // 라벨부착수행 X
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                             Thread.Sleep(50);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                         }
                     }
-                    else {
+                    else
+                    {
                         Global.정보로그(로그영역, "라벨부착수행", $"이전작업수행중", false);
                     }
                 }
-                else {
+                else
+                {
                     Global.오류로그(로그영역, "라벨부착수행", $"검사결과(제품인덱스:{제품인덱스})를 찾을 수 없습니다.", true);
                 }
 
@@ -582,13 +613,15 @@ namespace TPA.Schemas
             검사결과 검사 = Global.검사자료.검사완료(제품인덱스);
             if (검사 == null) return;
 
-            if (Global.환경설정.강제OK배출여부) {
+            if (Global.환경설정.강제OK배출여부)
+            {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                 Thread.Sleep(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 return;
             }
-            else if (Global.환경설정.강제NG배출여부) {
+            else if (Global.환경설정.강제NG배출여부)
+            {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
                 Thread.Sleep(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
@@ -605,9 +638,9 @@ namespace TPA.Schemas
             }
             else // 검사결과 NG
             {
-              Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-              Thread.Sleep(50);
-              Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
+                Thread.Sleep(50);
+                Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
             }
         }
     }

@@ -188,12 +188,14 @@ namespace TPA
                 return;
             }
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 while (!Global.조명제어.초기점멸작업완료여부)
                 {
                     Task.Delay(500).Wait();
                 }
-                this.Invoke(new Action(() => {
+                this.Invoke(new Action(() =>
+                {
                     WaitForm.Close();
                 }));
             });
@@ -209,7 +211,8 @@ namespace TPA
         private void MainFormClosing(object sender, FormClosingEventArgs e)
         {
             if (Global.환경설정.사용권한 == 유저권한구분.없음) this.CloseForm();
-            else {
+            else
+            {
                 e.Cancel = !Utils.Confirm(this, 번역.종료확인, Localization.확인.GetString());
                 if (!e.Cancel) this.CloseForm();
             }
@@ -402,48 +405,83 @@ namespace TPA
 
         private void b커버센서읽기_Click(object sender, EventArgs e)
         {
-                Dictionary<변위센서구분, Single> 자료1 = new Dictionary<변위센서구분, Single>();
-                Dictionary<변위센서구분, Single> 자료2 = new Dictionary<변위센서구분, Single>();
+            Dictionary<변위센서구분, Single> 자료1 = new Dictionary<변위센서구분, Single>();
+            Dictionary<변위센서구분, Single> 자료2 = new Dictionary<변위센서구분, Single>();
+            Dictionary<변위센서구분, Single> 전체센서자료 = new Dictionary<변위센서구분, Single>();
 
-                Global.변위센서제어.Read(센서구분.FRONT1, out 자료1);
-                foreach (var s in 자료1)
-                {
-                    Debug.WriteLine($"변위센서항목 : {s.Key.ToString()} 센서값 : {s.Value}");
-                }
+            Global.변위센서제어.Read(센서구분.REAR1, out 자료1);
+            foreach (var s in 자료1)
+            {
+                전체센서자료[s.Key] = s.Value;
+             
+            }
 
-                Global.변위센서제어.Read(센서구분.FRONT2, out 자료2);
-                foreach (var s in 자료2)
-                {
-                    Debug.WriteLine($"변위센서항목 : {s.Key.ToString()} 센서값 : {s.Value}");
-                }
+            Global.변위센서제어.Read(센서구분.REAR2, out 자료2);
+            foreach (var s in 자료2)
+            {
+                전체센서자료[s.Key] = s.Value;
+            }
 
-                //Single[,] 기준위치 = {
-                //    {  90,  200, (Single)검사.GetItem(검사항목.데이텀A1_R).결과값 },
-                //    { -90,  200, (Single)검사.GetItem(검사항목.데이텀A2_R).결과값 },
-                //    {  90, -230, (Single)검사.GetItem(검사항목.데이텀A3_R).결과값 },
-                //    { -90, -230, (Single)검사.GetItem(검사항목.데이텀A4_R).결과값 },
-                //};
-                //Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
-                //    { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
-                //    { 0,  -60, (Single)검사.GetItem(검사항목.커버상m2).결과값 },
-                //    { 0, -125, (Single)검사.GetItem(검사항목.커버상m3).결과값 },
-                //};
-                //Single[,] 커버윤곽위치 = {
-                //    {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.커버들뜸k1).결과값 },
-                //    {  26.7f,  -12.62f, (Single)검사.GetItem(검사항목.커버들뜸k2).결과값 },
-                //    {  26.7f,  -85.92f, (Single)검사.GetItem(검사항목.커버들뜸k3).결과값 },
-                //    {  26.7f, -175.42f, (Single)검사.GetItem(검사항목.커버들뜸k4).결과값 },
-                //    { -26.7f, -175.42f, (Single)검사.GetItem(검사항목.커버들뜸k5).결과값 },
-                //    { -26.7f,  -36.52f, (Single)검사.GetItem(검사항목.커버들뜸k6).결과값 },
-                //    { -26.7f,   33.38f, (Single)검사.GetItem(검사항목.커버들뜸k7).결과값 },
-                //    { -26.7f,   85.48f, (Single)검사.GetItem(검사항목.커버들뜸k8).결과값 },
-                //};
-                //
-                //Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
-                //Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
-                //
-                //Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);
-                //Single 커버윤곽높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버윤곽편차);
+            var Sort전체센서자료 = 전체센서자료.OrderBy(s => s.Key).ToList();
+
+            //Single averageA = ((Single)Sort전체센서자료[0].Value + (Single)Sort전체센서자료[1].Value + (Single)Sort전체센서자료[2].Value + (Single)Sort전체센서자료[3].Value) / 4;
+            //Debug.WriteLine($"averageA : {averageA}");
+            //foreach (var s in Sort전체센서자료)
+            //{
+            //    if((Int32)s.Key > 15)
+            //    {
+            //        //16 = 4
+            //        전체센서자료[s.Key] = s.Value - averageA;
+            //    }
+                
+            //}
+
+            Sort전체센서자료 = 전체센서자료.OrderBy(s => s.Key).ToList();
+            foreach (var s in Sort전체센서자료)
+            {
+                Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
+            }
+            //foreach (var s in 자료2)
+            //{
+            //    Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
+            //}
+
+
+            Single[,] 기준위치 = {
+                    {  90,  200, (Single)Sort전체센서자료[0].Value },
+                    { -90,  200, (Single)Sort전체센서자료[1].Value },
+                    {  90, -230, (Single)Sort전체센서자료[2].Value },
+                    { -90, -230, (Single)Sort전체센서자료[3].Value },
+                };
+
+            Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
+                    { 0,   40,  Sort전체센서자료[12].Value },
+                    { 0,  -60,  Sort전체센서자료[13].Value },
+                    { 0, -125,  Sort전체센서자료[14].Value},
+                };
+
+            Single[,] 커버윤곽위치 = {
+                    {  26.7f,   74.68f, Sort전체센서자료[4].Value},
+                    {  26.7f,  -12.62f, Sort전체센서자료[5].Value },
+                    {  26.7f,  -85.92f, Sort전체센서자료[6].Value},
+                    {  26.7f, -175.42f,Sort전체센서자료[7].Value },
+                    { -26.7f, -175.42f,Sort전체센서자료[8].Value  },
+                    { -26.7f,  -36.52f, Sort전체센서자료[9].Value},
+                    { -26.7f,   33.38f, Sort전체센서자료[10].Value},
+                    { -26.7f,   85.48f, Sort전체센서자료[11].Value},
+                };
+
+
+            Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
+            Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
+
+
+            Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);
+            Single 커버윤곽높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버윤곽편차);
+
+            Debug.WriteLine($"커버들뜸 : {커버들뜸높이}");
+            Debug.WriteLine($"커버윤곽 : {커버윤곽높이}");
+
         }
     }
 }

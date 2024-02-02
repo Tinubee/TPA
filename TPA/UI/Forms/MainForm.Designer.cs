@@ -106,7 +106,7 @@
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p환경설정);
             this.tabFormControl1.Pages.Add(this.t디버깅용페이지);
-            this.tabFormControl1.SelectedPage = this.p환경설정;
+            this.tabFormControl1.SelectedPage = this.t디버깅용페이지;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -384,7 +384,7 @@
             this.b커버센서읽기.Name = "b커버센서읽기";
             this.b커버센서읽기.Size = new System.Drawing.Size(173, 36);
             this.b커버센서읽기.TabIndex = 21;
-            this.b커버센서읽기.Text = "simpleButton1";
+            this.b커버센서읽기.Text = "커버센서읽기";
             this.b커버센서읽기.Click += new System.EventHandler(this.b커버센서읽기_Click);
             // 
             // bForceAutoMode
@@ -497,7 +497,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer4);
+            this.Controls.Add(this.tabFormContentContainer5);
             this.Controls.Add(this.tabFormControl1);
             this.IconOptions.SvgImage = global::TPA.Properties.Resources.vision;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
