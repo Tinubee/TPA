@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraWaitForm;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraWaitForm;
 using MvUtils;
 using Npgsql;
 using OpenCvSharp.Dnn;
@@ -413,7 +414,7 @@ namespace TPA
             foreach (var s in 자료1)
             {
                 전체센서자료[s.Key] = s.Value;
-             
+
             }
 
             Global.변위센서제어.Read(센서구분.REAR2, out 자료2);
@@ -433,14 +434,26 @@ namespace TPA
             //        //16 = 4
             //        전체센서자료[s.Key] = s.Value - averageA;
             //    }
-                
-            //}
 
+            //}
+      
             Sort전체센서자료 = 전체센서자료.OrderBy(s => s.Key).ToList();
-            foreach (var s in Sort전체센서자료)
+            lbK1.Text = "";
+            Clipboard.Clear();
+            for (int lop = 0; lop < Sort전체센서자료.Count; lop++)
             {
-                Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
+                lbK1.Text += $"{Sort전체센서자료[lop].Key} : {Sort전체센서자료[lop].Value}\r\n";
             }
+                
+            Clipboard.SetText(lbK1.Text);
+           
+            
+
+            //foreach (var s in Sort전체센서자료)
+            //{
+            //    Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
+
+            //}
             //foreach (var s in 자료2)
             //{
             //    Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");

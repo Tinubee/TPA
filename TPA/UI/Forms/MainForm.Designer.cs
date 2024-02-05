@@ -61,6 +61,7 @@
             this.e로그내역 = new TPA.UI.Controls.LogViewer();
             this.t디버깅용페이지 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer5 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.lbK1 = new DevExpress.XtraEditors.LabelControl();
             this.b커버센서읽기 = new DevExpress.XtraEditors.SimpleButton();
             this.bForceAutoMode = new DevExpress.XtraEditors.SimpleButton();
             this.bTriggerLow = new DevExpress.XtraEditors.SimpleButton();
@@ -359,6 +360,7 @@
             // 
             // tabFormContentContainer5
             // 
+            this.tabFormContentContainer5.Controls.Add(this.lbK1);
             this.tabFormContentContainer5.Controls.Add(this.b커버센서읽기);
             this.tabFormContentContainer5.Controls.Add(this.bForceAutoMode);
             this.tabFormContentContainer5.Controls.Add(this.bTriggerLow);
@@ -377,6 +379,14 @@
             this.tabFormContentContainer5.Name = "tabFormContentContainer5";
             this.tabFormContentContainer5.Size = new System.Drawing.Size(1920, 1010);
             this.tabFormContentContainer5.TabIndex = 5;
+            // 
+            // lbK1
+            // 
+            this.lbK1.Location = new System.Drawing.Point(1376, 84);
+            this.lbK1.Name = "lbK1";
+            this.lbK1.Size = new System.Drawing.Size(60, 15);
+            this.lbK1.TabIndex = 26;
+            this.lbK1.Text = "센서데이터";
             // 
             // b커버센서읽기
             // 
@@ -520,6 +530,7 @@
             this.t큐알검증.ResumeLayout(false);
             this.t로그내역.ResumeLayout(false);
             this.tabFormContentContainer5.ResumeLayout(false);
+            this.tabFormContentContainer5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -570,6 +581,7 @@
         private DevExpress.XtraEditors.SimpleButton bTriggerLow;
         private DevExpress.XtraEditors.SimpleButton bForceAutoMode;
         private DevExpress.XtraEditors.SimpleButton b커버센서읽기;
+        private DevExpress.XtraEditors.LabelControl lbK1;
     }
 }
 
