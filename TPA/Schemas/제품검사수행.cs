@@ -465,6 +465,7 @@ namespace TPA.Schemas
 
                 Dictionary<변위센서구분, Single> 자료 = new Dictionary<변위센서구분, Single>();
                 Dictionary<변위센서구분, Single> 자료2 = new Dictionary<변위센서구분, Single>();
+                List<Single> 커버들뜸값 = new List<Single>();
                 if (Global.변위센서제어.Read(센서구분.REAR1, out 자료))
                 {
                     foreach (var s in 자료)
@@ -497,11 +498,15 @@ namespace TPA.Schemas
                     { -90, -230, (Single)검사.GetItem(검사항목.데이텀A4_R).결과값 },
                 };
 
-                Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
-                    { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
-                    { 0,  -60, (Single)검사.GetItem(검사항목.커버상m2).결과값 },
-                    { 0, -125, (Single)검사.GetItem(검사항목.커버상m3).결과값 },
-                };
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m1).결과값);
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m2).결과값);
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m3).결과값);
+
+                //Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
+                //    { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
+                //    { 0,  -60, (Single)검사.GetItem(검사항목.커버상m2).결과값 },
+                //    { 0, -125, (Single)검사.GetItem(검사항목.커버상m3).결과값 },
+                //};
 
                 Single[,] 커버윤곽위치 = {
                     {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.커버들뜸k1).결과값 },
@@ -516,7 +521,7 @@ namespace TPA.Schemas
 
                 try
                 {
-                    Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
+                    Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(6, 커버들뜸값);
                     Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
                     검사.SetResult(검사항목.커버들뜸, 커버들뜸높이);
 

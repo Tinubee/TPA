@@ -1,11 +1,25 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Single;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 
 namespace TPA.Schemas
 {
     public static class PlaneDistanceCalculator
     {
+
+        public static float[] 편차계산(Int32 기준값, List<Single> 센서값)
+        {
+            Single[] distances = new Single[센서값.Count];
+            for (int lop = 0; lop < 센서값.Count; lop++)
+            {
+                distances[lop] = 기준값 - 센서값[lop];
+            }
+
+            return distances;
+        }
+
         public static float[] CalculateDistances(Int32 queryPointCnt, float[,] planePoints, float[,] queryPoints)
         {
             var matrixX = DenseMatrix.OfArray(new float[,] {

@@ -425,18 +425,6 @@ namespace TPA
 
             var Sort전체센서자료 = 전체센서자료.OrderBy(s => s.Key).ToList();
 
-            //Single averageA = ((Single)Sort전체센서자료[0].Value + (Single)Sort전체센서자료[1].Value + (Single)Sort전체센서자료[2].Value + (Single)Sort전체센서자료[3].Value) / 4;
-            //Debug.WriteLine($"averageA : {averageA}");
-            //foreach (var s in Sort전체센서자료)
-            //{
-            //    if((Int32)s.Key > 15)
-            //    {
-            //        //16 = 4
-            //        전체센서자료[s.Key] = s.Value - averageA;
-            //    }
-
-            //}
-      
             Sort전체센서자료 = 전체센서자료.OrderBy(s => s.Key).ToList();
             lbK1.Text = "";
             Clipboard.Clear();
@@ -444,22 +432,7 @@ namespace TPA
             {
                 lbK1.Text += $"{Sort전체센서자료[lop].Key} : {Sort전체센서자료[lop].Value}\r\n";
             }
-                
             Clipboard.SetText(lbK1.Text);
-           
-            
-
-            //foreach (var s in Sort전체센서자료)
-            //{
-            //    Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
-
-            //}
-            //foreach (var s in 자료2)
-            //{
-            //    Debug.WriteLine($"item{(Int32)s.Key}: {s.Key} value: {s.Value}");
-            //}
-
-
             Single[,] 기준위치 = {
                     {  90,  200, (Single)Sort전체센서자료[0].Value },
                     { -90,  200, (Single)Sort전체센서자료[1].Value },
@@ -467,11 +440,13 @@ namespace TPA
                     { -90, -230, (Single)Sort전체센서자료[3].Value },
                 };
 
-            Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
-                    { 0,   40,  Sort전체센서자료[12].Value },
-                    { 0,  -60,  Sort전체센서자료[13].Value },
-                    { 0, -125,  Sort전체센서자료[14].Value},
-                };
+            //Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
+            //        { 0,   40,  Sort전체센서자료[12].Value },
+            //        { 0,  -60,  Sort전체센서자료[13].Value },
+            //        { 0, -125,  Sort전체센서자료[14].Value},
+            //    };
+
+            List<Single> 커버들뜸값 = new List<Single>();
 
             Single[,] 커버윤곽위치 = {
                     {  26.7f,   74.68f, Sort전체센서자료[4].Value},
@@ -484,8 +459,12 @@ namespace TPA
                     { -26.7f,   85.48f, Sort전체센서자료[11].Value},
                 };
 
+            커버들뜸값.Add(Sort전체센서자료[12].Value);
+            커버들뜸값.Add(Sort전체센서자료[13].Value);
+            커버들뜸값.Add(Sort전체센서자료[14].Value);
 
-            Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
+            Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(6, 커버들뜸값);
+            //Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
             Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
 
 
