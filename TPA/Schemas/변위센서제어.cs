@@ -114,23 +114,23 @@ namespace TPA.Schemas
                 결과.Add(변위센서구분.변위센서a3, (Single)(Double.Parse(센서리딩값.ElementAt(6)) * 0.001));
             }
             else if (구분 == 센서구분.REAR1) {
-                결과.Add(변위센서구분.커버상m3, (Single)(Double.Parse(센서리딩값.ElementAt(1)) * 0.001));
-                결과.Add(변위센서구분.커버상m2, (Single)(Double.Parse(센서리딩값.ElementAt(2)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k5, (Single)(Double.Parse(센서리딩값.ElementAt(3)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k3, (Single)(Double.Parse(센서리딩값.ElementAt(4)) * 0.001));
+                결과.Add(변위센서구분.No4_3_커버상m3, (Single)(Double.Parse(센서리딩값.ElementAt(1)) * 0.001));
+                결과.Add(변위센서구분.No4_2_커버상m2, (Single)(Double.Parse(센서리딩값.ElementAt(2)) * 0.001));
+                결과.Add(변위센서구분.No4_8_커버들뜸k5, (Single)(Double.Parse(센서리딩값.ElementAt(3)) * 0.001));
+                결과.Add(변위센서구분.No4_6_커버들뜸k3, (Single)(Double.Parse(센서리딩값.ElementAt(4)) * 0.001));
                 결과.Add(변위센서구분.데이텀A4_R, (Single)(Double.Parse(센서리딩값.ElementAt(5)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k4, (Single)(Double.Parse(센서리딩값.ElementAt(6)) * 0.001));
+                결과.Add(변위센서구분.No4_7_커버들뜸k4, (Single)(Double.Parse(센서리딩값.ElementAt(6)) * 0.001));
                 결과.Add(변위센서구분.데이텀A3_R, (Single)(Double.Parse(센서리딩값.ElementAt(7)) * 0.001));
             }
             else if (구분 == 센서구분.REAR2) {
                 결과.Add(변위센서구분.데이텀A2_R, (Single)(Double.Parse(센서리딩값.ElementAt(1)) * 0.001));
-                결과.Add(변위센서구분.커버상m1,   (Single)(Double.Parse(센서리딩값.ElementAt(2)) * 0.001));
+                결과.Add(변위센서구분.No4_1_커버상m1,   (Single)(Double.Parse(센서리딩값.ElementAt(2)) * 0.001));
                 결과.Add(변위센서구분.데이텀A1_R, (Single)(Double.Parse(센서리딩값.ElementAt(3)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k6, (Single)(Double.Parse(센서리딩값.ElementAt(4)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k7, (Single)(Double.Parse(센서리딩값.ElementAt(5)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k8, (Single)(Double.Parse(센서리딩값.ElementAt(6)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k1, (Single)(Double.Parse(센서리딩값.ElementAt(7)) * 0.001));
-                결과.Add(변위센서구분.커버들뜸k2, (Single)(Double.Parse(센서리딩값.ElementAt(8)) * 0.001));
+                결과.Add(변위센서구분.No4_9_커버들뜸k6, (Single)(Double.Parse(센서리딩값.ElementAt(4)) * 0.001));
+                결과.Add(변위센서구분.No4_10_커버들뜸k7, (Single)(Double.Parse(센서리딩값.ElementAt(5)) * 0.001));
+                결과.Add(변위센서구분.No4_11_커버들뜸k8, (Single)(Double.Parse(센서리딩값.ElementAt(6)) * 0.001));
+                결과.Add(변위센서구분.No4_4_커버들뜸k1, (Single)(Double.Parse(센서리딩값.ElementAt(7)) * 0.001));
+                결과.Add(변위센서구분.No4_5_커버들뜸k2, (Single)(Double.Parse(센서리딩값.ElementAt(8)) * 0.001));
             }
             return true;   
         }

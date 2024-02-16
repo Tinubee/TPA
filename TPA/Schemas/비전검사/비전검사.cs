@@ -3,6 +3,7 @@ using Cognex.VisionPro.QuickBuild;
 using CogUtils;
 using DevExpress.Utils.Extensions;
 using MvUtils;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -105,7 +106,7 @@ namespace TPA.Schemas
             Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HHmmss.fff}")} [검사수행] {장치.구분}");
             if (결과 == null) return false;
             Boolean r = Run(장치.구분, 장치.CogImage(), 결과);
-            //Global.사진자료.SaveImage(장치, 결과);
+            Global.사진자료.SaveImage(장치, 결과);
             Global.제품검사수행.제품인덱스큐[(Int32)장치.구분].Dequeue();
             return r;
         }

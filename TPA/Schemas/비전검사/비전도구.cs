@@ -201,8 +201,6 @@ namespace TPA.Schemas
                     Global.검사자료.카메라검사(this.카메라, GetResults());
                     DisplayResult(검사);
                 }
-
-
                 return this.IsAccepted();
             }
             catch (Exception ex)

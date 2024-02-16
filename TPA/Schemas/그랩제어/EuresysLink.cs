@@ -148,13 +148,7 @@ namespace TPA.Schemas
                 MC.GetParam(currentChannel, "ImageSizeY", out ImageSizeY);
                 MC.GetParam(currentChannel, "BufferPitch", out BufferPitch);
                 MC.GetParam(currentSurface, "SurfaceAddr", out SurfaceAddr);
-
-
                 this.AcquisitionFinished(SurfaceAddr, ImageSizeX, ImageSizeY);
-
-
-
-
                 //Global.그랩제어.그랩완료(this.구분, SurfaceAddr, ImageSizeX, ImageSizeY);
             }
             catch (Euresys.MultiCamException ex) {

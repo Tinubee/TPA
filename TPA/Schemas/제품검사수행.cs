@@ -217,7 +217,7 @@ namespace TPA.Schemas
                 {
                     Single[] 위치편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 검사위치);
                     Single 바닥평면 = PlaneDistanceCalculator.FindMinMaxDiff(위치편차);
-                    검사.SetResult(검사항목.바닥평면도, 바닥평면);
+                    검사.SetResult(검사항목.No7_바닥평면도, 바닥평면);
 
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                     Task.Delay(50);
@@ -498,9 +498,9 @@ namespace TPA.Schemas
                     { -90, -230, (Single)검사.GetItem(검사항목.데이텀A4_R).결과값 },
                 };
 
-                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m1).결과값);
-                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m2).결과값);
-                커버들뜸값.Add((Single)검사.GetItem(검사항목.커버상m3).결과값);
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_1_커버상m1).결과값);
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_2_커버상m2).결과값);
+                커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_3_커버상m3).결과값);
 
                 //Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
                 //    { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
@@ -509,21 +509,21 @@ namespace TPA.Schemas
                 //};
 
                 Single[,] 커버윤곽위치 = {
-                    {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.커버들뜸k1).결과값 },
-                    {  26.7f,  -12.62f, (Single)검사.GetItem(검사항목.커버들뜸k2).결과값 },
-                    {  26.7f,  -85.92f, (Single)검사.GetItem(검사항목.커버들뜸k3).결과값 },
-                    {  26.7f, -175.42f, (Single)검사.GetItem(검사항목.커버들뜸k4).결과값 },
-                    { -26.7f, -175.42f, (Single)검사.GetItem(검사항목.커버들뜸k5).결과값 },
-                    { -26.7f,  -36.52f, (Single)검사.GetItem(검사항목.커버들뜸k6).결과값 },
-                    { -26.7f,   33.38f, (Single)검사.GetItem(검사항목.커버들뜸k7).결과값 },
-                    { -26.7f,   85.48f, (Single)검사.GetItem(검사항목.커버들뜸k8).결과값 },
+                    {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.No4_4_커버들뜸k1).결과값 },
+                    {  26.7f,  -12.62f, (Single)검사.GetItem(검사항목.No4_5_커버들뜸k2).결과값 },
+                    {  26.7f,  -85.92f, (Single)검사.GetItem(검사항목.No4_6_커버들뜸k3).결과값 },
+                    {  26.7f, -175.42f, (Single)검사.GetItem(검사항목.No4_7_커버들뜸k4).결과값 },
+                    { -26.7f, -175.42f, (Single)검사.GetItem(검사항목.No4_8_커버들뜸k5).결과값 },
+                    { -26.7f,  -36.52f, (Single)검사.GetItem(검사항목.No4_9_커버들뜸k6).결과값 },
+                    { -26.7f,   33.38f, (Single)검사.GetItem(검사항목.No4_10_커버들뜸k7).결과값 },
+                    { -26.7f,   85.48f, (Single)검사.GetItem(검사항목.No4_11_커버들뜸k8).결과값 },
                 };
 
                 try
                 {
                     Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(6, 커버들뜸값);
                     Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
-                    검사.SetResult(검사항목.커버들뜸, 커버들뜸높이);
+                    검사.SetResult(검사항목.No4_커버들뜸, 커버들뜸높이);
 
                     Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);
                     Single 커버윤곽높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버윤곽편차);

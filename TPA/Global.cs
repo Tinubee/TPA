@@ -41,6 +41,7 @@ namespace TPA
         public static 큐알인쇄 큐알인쇄;
         public static 제품검사수행 제품검사수행;
         public static 변위센서제어 변위센서제어;
+        public static 사진자료 사진자료;
 
         public static class 장치상태
         {
@@ -77,6 +78,7 @@ namespace TPA
                 큐알인쇄 = new 큐알인쇄();
                 제품검사수행 = new 제품검사수행();
                 변위센서제어 = new 변위센서제어();
+                사진자료 = new 사진자료();
 
                 로그자료.Init();
                 환경설정.Init();
@@ -87,13 +89,14 @@ namespace TPA
                 비전검사.Init();
                 큐알검증.Init();
                 제품검사수행.Init();
+                사진자료.Init();
 
                 if (환경설정.동작구분 == 동작구분.Live)
                 {  
                     if (!장치통신.Open()) new Exception("PLC 서버 연결 실패");
                     if (!그랩제어.Init()) new Exception("카메라 초기화 실패");
                     큐알제어.Init();
-                    큐알인쇄.Init();
+                    //큐알인쇄.Init();
                     조명제어.Init();
                     변위센서제어.Init();
                 }
@@ -130,6 +133,7 @@ namespace TPA
                 검사자료.Close();
                 모델자료.Close();
                 로그자료.Close();
+                사진자료.Close();
 
                 Properties.Settings.Default.Save();
                 Debug.WriteLine("시스템 종료");

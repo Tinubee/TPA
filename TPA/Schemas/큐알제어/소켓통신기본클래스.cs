@@ -70,7 +70,7 @@ namespace TPA.Schemas
         public virtual Boolean Connect(String 주소, Int32 포트)
         {
             try {
-                if (this.소켓연결여부) return true;
+                if (this.소켓연결여부 || 주소 == null) return true;
                 클라이언트.Connect(주소, 포트);
                 네트워크스트림 = 클라이언트.GetStream();
                 this.주소 = 주소;

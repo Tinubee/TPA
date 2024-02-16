@@ -226,8 +226,10 @@ namespace TPA.Schemas
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].Busy주소, 0);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 0);
                         }
-                        //Mat mat = new Mat(height, width, MatType.CV_8U, intPtr);
-                        //그랩이미지처리.ImageSave(Global.환경설정.사진저장경로, mat, 검사시간, 카메라, 제품인덱스, true);
+
+                        //Mat mat = new Mat(장치.ImageHeight, 장치.ImageWidth, MatType.CV_8U, 장치.BufferAddress);
+                        //if (mat != null)
+                        //    그랩이미지처리.ImageSave(Global.환경설정.사진저장경로, mat, 검사시간, 장치.구분, 제품인덱스, true);
                     });
                 }
                 else

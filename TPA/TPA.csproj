@@ -350,6 +350,7 @@
     <Compile Include="Schemas\변위센서제어\변위센서장치.cs" />
     <Compile Include="Schemas\비전검사\비전검사.cs" />
     <Compile Include="Schemas\비전검사\비전도구.cs" />
+    <Compile Include="Schemas\사진저장.cs" />
     <Compile Include="Schemas\유저정보.cs" />
     <Compile Include="Schemas\제품검사수행.cs" />
     <Compile Include="Schemas\조명제어.cs" />
@@ -736,7 +737,7 @@
     <None Include="Resources\enablesearch1.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvUtils\MvUtils\MvUtils.csproj">
+    <ProjectReference Include="..\..\..\..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
       <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
       <Name>MvUtils</Name>
     </ProjectReference>
