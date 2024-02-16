@@ -105,7 +105,8 @@ namespace TPA.Schemas
         private void ImageCallBack(IntPtr data, ref MV_FRAME_OUT_INFO_EX frameInfo, IntPtr user)
         {
             try {
-                Global.그랩제어.그랩완료(this.구분, data, frameInfo.nWidth, frameInfo.nHeight);
+                //Global.그랩제어.그랩완료(this.구분, data, frameInfo.nWidth, frameInfo.nHeight);
+                this.AcquisitionFinished(data, frameInfo.nWidth, frameInfo.nHeight);
                 this.Stop();
             }
             catch (Exception ex) {

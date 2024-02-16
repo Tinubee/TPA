@@ -144,15 +144,16 @@ namespace TPA.Schemas
             AddOutput(this.AlignTools, "Rotation", 0d);
             // SetCalib();
 
+            
             // Output 파라메터 설정, 일단 CTQ 항목만
-            // 검사설정 자료 = Global.모델자료.GetItem(this.모델구분)?.검사설정;
-            // if (자료 == null) return;
-            // List<검사정보> 목록 = 자료.Where(e => (Int32)e.검사장치 == (Int32)this.카메라 && !String.IsNullOrEmpty(e.변수명칭)).ToList();
-            // foreach (검사정보 검사 in 목록)
-            // {
-            //     if (검사.검사그룹 == 검사그룹.CTQ) { AddOutput(this.ToolBlock, 검사.변수명칭, typeof(Double)); }
-            //     else { }
-            // }
+            검사설정자료 자료 = Global.모델자료.GetItem(this.모델구분)?.검사설정;
+            if (자료 == null) return;
+            List<검사정보> 목록 = 자료.Where(e => (Int32)e.검사장치 == (Int32)this.카메라 && !String.IsNullOrEmpty(e.변수명칭)).ToList();
+            foreach (검사정보 검사 in 목록)
+            {
+                if (검사.검사그룹 == 검사그룹.CTQ) { AddOutput(this.ToolBlock, 검사.변수명칭, typeof(Double)); }
+                else {  }
+            }
         }
 
         public void Save()
@@ -179,43 +180,33 @@ namespace TPA.Schemas
             return true;
         }
 
-        public Boolean Run(ICogImage image, Dictionary<String, Object> inputs)
+        public Boolean Run(ICogImage image, 검사결과 검사)
         {
-            try {
-                Debug.WriteLine("Cognex Run Fails : Run 들어옴");
+            Boolean accepted = false;
+            try
+            {
+                if (image != null) this.InputImage = image;
                 this.검사시작 = DateTime.Now;
-                Debug.WriteLine("Cognex Run Fails : InputImage 진행전");
-                this.InputImage = image;
-                Debug.WriteLine("Cognex Run Fails : SetInputs 진행전 ");
-                this.SetInputs(inputs);
-                Debug.WriteLine("Cognex Run Fails : SetInputs 진행완료 ");
-                Debug.WriteLine("Cognex Run Fails : ToolBlock Run 진행전 ");
                 this.ToolBlock.Run();
-                Debug.WriteLine("Cognex Run Fails : ToolBlock Run 진행완료 ");
-
-                //foreach (ICogTool tool in this.ToolBlock.Tools) {
-                //    if (tool == this.ToolBlock.Tools.)
-                //    if (tool.RunStatus.Result != CogToolResultConstants.Accept)
-                //        ;
-                //}
-
-
-                if (카메라 == 카메라구분.Cam08) {
-                    DisplayResult(null);
-                }
-                else {
-                    Debug.WriteLine("Cognex Run Fails :GetResults 진행전 ");
-                    검사결과 검사 = Global.검사자료.카메라검사(this.카메라, GetResults());
-                    Debug.WriteLine("Cognex Run Fails :GetResults 진행완료 ");
-                    Debug.WriteLine("Cognex Run Fails :DisplayResult 진행전 ");
-                    DisplayResult(검사);
-                    Debug.WriteLine("Cognex Run Fails :DisplayResult 진행완료. ");
-                }
 
                 this.검사종료 = DateTime.Now;
+                accepted = this.IsAccepted();
+                if (this.카메라 == 카메라구분.Cam08)
+                {
+                    DisplayResult(null);
+                }
+                else
+                {
+                    Debug.WriteLine("연산진입");
+                    Global.검사자료.카메라검사(this.카메라, GetResults());
+                    DisplayResult(검사);
+                }
+
+
                 return this.IsAccepted();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Global.로그기록(로그영역, 로그구분.오류, "Cognex", $"Cognex Run Fails : {ex.Message}");
                 return false;
             }
@@ -237,8 +228,8 @@ namespace TPA.Schemas
                 else if (terminal.ValueType == typeof(String))
                     results.Add(terminal.Name, terminal.Value == null ? String.Empty : (String)terminal.Value);
             }
-            results.Add(ResultAttribute.VarName(검사항목.스크레치), SufaceResults(검사항목.스크레치));
-            results.Add(ResultAttribute.VarName(검사항목.찍힘불량), SufaceResults(검사항목.찍힘불량));
+            //results.Add(ResultAttribute.VarName(검사항목.스크레치), SufaceResults(검사항목.스크레치));
+            //results.Add(ResultAttribute.VarName(검사항목.찍힘불량), SufaceResults(검사항목.찍힘불량));
             return results;
         }
 
@@ -286,7 +277,7 @@ namespace TPA.Schemas
         {
             if (Global.장치상태.자동수동) return false;
             if (image == null) return false;
-            this.Run(image, null);
+            this.Run(image, Global.검사자료.수동검사);
             return true;
         }
         #endregion

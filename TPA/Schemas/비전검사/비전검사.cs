@@ -36,7 +36,6 @@ namespace TPA.Schemas
         {
             this.Close();
             this.Manager = new CogJobManager("JobManager") { GarbageCollection = true, GarbageCollectionInterval = 5 };
-            //Debug.WriteLine($"GarbageCollection={this.Manager.GarbageCollection}, Interval={this.Manager.GarbageCollectionInterval}", "비젼검사");
 
             List<카메라구분> 대상카메라 = new List<카메라구분>() {
                     카메라구분.Cam01, 카메라구분.Cam02, 카메라구분.Cam03, 카메라구분.Cam04,
@@ -101,38 +100,26 @@ namespace TPA.Schemas
             return Path.Combine(path, name);
         }
 
-        public Boolean Run(AcquisitionData data)
+        public Boolean Run(카메라장치 장치, 검사결과 결과)
         {
-            Boolean r = Run(data.Camera, data.CogImage());
-            if (data.Camera == 카메라구분.Cam03) {
-                Run(카메라구분.Cam08, data.CogImage());
-            }
-
-            //이미지 임시로 파일에 저장
-            Task.Run(() => {
-                // org Int32 제품인덱스 = Global.장치통신.촬영위치별제품인덱스(data.Camera, true);
-                Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(data.Camera);
-                String file = SaveImageFile(data.Camera, DateTime.Now, Global.환경설정.사진저장경로, Global.환경설정.선택모델, 제품인덱스, ImageFormat.Jpeg);
-                Common.ImageSaveJpeg(data.MatImage(), file, out String error, 70);
-
-                // 제품인덱스 저장용으로 Queue 자료구조 이용한다면 여기가 Pop을 할 곳
-                Global.제품검사수행.제품인덱스큐[(Int32)data.Camera].Dequeue();
-
-            });
+            Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HHmmss.fff}")} [검사수행] {장치.구분}");
+            if (결과 == null) return false;
+            Boolean r = Run(장치.구분, 장치.CogImage(), 결과);
+            //Global.사진자료.SaveImage(장치, 결과);
+            Global.제품검사수행.제품인덱스큐[(Int32)장치.구분].Dequeue();
             return r;
         }
-        public Boolean Run(카메라구분 카메라, ICogImage image)
+
+        public Boolean Run(카메라구분 카메라, ICogImage image, 검사결과 검사)
         {
-            if (image == null) {
+            if (image == null)
+            {
                 Global.오류로그("비전검사", "이미지없음", $"{카메라} 검사할 이미지가 없습니다.", true);
                 return false;
             }
             if (!this.ContainsKey(카메라)) return false;
-
             비전도구 도구 = this[카메라];
-            Boolean r = 도구.Run(image, null);
-
-            return r;
+            return 도구.Run(image, 검사);
         }
 
         #endregion

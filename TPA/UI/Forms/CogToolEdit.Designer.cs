@@ -137,6 +137,7 @@
             this.b설정저장.ImageOptions.SvgImage = global::TPA.Properties.Resources.saveas;
             this.b설정저장.Name = "b설정저장";
             this.b설정저장.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.b설정저장.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // CogToolEdit
             // 

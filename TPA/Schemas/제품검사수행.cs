@@ -131,7 +131,7 @@ namespace TPA.Schemas
                     //}
 
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                    Thread.Sleep(50);
+                    Task.Delay(50);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 }
@@ -220,7 +220,7 @@ namespace TPA.Schemas
                     검사.SetResult(검사항목.바닥평면도, 바닥평면);
 
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                    Thread.Sleep(50);
+                    Task.Delay(50);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 }
@@ -300,7 +300,7 @@ namespace TPA.Schemas
                 Task.Run(() =>
                 {
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                    Thread.Sleep(50);
+                    Task.Delay(50);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                     return;
@@ -332,7 +332,7 @@ namespace TPA.Schemas
                         Global.큐알제어.상부큐알리더.리딩종료();
                         //리딩실패시 NG로 빼자.
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                        Thread.Sleep(50);
+                        Task.Delay(50);
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                     }
@@ -416,7 +416,7 @@ namespace TPA.Schemas
                 Debug.WriteLine("강제커버조립O 들어옴");
                 Debug.WriteLine($"강제커버조립O PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].완료주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 return;
             }
@@ -425,7 +425,7 @@ namespace TPA.Schemas
                 Debug.WriteLine("강제커버조립X 들어옴");
                 Debug.WriteLine($"강제커버조립X PLC커맨드 : {Global.장치통신.PLC커맨드[커맨드].Busy주소}");
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                 return;
             }
@@ -434,14 +434,14 @@ namespace TPA.Schemas
             {
                 // 커버조립 O
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
             }
             else
             {
                 // 커버조립 X
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
             }
         }
@@ -530,7 +530,7 @@ namespace TPA.Schemas
                     검사.SetResult(검사항목.면윤곽도, 커버윤곽높이);
 
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                    Thread.Sleep(50);
+                    Task.Delay(50);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 }
@@ -563,19 +563,19 @@ namespace TPA.Schemas
                         {
                             //Global.큐알인쇄.자료전송(검사.검사일시, 검사.모델구분, 검사.검사코드);
                             Global.큐알인쇄.라벨발행(검사.검사일시, 검사.모델구분, 검사.검사코드);
-                            Thread.Sleep(50);
+                            Task.Delay(50);
                             Global.정보로그(로그영역, "라벨부착수행", $"라벨부착커맨드 전송", false);
 
                             // 라벨부착수행 O
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                            Thread.Sleep(50);
+                            Task.Delay(50);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                         }
                         else
                         {
                             // 라벨부착수행 X
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                            Thread.Sleep(50);
+                            Task.Delay(50);
                             Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                         }
                     }
@@ -591,14 +591,14 @@ namespace TPA.Schemas
 
                 // 라벨부착수행 O
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
             }
             else
             {
                 // 라벨부착수행 X
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
             }
         }
@@ -621,14 +621,14 @@ namespace TPA.Schemas
             if (Global.환경설정.강제OK배출여부)
             {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                 return;
             }
             else if (Global.환경설정.강제NG배출여부)
             {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                 return;
             }
@@ -638,13 +638,13 @@ namespace TPA.Schemas
             if (ok) // 검사결과 OK
             {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
             }
             else // 검사결과 NG
             {
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 1);
-                Thread.Sleep(50);
+                Task.Delay(50);
                 Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
             }
         }

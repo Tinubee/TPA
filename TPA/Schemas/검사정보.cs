@@ -1,4 +1,5 @@
 ﻿using Cognex.VisionPro;
+using DevExpress.DataProcessing.InMemoryDataProcessor.GraphGenerator;
 using DevExpress.Xpf.LayoutControl;
 using MvUtils;
 using Newtonsoft.Json;
@@ -29,6 +30,7 @@ namespace TPA.Schemas
         }
     }
 
+
     public class ResultAttribute : Attribute
     {
         public 검사그룹 검사그룹 = 검사그룹.None;
@@ -46,6 +48,7 @@ namespace TPA.Schemas
             return a.변수명칭;
         }
     }
+
 
     public enum 장치구분
     {
@@ -77,6 +80,7 @@ namespace TPA.Schemas
         QRMark,
     }
 
+
     public enum 노멀미러
     {
         [ListBindable(false)]
@@ -85,12 +89,14 @@ namespace TPA.Schemas
         Mirror = 2,
     }
 
+
     public enum 결과분류
     {
         None,
         Summary,
         Detail,
     }
+
 
     public enum 검사그룹
     {
@@ -101,6 +107,7 @@ namespace TPA.Schemas
         [Description("Surface"), Translation("Surface", "외관검사")]
         Surface,
     }
+
 
     public enum 검사항목 : Int32
     {
@@ -312,6 +319,8 @@ namespace TPA.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG16")]
         가공부높이g16 = 54,
 
+
+
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         데이텀A1_R = 105,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
@@ -321,10 +330,14 @@ namespace TPA.Schemas
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         데이텀A4_R = 108,
 
+
+
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness)]
         면윤곽도 = 104,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness)]
         커버들뜸 = 11,
+
+
 
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         커버상m1 = 12,
@@ -349,8 +362,13 @@ namespace TPA.Schemas
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         커버들뜸k8 = 22,
 
+
+
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MarkingResult")]
         노멀미러 = 114,
+
+
+
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "Dent")]
         찍힘불량 = 115,
@@ -365,6 +383,8 @@ namespace TPA.Schemas
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentR")]
         찍힘불량R = 120,
 
+
+
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "Scratch")]
         스크레치 = 121,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchB")]
@@ -378,10 +398,39 @@ namespace TPA.Schemas
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchR")]
         스크레치R = 126,
 
+
+
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
         큐알검증 = 127,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
         중복여부 = 128,
+
+
+
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "PlusMarkingResult")]
+        플러스각인 = 1201,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MinusMarkingResult")]
+        마이너스각인 = 1202,
+        
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult1")]
+        브라켓각인1 = 1203,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult2")]
+        브라켓각인2 = 1204,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult3")]
+        브라켓각인3 = 1205,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult4")]
+        브라켓각인4 = 1206,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult5")]
+        브라켓각인5 = 1207,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult6")]
+        브라켓각인6 = 1208,
+        
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MarkingResult1")]
+        직선각인1 = 1209,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MarkingResult2")]
+        직선각인2 = 1210,
+
+
     }
     public enum 단위구분
     {
@@ -411,12 +460,14 @@ namespace TPA.Schemas
         OK = 7,
     }
 
+
     public enum 역투입여부
     {
         None,
         Normal,
         Reverse,
     }
+
 
     public enum 각인유무
     {
@@ -425,12 +476,15 @@ namespace TPA.Schemas
         Presence,
     }
 
+
     public enum 커넥터설삽여부
     {
         None,
         OK,
         NG,
     }
+
+
 
     public enum MES응답
     {
@@ -439,11 +493,15 @@ namespace TPA.Schemas
         NG,
     }
 
+
+
     public enum 재검사여부
     {
         FALSE,
         TRUE,
     }
+
+
 
     [Table("inspd")]
     public class 검사정보
@@ -452,21 +510,21 @@ namespace TPA.Schemas
         public DateTime 검사일시 { get; set; } = DateTime.Now;
         [Column("iditm", Order = 1), Required, Key, JsonProperty("iditm"), Translation("Item", "검사항목")]
         public 검사항목 검사항목 { get; set; } = 검사항목.None;
-        [Column("idgrp"), JsonProperty("idgrp"), Translation("Group", "검사그룹"), BatchEdit(true)]
+        [Column("idgrp"), JsonProperty("idgrp"), Translation("Group", "검사그룹"),     BatchEdit(true)]
         public 검사그룹 검사그룹 { get; set; } = 검사그룹.None;
-        [Column("iddev"), JsonProperty("iddev"), Translation("Device", "검사장치"), BatchEdit(true)]
+        [Column("iddev"), JsonProperty("iddev"), Translation("Device", "검사장치"),    BatchEdit(true)]
         public 장치구분 검사장치 { get; set; } = 장치구분.None;
-        [Column("idcat"), JsonProperty("idcat"), Translation("Category", "결과유형"), BatchEdit(true)]
+        [Column("idcat"), JsonProperty("idcat"), Translation("Category", "결과유형"),  BatchEdit(true)]
         public 결과분류 결과분류 { get; set; } = 결과분류.None;
-        [Column("iduni"), JsonProperty("iduni"), Translation("Unit", "단위"), BatchEdit(true)]
+        [Column("iduni"), JsonProperty("iduni"), Translation("Unit", "단위"),         BatchEdit(true)]
         public 단위구분 측정단위 { get; set; } = 단위구분.mm;
-        [Column("idstd"), JsonProperty("idstd"), Translation("Standard", "기준값"), BatchEdit(true)]
+        [Column("idstd"), JsonProperty("idstd"), Translation("Standard", "기준값"),    BatchEdit(true)]
         public Decimal 기준값 { get; set; } = 0m;
-        [Column("idmin"), JsonProperty("idmin"), Translation("Min", "최소값"), BatchEdit(true)]
+        [Column("idmin"), JsonProperty("idmin"), Translation("Min", "최소값"),         BatchEdit(true)]
         public Decimal 최소값 { get; set; } = 0m;
-        [Column("idmax"), JsonProperty("idmax"), Translation("Max", "최대값"), BatchEdit(true)]
+        [Column("idmax"), JsonProperty("idmax"), Translation("Max", "최대값"),         BatchEdit(true)]
         public Decimal 최대값 { get; set; } = 0m;
-        [Column("idoff"), JsonProperty("idoff"), Translation("Offset", "보정값"), BatchEdit(true)]
+        [Column("idoff"), JsonProperty("idoff"), Translation("Offset", "보정값"),      BatchEdit(true)]
         public Decimal 보정값 { get; set; } = 0m;
         [Column("idcal"), JsonProperty("idcal"), Translation("Calib(µm)", "교정(µm)"), BatchEdit(true)]
         public Decimal 교정값 { get; set; } = 1m;
@@ -515,6 +573,7 @@ namespace TPA.Schemas
         }
     }
 
+
     [Table("inspl")]
     public class 검사결과
     {
@@ -560,11 +619,13 @@ namespace TPA.Schemas
         [NotMapped, JsonProperty("ilreg")]
         public List<불량영역> 표면불량 { get; set; } = new List<불량영역>();
 
+
         public 검사결과()
         {
             this.검사일시 = DateTime.Now;
             this.모델구분 = Global.환경설정.선택모델;
         }
+
 
         public void Reset()
         {
@@ -612,6 +673,10 @@ namespace TPA.Schemas
                 {
                     검사.결과값 = 검사.측정값;
                 }
+                else if (검사.검사항목 == 검사항목.마이너스각인 || 검사.검사항목 == 검사항목.플러스각인)
+                {
+                    검사.결과값 = 검사.측정값;
+                }
                 else
                 {
                     if (검사.교정값 > 0) 검사.결과값 = Math.Round(검사.측정값 * 검사.교정값, Global.환경설정.결과자릿수);
@@ -644,19 +709,21 @@ namespace TPA.Schemas
         }
         public void SetResults(카메라구분 카메라, Dictionary<String, Object> results)
         {
-            불량영역제거(카메라);
-            String scratch = ResultAttribute.VarName(검사항목.스크레치);
-            String dent = ResultAttribute.VarName(검사항목.찍힘불량);
+            //불량영역제거(카메라);
+            //Debug.WriteLine("1");
+            //String scratch = ResultAttribute.VarName(검사항목.스크레치);
+            //String dent = ResultAttribute.VarName(검사항목.찍힘불량);
+            //Debug.WriteLine("2");
             String markingResult = ResultAttribute.VarName(검사항목.노멀미러);
             String inputdir = ResultAttribute.VarName(검사항목.역투입);
-
+            //.WriteLine("3");
             foreach (var result in results)
             {
-                if (result.Key.Equals(scratch) || result.Key.Equals(dent))
-                {
-                    this.표면불량.AddRange(result.Value as List<불량영역>);
-                    continue;
-                }
+                //if (result.Key.Equals(scratch) || result.Key.Equals(dent))
+                //{
+                //    this.표면불량.AddRange(result.Value as List<불량영역>);
+                //    continue;
+                //}
 
                 검사정보 정보 = GetItem((장치구분)카메라, result.Key); // result.Key : 검사항목명
                 if (정보 == null) continue;
@@ -825,6 +892,7 @@ namespace TPA.Schemas
             return this.측정결과;
         }
     }
+
 
     [Table("insurf")]
     public class 불량영역

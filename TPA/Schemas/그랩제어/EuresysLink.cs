@@ -149,7 +149,13 @@ namespace TPA.Schemas
                 MC.GetParam(currentChannel, "BufferPitch", out BufferPitch);
                 MC.GetParam(currentSurface, "SurfaceAddr", out SurfaceAddr);
 
-                Global.그랩제어.그랩완료(this.구분, SurfaceAddr, ImageSizeX, ImageSizeY);
+
+                this.AcquisitionFinished(SurfaceAddr, ImageSizeX, ImageSizeY);
+
+
+
+
+                //Global.그랩제어.그랩완료(this.구분, SurfaceAddr, ImageSizeX, ImageSizeY);
             }
             catch (Euresys.MultiCamException ex) {
                 Utils.MessageBox("영상획득", ex.ToString(), 2000);
