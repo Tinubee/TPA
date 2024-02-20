@@ -1,6 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Display;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace CogUtils
@@ -18,11 +19,23 @@ namespace CogUtils
             this.MouseMode = CogDisplayMouseModeConstants.Pan;
         }
 
-        public void SetImage(ICogImage image)
+        public void SetImage(ICogImage image, ICogRecord record, List<ICogGraphic> graphics) //(ICogImage image)
         {
+            if (image == null || !image.Allocated) return;
+            if (this.InvokeRequired) { this.BeginInvoke(new Action(() => { SetImage(image, record, graphics); })); return; }
+
+            this.Image = null;
+            this.InteractiveGraphics.Clear();
+            this.StaticGraphics.Clear();
             this.Image = image;
+            this.Record = record;
+            foreach (ICogGraphic graphic in graphics)
+                this.StaticGraphics.Add(graphic, "Results");
             this.SetBackground();
             this.Fit(true);
+            //this.Image = image;
+            //this.SetBackground();
+            //this.Fit(true);
         }
 
         public void SetBackground() => this.BackColor = 배경색상;

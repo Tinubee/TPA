@@ -285,22 +285,38 @@ namespace TPA.Schemas
         public void DisplayResult(RecordDisplay display, 검사결과 검사)
         {
             if (display == null) return;
-            display.InteractiveGraphics.Clear();
-            display.StaticGraphics.Clear();
-            ICogRecord record = this.ToolBlock.CreateLastRunRecord();
-            if (record != null && record.SubRecords != null && record.SubRecords.ContainsKey(this.ViewerRecodName))
-                display.Record = record.SubRecords[this.ViewerRecodName];
-            if (this.OutputImage != null)
-                display.SetImage(this.OutputImage);
-            else
-                display.SetImage(this.InputImage);
-            if (검사 == null) return;
-            검사.불량영역(this.카메라).ForEach(e => display.StaticGraphics.Add(e.GetRectangle(GraphicColor(결과구분.NG), 2), "Results"));
+            ICogRecord records = this.ToolBlock.CreateLastRunRecord();
+            try
+            {
+                ICogRecord record = null;
+                if (records != null && records.SubRecords != null && records.SubRecords.ContainsKey(this.ViewerRecodName))
+                    record = records.SubRecords[this.ViewerRecodName];
+                List<ICogGraphic> graphics = new List<ICogGraphic>();
+                if (검사 != null)
+                    검사.불량영역(this.카메라).ForEach(e => display.StaticGraphics.Add(e.GetRectangle(GraphicColor(결과구분.NG), 2), "Results"));
+                if (this.OutputImage != null) display.SetImage(this.OutputImage, record, graphics);
+                else display.SetImage(this.InputImage, record, graphics);
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message, "DisplayResult"); }
+
+
+            //if (display == null) return;
+            //display.InteractiveGraphics.Clear();
+            //display.StaticGraphics.Clear();
+            //ICogRecord record = this.ToolBlock.CreateLastRunRecord();
+            //if (record != null && record.SubRecords != null && record.SubRecords.ContainsKey(this.ViewerRecodName))
+            //    display.Record = record.SubRecords[this.ViewerRecodName];
+            //if (this.OutputImage != null)
+            //    display.SetImage(this.OutputImage);
+            //else
+            //    display.SetImage(this.InputImage);
+            //if (검사 == null) return;
+            //검사.불량영역(this.카메라).ForEach(e => display.StaticGraphics.Add(e.GetRectangle(GraphicColor(결과구분.NG), 2), "Results"));
         }
 
         public void DisplayResult(RecordDisplay display, ICogImage image)
         {
-            display.SetImage(image);
+            //display.SetImage(image);
         }
 
         private static CogColorConstants GraphicColor(결과구분 판정)
