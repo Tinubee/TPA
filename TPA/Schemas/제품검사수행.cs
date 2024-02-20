@@ -278,7 +278,8 @@ namespace TPA.Schemas
                 Global.그랩제어.Ready(카메라구분.Cam01);
 
                 Debug.WriteLine($"측면촬영수행(L) : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
 
             new Thread(() =>
             {
@@ -286,7 +287,8 @@ namespace TPA.Schemas
                 Global.그랩제어.Ready(카메라구분.Cam02);
 
                 Debug.WriteLine($"측면촬영수행(R) : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 상부촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -309,7 +311,8 @@ namespace TPA.Schemas
                 Global.조명제어.TurnOn(카메라구분.Cam03);
                 Global.그랩제어.Ready(카메라구분.Cam03);
                 Debug.WriteLine($"상부촬영수행 : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 상부큐알리딩수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -419,14 +422,16 @@ namespace TPA.Schemas
                 Global.조명제어.TurnOn(카메라구분.Cam04);
                 Global.그랩제어.Ready(카메라구분.Cam04);
                 Debug.WriteLine($"하부촬영수행(L) : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
 
             new Thread(() =>
             {
                 Global.조명제어.TurnOn(카메라구분.Cam05);
                 Global.그랩제어.Ready(카메라구분.Cam05);
                 Debug.WriteLine($"하부촬영수행(R) : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 커넥터설삽촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -453,7 +458,8 @@ namespace TPA.Schemas
                 Global.그랩제어.Triggering(카메라구분.Cam06);
                 Global.그랩제어.Triggering(카메라구분.Cam07);
                 Debug.WriteLine($"커넥터촬영수행 : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 커버조립여부요청수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -598,7 +604,8 @@ namespace TPA.Schemas
 
                 Global.모델자료.선택모델.검사종료(제품인덱스);
                 Global.검사자료.검사결과계산(제품인덱스);
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         public void 라벨부착수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
