@@ -463,9 +463,9 @@ namespace TPA
             커버들뜸값.Add(Sort전체센서자료[13].Value);
             커버들뜸값.Add(Sort전체센서자료[14].Value);
 
-            Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(6, 커버들뜸값);
+            Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(커버들뜸값);
             //Single[] 커버들뜸편차 = PlaneDistanceCalculator.CalculateDistances(3, 기준위치, 커버들뜸위치);
-            Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
+            Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff2(커버들뜸편차);
 
 
             Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);

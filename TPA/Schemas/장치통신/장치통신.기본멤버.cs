@@ -14,7 +14,7 @@ namespace TPA.Schemas
     {
         private static String 로그영역 = "PLC 통신";
         private ActUtlType64 PLC = null;
-        private const Int32 PLC통신주기 = 60;
+        private const Int32 PLC통신주기 = 20;
         private DateTime 시작일시 = DateTime.Now;
         private Boolean 작업여부 = false;
         public Boolean 정상여부 = false;

@@ -72,16 +72,7 @@ namespace TPA.Schemas
 
             Global.모델자료.선택모델.검사시작(제품인덱스);
 
-            //if (Global.환경설정.Only어퍼하우징검사)
-            //{
-            //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-            //    Thread.Sleep(50);
-            //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
-            //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
-            //    return;
-            //}
-
-            Task.Run(() =>
+            new Thread(() =>
             {
                 검사결과 검사 = Global.검사자료.검사시작(제품인덱스);
                 검사.재검사여부 = this.재검사;
@@ -92,13 +83,6 @@ namespace TPA.Schemas
                 if (하부큐알1결과.결과자료.정상여부)
                 {
                     검사.큐알정보검사(검사항목.하부큐알코드1, 하부큐알1결과.결과자료.응답내용);
-
-                    //Char[] FFC_rear = new char[하부큐알1결과.결과자료.응답내용.Length];
-                    //FFC_rear = 하부큐알1결과.결과자료.응답내용.ToCharArray();
-                    //for (int i = 0; i < FFC_rear.Length; i += 2) {
-                    //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보R_1 + (i/2)].요청주소, (Int32)(FFC_rear[i]<<8) | (Int32)FFC_rear[i+1]);
-                    //}
-
                     Global.정보로그(로그영역, "하부큐알1리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알1결과.결과자료.응답내용}", false);
                 }
                 else
@@ -110,25 +94,7 @@ namespace TPA.Schemas
                 if (하부큐알2결과.결과자료.정상여부)
                 {
                     검사.큐알정보검사(검사항목.하부큐알코드2, 하부큐알2결과.결과자료.응답내용);
-
-                    //Char[] FFC_front = new char[하부큐알2결과.결과자료.응답내용.Length];
-                    //FFC_front = 하부큐알2결과.결과자료.응답내용.ToCharArray();
-                    //for (int i = 0; i < FFC_front.Length; i += 2) {
-                    //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보F_1 + (i / 2)].요청주소, (Int32)(FFC_front[i] << 8) | (Int32)FFC_front[i + 1]);
-                    //}
-
                     Global.정보로그(로그영역, "하부큐알2리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알2결과.결과자료.응답내용}", false);
-
-                    //Int32 NG여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].Busy주소);
-                    //Int32 OK여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].완료주소);
-                    //
-                    //
-                    //if (NG여부 > 0) { // MES 응답 NG
-                    //    검사.MES응답 = MES응답.NG;
-                    //}
-                    //else if (OK여부 > 0) {
-                    //    검사.MES응답 = MES응답.OK;
-                    //}
 
                     Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                     Task.Delay(50);
@@ -140,7 +106,70 @@ namespace TPA.Schemas
                     Global.정보로그(로그영역, "하부큐알2리딩수행", $"큐알리딩실패 : {하부큐알2결과.결과자료.오류내용}", false);
                     Global.큐알제어.하부큐알리더2.리딩종료();
                 }
-            });
+            })
+            { Priority = ThreadPriority.Highest }.Start();
+
+
+            //Task.Run(() =>
+            //{
+            //    검사결과 검사 = Global.검사자료.검사시작(제품인덱스);
+            //    검사.재검사여부 = this.재검사;
+
+            //    큐알리더.큐알리딩결과 하부큐알1결과 = Global.큐알제어.하부큐알리더1.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
+            //    큐알리더.큐알리딩결과 하부큐알2결과 = Global.큐알제어.하부큐알리더2.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
+
+            //    if (하부큐알1결과.결과자료.정상여부)
+            //    {
+            //        검사.큐알정보검사(검사항목.하부큐알코드1, 하부큐알1결과.결과자료.응답내용);
+
+            //        //Char[] FFC_rear = new char[하부큐알1결과.결과자료.응답내용.Length];
+            //        //FFC_rear = 하부큐알1결과.결과자료.응답내용.ToCharArray();
+            //        //for (int i = 0; i < FFC_rear.Length; i += 2) {
+            //        //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보R_1 + (i/2)].요청주소, (Int32)(FFC_rear[i]<<8) | (Int32)FFC_rear[i+1]);
+            //        //}
+
+            //        Global.정보로그(로그영역, "하부큐알1리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알1결과.결과자료.응답내용}", false);
+            //    }
+            //    else
+            //    {
+            //        Global.정보로그(로그영역, "하부큐알1리딩수행", $"큐알리딩실패 : {하부큐알1결과.결과자료.오류내용}", false);
+            //        Global.큐알제어.하부큐알리더1.리딩종료();
+            //    }
+
+            //    if (하부큐알2결과.결과자료.정상여부)
+            //    {
+            //        검사.큐알정보검사(검사항목.하부큐알코드2, 하부큐알2결과.결과자료.응답내용);
+
+            //        //Char[] FFC_front = new char[하부큐알2결과.결과자료.응답내용.Length];
+            //        //FFC_front = 하부큐알2결과.결과자료.응답내용.ToCharArray();
+            //        //for (int i = 0; i < FFC_front.Length; i += 2) {
+            //        //    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부큐알정보F_1 + (i / 2)].요청주소, (Int32)(FFC_front[i] << 8) | (Int32)FFC_front[i + 1]);
+            //        //}
+
+            //        Global.정보로그(로그영역, "하부큐알2리딩수행", $"제품인덱스 {제품인덱스}, 결과 : {하부큐알2결과.결과자료.응답내용}", false);
+
+            //        //Int32 NG여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].Busy주소);
+            //        //Int32 OK여부 = Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.진행여부트리거].완료주소);
+            //        //
+            //        //
+            //        //if (NG여부 > 0) { // MES 응답 NG
+            //        //    검사.MES응답 = MES응답.NG;
+            //        //}
+            //        //else if (OK여부 > 0) {
+            //        //    검사.MES응답 = MES응답.OK;
+            //        //}
+
+            //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+            //        Task.Delay(50);
+            //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+            //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+            //    }
+            //    else
+            //    {
+            //        Global.정보로그(로그영역, "하부큐알2리딩수행", $"큐알리딩실패 : {하부큐알2결과.결과자료.오류내용}", false);
+            //        Global.큐알제어.하부큐알리더2.리딩종료();
+            //    }
+            //});
         }
 
         private void 바닥평면센서수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -308,7 +337,7 @@ namespace TPA.Schemas
             }
             else
             {
-                Task.Run(() =>
+                new Thread(() =>
                 {
                     검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
                     if (검사 == null) return;
@@ -336,7 +365,37 @@ namespace TPA.Schemas
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
                     }
-                });
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+                //Task.Run(() =>
+                //{
+                //    검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
+                //    if (검사 == null) return;
+
+                //    SR2000.SR2000리딩결과 상부큐알결과 = (SR2000.SR2000리딩결과)Global.큐알제어.상부큐알리더.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
+
+                //    if (상부큐알결과.결과자료.정상여부)
+                //    {
+                //        검사.큐알정보검사(검사항목.상부큐알코드1, 상부큐알결과.결과자료.큐알별내용[0]);
+                //        검사.큐알정보검사(검사항목.상부큐알코드2, 상부큐알결과.결과자료.큐알별내용[1]);
+                //        Global.정보로그(로그영역, "상부큐알리딩수행", $"제품인덱스 {제품인덱스}, 결과1 : {상부큐알결과.결과자료.큐알별내용[0]}, 결과2 : {상부큐알결과.결과자료.큐알별내용[1]}", false);
+
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                //        Thread.Sleep(50);
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+                //    }
+                //    else
+                //    {
+                //        Global.정보로그(로그영역, "상부큐알리딩수행", $"큐알리딩실패 : {상부큐알결과.결과자료.오류내용}", false);
+                //        Global.큐알제어.상부큐알리더.리딩종료();
+                //        //리딩실패시 NG로 빼자.
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                //        Task.Delay(50);
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                //        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+                //    }
+                //});
             }
         }
 
@@ -521,8 +580,9 @@ namespace TPA.Schemas
 
                 try
                 {
-                    Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(6, 커버들뜸값);
-                    Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버들뜸편차);
+                    Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(커버들뜸값);
+                    Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff2(커버들뜸편차);
+                    Debug.WriteLine($"커버들뜸 높이 : {커버들뜸높이}");
                     검사.SetResult(검사항목.No4_커버들뜸, 커버들뜸높이);
 
                     Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);

@@ -9,12 +9,12 @@ namespace TPA.Schemas
     public static class PlaneDistanceCalculator
     {
 
-        public static float[] 편차계산(Int32 기준값, List<Single> 센서값)
+        public static float[] 편차계산(List<Single> 센서값)
         {
             Single[] distances = new Single[센서값.Count];
             for (int lop = 0; lop < 센서값.Count; lop++)
             {
-                distances[lop] = 기준값 - 센서값[lop];
+                distances[lop] = 센서값[lop]* 2;
             }
 
             return distances;
@@ -42,7 +42,8 @@ namespace TPA.Schemas
             Single C = -1;
             Single D = result[2];
             Single[] distances = new Single[queryPointCnt];
-            for (int i = 0; i < queryPointCnt; i++) {
+            for (int i = 0; i < queryPointCnt; i++)
+            {
                 Single x = queryPoints[i, 0];
                 Single y = queryPoints[i, 1];
                 Single z = queryPoints[i, 2];
@@ -55,5 +56,6 @@ namespace TPA.Schemas
 
         public static Single FindMinMaxDiff(Single[] arr) => Math.Abs(arr.Max() - arr.Min());
         public static Single FindAbsMaxDiff(Single[] arr) => Math.Max(Math.Abs(arr.Max()), Math.Abs(arr.Min())) * 2;
+        public static Single FindAbsMaxDiff2(Single[] arr) => Math.Max(Math.Abs(arr.Max()), Math.Abs(arr.Min()));
     }
 }
