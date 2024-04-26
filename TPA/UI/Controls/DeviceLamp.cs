@@ -35,7 +35,7 @@ namespace TPA.UI.Controls
 
         public void Init()
         {
-            this.PLC통신 = new 장치상태(this.e장치통신, true);
+            this.PLC통신 = new 장치상태(this.e장치통신);
             this.큐알리더1 = new 장치상태(this.e큐알리더1);
             this.큐알리더2 = new 장치상태(this.e큐알리더2);
             this.큐알리더3 = new 장치상태(this.e큐알리더3);

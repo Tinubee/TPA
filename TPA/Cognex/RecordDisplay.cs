@@ -32,7 +32,6 @@ namespace CogUtils
             foreach (ICogGraphic graphic in graphics)
                 this.StaticGraphics.Add(graphic, "Results");
             this.SetBackground();
-            this.Fit(true);
             //this.Image = image;
             //this.SetBackground();
             //this.Fit(true);

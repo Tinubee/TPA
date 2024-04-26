@@ -205,7 +205,6 @@ namespace TPA.Schemas
             // }
 
             if (카메라 == 카메라구분.Cam03) {
-                Debug.WriteLine("1");
                 검사정보 H1 = 검사.GetItem(검사항목.No2_1_거리측정h1);
                 검사정보 H2 = 검사.GetItem(검사항목.No2_2_거리측정h2);
                 검사정보 H3 = 검사.GetItem(검사항목.No3_1_거리측정h3);
@@ -218,13 +217,12 @@ namespace TPA.Schemas
 
                 검사정보 F1 = 검사.GetItem(검사항목.No8_1_거리측정L);
                 검사정보 F2 = 검사.GetItem(검사항목.No8_2_거리측정R);
-                Debug.WriteLine("2");
                 검사.SetResult(검사항목.No2_선윤곽도H_F, (Single)(Math.Max(Math.Abs(H1.기준값 - H1.결과값), Math.Abs(H2.기준값 - H2.결과값)) * 2));
                 검사.SetResult(검사항목.No3_선윤곽도H_R, (Single)(Math.Max(Math.Abs(H3.기준값 - H3.결과값), Math.Abs(H4.기준값 - H4.결과값)) * 2));
                 검사.SetResult(검사항목.No10_1_선윤곽도J_F, (Single)(Math.Max(Math.Abs(J1.기준값 - J1.결과값), Math.Abs(J2.기준값 - J2.결과값)) * 2));
                 검사.SetResult(검사항목.No10_2_선윤곽도J_R, (Single)(Math.Max(Math.Abs(J3.기준값 - J3.결과값), Math.Abs(J4.기준값 - J4.결과값)) * 2));
                 검사.SetResult(검사항목.No8_선윤곽도_F, (Single)(Math.Max(Math.Abs(F1.기준값 - F1.결과값), Math.Abs(F2.기준값 - F2.결과값)) * 2));
-                Debug.WriteLine("3");
+
                 검사정보 각인정보 = 검사.GetItem(검사항목.노멀미러);
                 if ((Single)각인정보.결과값 == 0)
                     검사.노멀미러 = 노멀미러.None;
@@ -232,7 +230,6 @@ namespace TPA.Schemas
                     검사.노멀미러 = 노멀미러.Normal;
                 else if ((Single)각인정보.결과값 == 2)
                     검사.노멀미러 = 노멀미러.Mirror;
-                Debug.WriteLine("4");
                 검사정보 역투입정보 = 검사.GetItem(검사항목.역투입);
                 if ((Single)역투입정보.결과값 == 0)
                     검사.역투입여부 = 역투입여부.None;
@@ -301,7 +298,8 @@ namespace TPA.Schemas
 
         public void Save()
         {
-            try { this.SaveChanges(); }
+            //try { this.SaveChanges(); }
+            try { this.SaveChangesAsync(); }
             catch (Exception ex) { Debug.WriteLine(ex.ToString(), "자료저장"); }
         }
 

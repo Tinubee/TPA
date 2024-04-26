@@ -189,6 +189,8 @@ namespace TPA.Schemas
 
         public void 그랩완료(카메라장치 장치)
         {
+            Global.조명제어.TurnOff(장치.구분);
+            this[장치.구분].Stop();
             if (Global.장치통신.자동수동여부)
             {
                 Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(장치.구분);
@@ -236,9 +238,7 @@ namespace TPA.Schemas
                 {
                     Global.경고로그("카메라", "제품인덱스", $"카메라 [{Utils.GetDescription(장치.구분)}]의 검사 Index가 없습니다.", false);
                 }
-                this[장치.구분].Stop();
             }
-            Global.조명제어.TurnOff(장치.구분);
         }
 
         public 카메라장치 GetItem(카메라구분 구분)

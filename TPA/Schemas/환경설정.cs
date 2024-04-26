@@ -126,7 +126,8 @@ namespace TPA.Schemas
 
         public Boolean Load()
         {
-            if (!CanDbConnect()) {
+            if (!CanDbConnect())
+            {
                 Global.오류로그(로그영역.GetString(), "데이터베이스 연결실패", "데이터베이스에 연결할 수 없습니다.", true);
                 return false;
             }

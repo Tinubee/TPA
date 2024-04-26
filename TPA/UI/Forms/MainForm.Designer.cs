@@ -75,6 +75,7 @@
             this.e제품수행이벤트발생 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델정보뷰어 = new TPA.UI.Controls.ModelSettingViewer();
             this.e셋팅뷰어 = new TPA.UI.Controls.EnvSettingViewer();
+            this.bMES테스트 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
@@ -360,6 +361,7 @@
             // 
             // tabFormContentContainer5
             // 
+            this.tabFormContentContainer5.Controls.Add(this.bMES테스트);
             this.tabFormContentContainer5.Controls.Add(this.lbK1);
             this.tabFormContentContainer5.Controls.Add(this.b커버센서읽기);
             this.tabFormContentContainer5.Controls.Add(this.bForceAutoMode);
@@ -502,6 +504,14 @@
             this.e셋팅뷰어.Size = new System.Drawing.Size(600, 1010);
             this.e셋팅뷰어.TabIndex = 0;
             // 
+            // bMES테스트
+            // 
+            this.bMES테스트.Location = new System.Drawing.Point(1252, 841);
+            this.bMES테스트.Name = "bMES테스트";
+            this.bMES테스트.Size = new System.Drawing.Size(135, 23);
+            this.bMES테스트.TabIndex = 27;
+            this.bMES테스트.Text = "MES 테스트";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -582,6 +592,7 @@
         private DevExpress.XtraEditors.SimpleButton bForceAutoMode;
         private DevExpress.XtraEditors.SimpleButton b커버센서읽기;
         private DevExpress.XtraEditors.LabelControl lbK1;
+        private DevExpress.XtraEditors.SimpleButton bMES테스트;
     }
 }
 
