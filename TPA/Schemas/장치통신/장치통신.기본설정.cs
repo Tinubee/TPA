@@ -55,7 +55,7 @@ namespace TPA.Schemas
             Global.정보로그(로그영역, "PLC 통신", $"통신을 시작합니다.", false);
             while (this.작업여부) {
                 PLC커맨드자료분석();
-                Thread.Sleep(PLC통신주기);
+                Task.Delay(PLC통신주기);
             }
 
             Global.정보로그(로그영역, "PLC 통신", $"통신이 종료되었습니다.", false);

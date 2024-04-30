@@ -31,11 +31,11 @@ namespace TPA.UI.Controls
         private 장치상태 카메라5;
         private 장치상태 카메라6;
         private 장치상태 카메라7;
-        private 장치상태 라벨출력;
+        //private 장치상태 라벨출력;
 
         public void Init()
         {
-            this.PLC통신 = new 장치상태(this.e장치통신);
+            this.PLC통신 = new 장치상태(this.e장치통신, true);
             this.큐알리더1 = new 장치상태(this.e큐알리더1);
             this.큐알리더2 = new 장치상태(this.e큐알리더2);
             this.큐알리더3 = new 장치상태(this.e큐알리더3);
@@ -47,7 +47,7 @@ namespace TPA.UI.Controls
             this.카메라5 = new 장치상태(this.e카메라5);
             this.카메라6 = new 장치상태(this.e카메라6);
             this.카메라7 = new 장치상태(this.e카메라7);
-            this.라벨출력 = new 장치상태(this.e라벨기);
+            //this.라벨출력 = new 장치상태(this.e라벨기);
             Global.장치통신.통신상태알림 += 통신상태알림;
             this.통신상태알림();
         }
@@ -61,6 +61,7 @@ namespace TPA.UI.Controls
             }
 
             if (Global.장치통신.정상여부) this.PLC통신.Set(Global.장치통신.통신확인핑퐁 ? 상태구분.정상 : 상태구분.대기);
+            //if (Global.장치통신.정상여부) this.PLC통신.Set(상태구분.정상);
             else this.PLC통신.Set(상태구분.오류);
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
 
@@ -75,7 +76,7 @@ namespace TPA.UI.Controls
             this.카메라5.Set(Global.장치상태.하부카메라2);
             this.카메라6.Set(Global.장치상태.커넥터설삽카메라1);
             this.카메라7.Set(Global.장치상태.커넥터설삽카메라2);
-            this.라벨출력.Set(Global.장치상태.라벨기);
+            //this.라벨출력.Set(Global.장치상태.라벨기);
         }
 
         private enum 상태구분

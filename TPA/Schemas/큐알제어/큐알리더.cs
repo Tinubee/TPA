@@ -35,7 +35,7 @@ namespace TPA.Schemas
 
     public abstract class 큐알리더 : 큐알장치
     {
-        protected String 로그영역 = "큐알리더";
+        //protected String 로그영역 = "큐알리더";
         public delegate void Communication(통신구분 통신, 큐알동작커맨드 커맨드, String mesg);
         public event Communication 송신수신알림;
         public abstract 큐알리딩결과자료 커맨드분석(큐알동작커맨드 커맨드, String 결과);

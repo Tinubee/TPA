@@ -18,6 +18,8 @@ namespace TPA.Schemas
     partial class 장치통신
     {
         public Boolean 센서읽기 = false;
+        public DateTime 통신확인주기시간 = DateTime.Now;
+        public Int32 통신확인주기 = 1;
 
         private Boolean PLC커맨드정보갱신()
         {
@@ -42,11 +44,11 @@ namespace TPA.Schemas
                 //Debug.WriteLine($"완료주소 : {item.Busy주소}");
                 //if(item.완료주소 != "")
                 //{
-                Debug.WriteLine($"{item.완료주소} Off");
+                //Debug.WriteLine($"{item.완료주소} Off");
                 Global.장치통신.강제쓰기(item.완료주소, 0);
                 //}else if(item.Busy주소 != "")
                 //{
-                Debug.WriteLine($"{item.Busy주소} Off");
+                //Debug.WriteLine($"{item.Busy주소} Off");
                 Global.장치통신.강제쓰기(item.Busy주소, 0);
                 //}
             }
@@ -206,36 +208,18 @@ namespace TPA.Schemas
                 // org this.검사번호리셋 = true;
                 Global.모델자료.선택모델.날짜변경();
             }
-            this.통신확인핑퐁 = !this.통신확인핑퐁;
-            this.통신상태알림?.Invoke();
+            if (확인주기())
+            {
+                this.통신확인핑퐁 = !this.통신확인핑퐁;
+                this.통신상태알림?.Invoke();
+            }
         }
 
-        // public 제품인덱스 촬영위치별제품인덱스(카메라구분 촬영위치, Boolean testflag)
-        // {
-        //     if (!testflag) {
-        //         if (촬영위치 == 카메라구분.Cam01 || 촬영위치 == 카메라구분.Cam02)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam03 || 촬영위치 == 카메라구분.Cam08)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam04 || 촬영위치 == 카메라구분.Cam05)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam06 || 촬영위치 == 카메라구분.Cam07)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀04제품인덱스];
-        //         else
-        //             return 0;
-        //     }
-        //     else {
-        //         if (촬영위치 == 카메라구분.Cam01 || 촬영위치 == 카메라구분.Cam02)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam03 || 촬영위치 == 카메라구분.Cam08)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam04 || 촬영위치 == 카메라구분.Cam05)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
-        //         else if (촬영위치 == 카메라구분.Cam06 || 촬영위치 == 카메라구분.Cam07)
-        //             return this.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀04제품인덱스];
-        //         else
-        //             return 0;
-        //     }
-        // }
+        public Boolean 확인주기()
+        {
+            if ((DateTime.Now - 통신확인주기시간).TotalSeconds < this.통신확인주기) return false;
+            this.통신확인주기시간 = DateTime.Now;
+            return true;
+        }
     }
 }

@@ -26,9 +26,7 @@ namespace TPA.Schemas
             [Description("00")]
             장치상태,
         }
-
-        public String 로그영역 = "라벨프린터";
-
+        //public String 로그영역 = "라벨프린터";
         public override String STX { get { return Convert.ToString(2); } }
         public override Char ETX { get { return Convert.ToChar(13); } }
         private Char LF { get { return Convert.ToChar(10); } }

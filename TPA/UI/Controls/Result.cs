@@ -4,6 +4,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using MvUtils;
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
 using TPA.Schemas;
 
@@ -153,6 +154,7 @@ namespace TPA.UI.Controls
         private void 자료조회(object sender, EventArgs e)
         {
             Global.검사자료.Save();
+            Debug.WriteLine($"{this.e시작일자.DateTime} ~ {this.e종료일자.DateTime}");
             Global.검사자료.Load(this.e시작일자.DateTime, this.e종료일자.DateTime);
         }
 

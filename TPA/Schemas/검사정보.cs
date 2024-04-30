@@ -106,6 +106,8 @@ namespace TPA.Schemas
         CTQ,
         [Description("Surface"), Translation("Surface", "외관검사")]
         Surface,
+        [Description("ETC"), Translation("ETC", "기타")]
+        ETC,
     }
 
 
@@ -432,6 +434,12 @@ namespace TPA.Schemas
         µm = 2,
         [Description("px")]
         px = 3,
+        [Description("OK/NG판정")]
+        ok_ng = 4,
+        [Description("EA")]
+        ea = 5,
+        [Description("등급")]
+        rate = 6,
     }
 
     public enum 결과구분

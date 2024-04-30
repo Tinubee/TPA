@@ -85,8 +85,8 @@ namespace TPA.Schemas
             List<Int32> 대상 = Global.장치통신.검사중인항목();
             자료.ForEach(검사 => {
                 this.Add(검사);
-                if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-                    this.검사스플.Add(검사.검사코드, 검사);
+                //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+                //    this.검사스플.Add(검사.검사코드, 검사);
             });
             this.RaiseListChangedEvents = true;
             this.ResetBindings();
