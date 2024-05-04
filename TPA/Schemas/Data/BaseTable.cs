@@ -58,7 +58,7 @@ namespace TPA.Schemas.Data
         public BaseTable() : base() 
         {
             // org NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "192.168.3.5", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590tpa_ohsung" };
-            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590tpa_ohsung" };
+            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "VDA590TPA" };
             this.DbConn = new NpgsqlConnection(b.ConnectionString);
         }
 

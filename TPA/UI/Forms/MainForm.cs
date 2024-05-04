@@ -43,7 +43,7 @@ namespace TPA
         private void 타이틀_ItemDoubleClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             List<string> resultRow = new List<string>();
-            var connectionString = "Host=localhost;Port=5432;Username=postgres;Password=ivmadmin;Database=vda590tpa_ohsung";
+            var connectionString = "Host=localhost;Port=5432;Username=postgres;Password=ivmadmin;Database=VDA590TPA";
 
             using (var conn = new NpgsqlConnection(connectionString))
             {

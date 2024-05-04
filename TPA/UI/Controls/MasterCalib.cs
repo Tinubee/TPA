@@ -121,7 +121,7 @@ namespace TPA.UI.Controls
 
         private void 자료조회(object sender, EventArgs e)
         {
-            string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=ivmadmin;Database=vda590tpa_ohsung";
+            string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=ivmadmin;Database=VDA590TPA";
 
             NpgsqlConnection conn = new NpgsqlConnection(connectionString);
 

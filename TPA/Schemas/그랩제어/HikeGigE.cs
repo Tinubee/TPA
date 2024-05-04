@@ -17,7 +17,7 @@ namespace TPA.Schemas
         private CCameraInfo Device;
         private cbOutputExdelegate ImageCallBackDelegate;
         public delegate void ImageCallBackEvent(카메라구분 카메라, IntPtr intPtr, Int32 width, Int32 height);
-        public event ImageCallBackEvent OnImageCallbackReceived;
+       // public event ImageCallBackEvent OnImageCallbackReceived;
 
         public Boolean Init(CGigECameraInfo info)
         {

@@ -26,7 +26,7 @@ namespace TPA.Schemas
                             { 카메라구분.Cam01, 카메라구분.Cam02, 카메라구분.Cam03, 카메라구분.Cam04,
                               카메라구분.Cam05, 카메라구분.Cam06, 카메라구분.Cam07, 카메라구분.Cam08 };
         public delegate void 그랩완료이벤트(카메라구분 카메라, IntPtr intPtr, Int32 width, Int32 height);
-        public event 그랩완료이벤트 OnGrabbedImage;
+        //public event 그랩완료이벤트 OnGrabbedImage;
 
         public HikeGigE 측면카메라1 = null; // Side Left
         public HikeGigE 측면카메라2 = null; // Side Right

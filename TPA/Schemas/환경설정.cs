@@ -59,7 +59,7 @@ namespace TPA.Schemas
         [JsonIgnore, Description("검사여부"), Translation("Use Inspect", "검사여부")]
         public Boolean 검사여부 { get; set; } = true;
         [JsonProperty("CurrentModel")]
-        public 모델구분 선택모델 { get; set; } = 모델구분.VDA590TPA_Ohsung;
+        public 모델구분 선택모델 { get; set; } = 모델구분.VDA590TPA;
         [JsonProperty("TriggerBoardPort")]
         public String 트리거보드포트 { get; set; } = "COM6";
         [JsonProperty("CodeReader1Host")]
@@ -163,7 +163,7 @@ namespace TPA.Schemas
                 this.Save();
                 Debug.WriteLine("환경설정 로드 실패 : 저장된 설정파일 없음");
             }
-            Debug.WriteLine(this.동작구분, "동작구분");
+            //Debug.WriteLine(this.동작구분, "동작구분");
             return true;
         }
 
@@ -214,7 +214,7 @@ namespace TPA.Schemas
         public static NpgsqlConnection CreateDbConnection()
         {
             // org NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "192.168.3.5", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590tpa_ohsung" };
-            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590tpa_ohsung" };
+            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "VDA590TPA" };
             return new NpgsqlConnection(b.ConnectionString);
         }
 

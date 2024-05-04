@@ -41,7 +41,7 @@ namespace TPA.Schemas
     public class EuresysLink : 카메라장치
     {
         public delegate void ImageCallbackEvent(카메라구분 카메라, IntPtr intPtr, Int32 width, Int32 height);
-        public event ImageCallbackEvent OnImageCallbackReceived;
+        //public event ImageCallbackEvent OnImageCallbackReceived;
 
         public UInt32 Channel;
         public string CamFile { get; set; } = "P3-80-16k40.cam";

@@ -22,7 +22,7 @@ namespace TPA.Schemas
         [JsonProperty("Copy"), Translation("Copy", "사본저장")]
         public Boolean 사본저장 { get; set; } = true;
         [JsonProperty("Format"), Translation("Format", "사본유형")]
-        public 사진형식 사본유형 { get; set; } = 사진형식.Png;
+        public 사진형식 사본유형 { get; set; } = 사진형식.Jpg;
         [JsonProperty("Scale"), Translation("Scale", "사진비율")]
         public Int32 사진비율 { get; set; } = 100;
         [JsonProperty("Quality"), Translation("Quality", "사진품질")]

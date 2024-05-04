@@ -15,8 +15,10 @@ namespace TPA.Schemas
     {
         [ListBindable(false)]
         None,
+        [DXDescription("VDA590 UFA"), Description("VDA590 UFA")]
+        VDA590UFA = 1,
         [DXDescription("VDA590 TPA"), Description("VDA590 TPA")]
-        VDA590TPA_Ohsung,
+        VDA590TPA = 2,
     }
     public class 모델정보
     {

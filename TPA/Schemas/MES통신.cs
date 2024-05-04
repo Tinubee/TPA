@@ -16,7 +16,7 @@ namespace TPA.Schemas
 {
     public class MES통신
     {
-        public event EventHandler<string> 검사진행요청;
+        //public event EventHandler<string> 검사진행요청;
 
         public MES통신() { }
 

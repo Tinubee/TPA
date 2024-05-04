@@ -42,6 +42,7 @@ namespace TPA
         public static 제품검사수행 제품검사수행;
         public static 변위센서제어 변위센서제어;
         public static 사진자료 사진자료;
+        public static MES통신 MES통신;
 
         public static class 장치상태
         {
@@ -79,6 +80,7 @@ namespace TPA
                 제품검사수행 = new 제품검사수행();
                 변위센서제어 = new 변위센서제어();
                 사진자료 = new 사진자료();
+                MES통신 = new MES통신();
 
                 로그자료.Init();
                 환경설정.Init();
@@ -95,6 +97,7 @@ namespace TPA
                 {  
                     if (!장치통신.Open()) new Exception("PLC 서버 연결 실패");
                     if (!그랩제어.Init()) new Exception("카메라 초기화 실패");
+                    //if (!MES통신.Init()) new Exception("MES통신 연결 실패");
                     큐알제어.Init();
                     //큐알인쇄.Init();
                     조명제어.Init();
@@ -119,21 +122,22 @@ namespace TPA
             try
             {
                 if (환경설정.동작구분 == 동작구분.Live) {
-                    큐알제어.Close();
-                    큐알인쇄.Close();
-                    조명제어.Close();
-                    변위센서제어.Close();
+                    큐알제어?.Close();
+                    큐알인쇄?.Close();
+                    조명제어?.Close();
+                    변위센서제어?.Close();
+                    MES통신?.Close();
                 }
 
-                장치통신.Close();
-                유저자료.Close();
-                환경설정.Close();
-                그랩제어.Close();
-                비전검사.Close();
-                검사자료.Close();
-                모델자료.Close();
-                로그자료.Close();
-                사진자료.Close();
+                장치통신?.Close();
+                유저자료?.Close();
+                환경설정?.Close();
+                그랩제어?.Close();
+                비전검사?.Close();
+                검사자료?.Close();
+                모델자료?.Close();
+                로그자료?.Close();
+                사진자료?.Close();
 
                 Properties.Settings.Default.Save();
                 Debug.WriteLine("시스템 종료");
@@ -156,11 +160,11 @@ namespace TPA
         {
             if (Localization.CurrentLanguage != Language.KO) return;
             MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.KO;
-            MvUtils.DxDataGridLocalizer.Enable();
-            MvUtils.DxEditorsLocalizer.Enable();
-            MvUtils.DxDataFilteringLocalizer.Enable();
-            MvUtils.DxLayoutLocalizer.Enable();
-            MvUtils.DxBarLocalizer.Enable();
+            DxDataGridLocalizer.Enable();
+            DxEditorsLocalizer.Enable();
+            DxDataFilteringLocalizer.Enable();
+            DxLayoutLocalizer.Enable();
+            DxBarLocalizer.Enable();
         }
 
         public static String GetGuid()

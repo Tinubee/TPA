@@ -17,7 +17,7 @@ namespace TPA.Schemas
         public event BaseEvent 동작상태알림;
         public event BaseEvent 통신상태알림;
         public delegate void 제품검사수행델리게이트(PLC커맨드목록 커맨드, Int32 제품인덱스);
-        public event 제품검사수행델리게이트 제품검사수행이벤트;
+        //public event 제품검사수행델리게이트 제품검사수행이벤트;
 
         public void Init()
         {
