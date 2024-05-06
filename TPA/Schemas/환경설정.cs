@@ -204,10 +204,35 @@ namespace TPA.Schemas
             return this.ImageSaveDrive;
         }
 
+        private DriveInfo ChangeSaveImageDirve()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            DriveInfo currentDrive = this.GetSaveImageDrive();  
+            foreach (DriveInfo drive in drives)
+            {
+                if (!drive.Name.Equals(currentDrive.Name) && drive.IsReady && drive.AvailableFreeSpace > drive.TotalSize * 0.20)
+                {
+                    this.ImageSaveDrive = drive;
+                    this.사진저장경로 = Path.Combine(drive.Name, "Images");
+                    return this.ImageSaveDrive;
+                }
+            }
+            
+            return currentDrive;
+        }
+
         public Int32 SaveImageDriveFreeSpace()
         {
             DriveInfo drive = this.GetSaveImageDrive();
             double FreeSpace = drive.AvailableFreeSpace / (double)drive.TotalSize * 100;
+
+            if(FreeSpace < 20)
+            {
+                //저장경로 변경
+                drive = this.ChangeSaveImageDirve();
+                FreeSpace = drive.AvailableFreeSpace / (double)drive.TotalSize * 100;
+            }
+
             return Convert.ToInt32(FreeSpace);
         }
 

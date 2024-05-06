@@ -88,17 +88,9 @@ namespace TPA.Schemas
 
             Task.Run(() => {
                 String file = String.Empty;
-                //if (정보.원본저장)
-                //{
-                //    file = OriginImageFile(시간, 번호, 카메라);
-                //    if (String.IsNullOrEmpty(file)) return;
-                //    if (!Common.ImageSavePng(image, file, out String error))
-                //        Global.오류로그(로그영역.GetString(), 카메라.ToString(), error, false);
-                //}
                 if (!정보.사본저장) return;
                 file = CopyImageFile(시간, 번호, 카메라, 정보.사본유형);
                 Double scale = Math.Max(0.1, Math.Min((Double)정보.사진비율 / 100, 1.0));
-                //Debug.WriteLine($"Scale: {정보.사진비율} => {scale}", 카메라.ToString());
                 if (scale == 1) this.SaveImage(정보, image, file);
                 else
                 {
