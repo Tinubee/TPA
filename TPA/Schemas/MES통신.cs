@@ -23,6 +23,11 @@ namespace TPA.Schemas
         public String 로그영역 = "MES통신";
         private MESClient 통신장치;
 
+        public enum EQPID
+        {
+            REQ_PROCESS_START = 1,
+            REQ_PROCESS_END = 2,
+        }
 
         public Boolean Init() {
             try

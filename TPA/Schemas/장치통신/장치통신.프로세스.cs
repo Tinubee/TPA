@@ -57,7 +57,6 @@ namespace TPA.Schemas
         private void 검사위치별제품인덱스버퍼초기화()
         {
             this.검사위치별제품인덱스버퍼.Clear();
-
             this.검사위치별제품인덱스버퍼.Add(PLC커맨드목록.셔틀01제품인덱스, 0);
             this.검사위치별제품인덱스버퍼.Add(PLC커맨드목록.셔틀02제품인덱스, 0);
             this.검사위치별제품인덱스버퍼.Add(PLC커맨드목록.셔틀03제품인덱스, 0);

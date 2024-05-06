@@ -37,6 +37,7 @@ namespace TPA.Schemas
         public ICogImage InputImage { get => this.GetInput<ICogImage>("InputImage"); set => this.SetInput("InputImage", value); }
         public ICogImage OutputImage { get { return GetOutput<ICogImage>(this.AlignTools, "OutputImage"); } }
         public String ViewerRecodName { get { return "AlignTools.Fixture.OutputImage"; } }
+        public String InputImageName { get { return "AlignTools.CogPMAlignTool1.InputImage"; } }
 
         private DateTime 검사시작 = DateTime.Today;
         private DateTime 검사종료 = DateTime.Today;
@@ -197,7 +198,11 @@ namespace TPA.Schemas
                 }
                 else
                 {
-                    Debug.WriteLine("연산진입");
+                    if(this.카메라 == 카메라구분.Cam06 || this.카메라 == 카메라구분.Cam07)
+                    {
+                        Debug.WriteLine($"검사Tool Accepted 확인 : {this.카메라} - {accepted}");
+                    }
+                    //Debug.WriteLine("연산진입");
                     Global.검사자료.카메라검사(this.카메라, GetResults());
                     DisplayResult(검사);
                 }
@@ -295,23 +300,13 @@ namespace TPA.Schemas
                 if (검사 != null)
                     검사.불량영역(this.카메라).ForEach(e => display.StaticGraphics.Add(e.GetRectangle(GraphicColor(결과구분.NG), 2), "Results"));
                 if (this.OutputImage != null) display.SetImage(this.OutputImage, record, graphics);
-                else display.SetImage(this.InputImage, record, graphics);
+                else
+                {
+                    record = records.SubRecords[this.InputImageName];
+                    display.SetImage(this.InputImage, record, graphics);
+                }
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message, "DisplayResult"); }
-
-
-            //if (display == null) return;
-            //display.InteractiveGraphics.Clear();
-            //display.StaticGraphics.Clear();
-            //ICogRecord record = this.ToolBlock.CreateLastRunRecord();
-            //if (record != null && record.SubRecords != null && record.SubRecords.ContainsKey(this.ViewerRecodName))
-            //    display.Record = record.SubRecords[this.ViewerRecodName];
-            //if (this.OutputImage != null)
-            //    display.SetImage(this.OutputImage);
-            //else
-            //    display.SetImage(this.InputImage);
-            //if (검사 == null) return;
-            //검사.불량영역(this.카메라).ForEach(e => display.StaticGraphics.Add(e.GetRectangle(GraphicColor(결과구분.NG), 2), "Results"));
         }
 
         public void DisplayResult(RecordDisplay display, ICogImage image)
