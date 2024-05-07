@@ -74,16 +74,16 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1264, 487, 717, 784);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(300, 230);
+            this.layoutControl1.Size = new System.Drawing.Size(372, 233);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // b취소
             // 
             this.b취소.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b취소.ImageOptions.SvgImage")));
-            this.b취소.Location = new System.Drawing.Point(152, 182);
+            this.b취소.Location = new System.Drawing.Point(183, 185);
             this.b취소.Name = "b취소";
-            this.b취소.Size = new System.Drawing.Size(136, 36);
+            this.b취소.Size = new System.Drawing.Size(177, 36);
             this.b취소.StyleController = this.layoutControl1;
             this.b취소.TabIndex = 9;
             this.b취소.Text = "취 소";
@@ -91,9 +91,9 @@
             // b인증
             // 
             this.b인증.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b인증.ImageOptions.SvgImage")));
-            this.b인증.Location = new System.Drawing.Point(12, 182);
+            this.b인증.Location = new System.Drawing.Point(12, 185);
             this.b인증.Name = "b인증";
-            this.b인증.Size = new System.Drawing.Size(136, 36);
+            this.b인증.Size = new System.Drawing.Size(167, 36);
             this.b인증.StyleController = this.layoutControl1;
             this.b인증.TabIndex = 8;
             this.b인증.Text = "로그인";
@@ -105,7 +105,9 @@
             this.e비밀번호.Name = "e비밀번호";
             this.e비밀번호.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F);
             this.e비밀번호.Properties.Appearance.Options.UseFont = true;
-            this.e비밀번호.Size = new System.Drawing.Size(200, 28);
+            this.e비밀번호.Properties.PasswordChar = '●';
+            this.e비밀번호.Properties.UseSystemPasswordChar = true;
+            this.e비밀번호.Size = new System.Drawing.Size(272, 28);
             this.e비밀번호.StyleController = this.layoutControl1;
             this.e비밀번호.TabIndex = 7;
             // 
@@ -117,7 +119,7 @@
             this.e사용자명.Properties.Appearance.Options.UseFont = true;
             this.e사용자명.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e사용자명.Size = new System.Drawing.Size(200, 28);
+            this.e사용자명.Size = new System.Drawing.Size(272, 28);
             this.e사용자명.StyleController = this.layoutControl1;
             this.e사용자명.TabIndex = 6;
             // 
@@ -125,9 +127,9 @@
             // 
             this.e한글.ImageOptions.SvgImage = global::TPA.Properties.Resources.Korea;
             this.e한글.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.e한글.Location = new System.Drawing.Point(160, 20);
+            this.e한글.Location = new System.Drawing.Point(191, 20);
             this.e한글.Name = "e한글";
-            this.e한글.Size = new System.Drawing.Size(120, 36);
+            this.e한글.Size = new System.Drawing.Size(161, 36);
             this.e한글.StyleController = this.layoutControl1;
             this.e한글.TabIndex = 5;
             this.e한글.TabStop = false;
@@ -139,7 +141,7 @@
             this.e영어.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.e영어.Location = new System.Drawing.Point(20, 20);
             this.e영어.Name = "e영어";
-            this.e영어.Size = new System.Drawing.Size(120, 36);
+            this.e영어.Size = new System.Drawing.Size(151, 36);
             this.e영어.StyleController = this.layoutControl1;
             this.e영어.TabIndex = 4;
             this.e영어.TabStop = false;
@@ -158,7 +160,7 @@
             this.layoutControlItem5,
             this.layoutControlItem6});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(300, 230);
+            this.Root.Size = new System.Drawing.Size(372, 233);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -169,7 +171,7 @@
             this.layoutControlItem1.MinSize = new System.Drawing.Size(100, 56);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
-            this.layoutControlItem1.Size = new System.Drawing.Size(140, 56);
+            this.layoutControlItem1.Size = new System.Drawing.Size(171, 56);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -180,19 +182,19 @@
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 152);
             this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 10);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(280, 18);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(352, 21);
             this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.e한글;
-            this.layoutControlItem2.Location = new System.Drawing.Point(140, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(171, 0);
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 56);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(99, 56);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
-            this.layoutControlItem2.Size = new System.Drawing.Size(140, 56);
+            this.layoutControlItem2.Size = new System.Drawing.Size(181, 56);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -206,7 +208,7 @@
             this.layoutControlItem3.MinSize = new System.Drawing.Size(138, 48);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
-            this.layoutControlItem3.Size = new System.Drawing.Size(280, 48);
+            this.layoutControlItem3.Size = new System.Drawing.Size(352, 48);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.Text = "사용자명";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 15);
@@ -220,7 +222,7 @@
             this.layoutControlItem4.MinSize = new System.Drawing.Size(130, 48);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
-            this.layoutControlItem4.Size = new System.Drawing.Size(280, 48);
+            this.layoutControlItem4.Size = new System.Drawing.Size(352, 48);
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.Text = "비밀번호";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 15);
@@ -228,11 +230,11 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.b인증;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 170);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 173);
             this.layoutControlItem5.MaxSize = new System.Drawing.Size(0, 40);
             this.layoutControlItem5.MinSize = new System.Drawing.Size(82, 40);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem5.Size = new System.Drawing.Size(171, 40);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -240,11 +242,11 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.b취소;
-            this.layoutControlItem6.Location = new System.Drawing.Point(140, 170);
+            this.layoutControlItem6.Location = new System.Drawing.Point(171, 173);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(0, 40);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(78, 40);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem6.Size = new System.Drawing.Size(181, 40);
             this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
@@ -257,7 +259,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 230);
+            this.ClientSize = new System.Drawing.Size(372, 233);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("Login.IconOptions.SvgImage")));
@@ -266,6 +268,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "로그인";
+            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e비밀번호.Properties)).EndInit();

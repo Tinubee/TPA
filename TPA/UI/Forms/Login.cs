@@ -1,6 +1,8 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraRichEdit.Model;
 using MvUtils;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace TPA.UI.Controls
@@ -35,6 +37,10 @@ namespace TPA.UI.Controls
         {
             CheckButton btn = sender as CheckButton;
             if (!btn.Checked) return;
+
+            if (btn.Tag.ToString() == Language.KO.ToString()) e영어.Checked = false;
+            else if (btn.Tag.ToString() == Language.EN.ToString()) e한글.Checked = false;
+
             this.언어변경((Language)btn.Tag);
             this.BindLocalization.ResetBindings(false);
         }
