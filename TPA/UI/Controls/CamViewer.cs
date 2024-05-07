@@ -39,7 +39,7 @@ namespace TPA.UI.Controls
             this.e좌측면.Init(false);
             this.e우측면.Init(false);
             this.e상부면.Init(false);
-            this.e노멀각인.Init(false);
+            //this.e노멀각인.Init(false);
             this.e좌측하부.Init(false);
             this.e우측하부.Init(false);
             this.e커넥터설삽상부.Init(false);
@@ -53,7 +53,7 @@ namespace TPA.UI.Controls
             Global.비전검사.SetDisplay(카메라구분.Cam05, this.e우측하부);
             Global.비전검사.SetDisplay(카메라구분.Cam06, this.e커넥터설삽상부);
             Global.비전검사.SetDisplay(카메라구분.Cam07, this.e커넥터설삽하부);
-            Global.비전검사.SetDisplay(카메라구분.Cam08, this.e노멀각인);
+            //Global.비전검사.SetDisplay(카메라구분.Cam08, this.e노멀각인);
 
             Global.검사자료.검사완료알림 += 검사완료알림;
             검사완료알림(Global.검사자료.현재검사찾기());
@@ -64,7 +64,7 @@ namespace TPA.UI.Controls
             if (구분 == DisplayUI.좌측면) return this.e좌측면;
             else if (구분 == DisplayUI.우측면) return this.e우측면;
             else if (구분 == DisplayUI.상부면) return this.e상부면;
-            else if (구분 == DisplayUI.노멀각인) return this.e노멀각인;
+            //else if (구분 == DisplayUI.노멀각인) return this.e노멀각인;
             else if (구분 == DisplayUI.좌측하부) return this.e좌측하부;
             else if (구분 == DisplayUI.우측하부) return this.e우측하부;
             else if (구분 == DisplayUI.커넥터설삽상부) return this.e커넥터설삽상부;

@@ -61,6 +61,7 @@
             this.e로그내역 = new TPA.UI.Controls.LogViewer();
             this.t디버깅용페이지 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer5 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.bMES테스트 = new DevExpress.XtraEditors.SimpleButton();
             this.lbK1 = new DevExpress.XtraEditors.LabelControl();
             this.b커버센서읽기 = new DevExpress.XtraEditors.SimpleButton();
             this.bForceAutoMode = new DevExpress.XtraEditors.SimpleButton();
@@ -75,7 +76,6 @@
             this.e제품수행이벤트발생 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델정보뷰어 = new TPA.UI.Controls.ModelSettingViewer();
             this.e셋팅뷰어 = new TPA.UI.Controls.EnvSettingViewer();
-            this.bMES테스트 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
@@ -358,6 +358,7 @@
             this.t디버깅용페이지.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("t디버깅용페이지.ImageOptions.SvgImage")));
             this.t디버깅용페이지.Name = "t디버깅용페이지";
             this.t디버깅용페이지.Text = "For Debugging";
+            this.t디버깅용페이지.Visible = false;
             // 
             // tabFormContentContainer5
             // 
@@ -381,6 +382,14 @@
             this.tabFormContentContainer5.Name = "tabFormContentContainer5";
             this.tabFormContentContainer5.Size = new System.Drawing.Size(1920, 1010);
             this.tabFormContentContainer5.TabIndex = 5;
+            // 
+            // bMES테스트
+            // 
+            this.bMES테스트.Location = new System.Drawing.Point(1252, 841);
+            this.bMES테스트.Name = "bMES테스트";
+            this.bMES테스트.Size = new System.Drawing.Size(135, 23);
+            this.bMES테스트.TabIndex = 27;
+            this.bMES테스트.Text = "MES 테스트";
             // 
             // lbK1
             // 
@@ -503,14 +512,6 @@
             this.e셋팅뷰어.Name = "e셋팅뷰어";
             this.e셋팅뷰어.Size = new System.Drawing.Size(600, 1010);
             this.e셋팅뷰어.TabIndex = 0;
-            // 
-            // bMES테스트
-            // 
-            this.bMES테스트.Location = new System.Drawing.Point(1252, 841);
-            this.bMES테스트.Name = "bMES테스트";
-            this.bMES테스트.Size = new System.Drawing.Size(135, 23);
-            this.bMES테스트.TabIndex = 27;
-            this.bMES테스트.Text = "MES 테스트";
             // 
             // MainForm
             // 

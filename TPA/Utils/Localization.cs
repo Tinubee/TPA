@@ -13,17 +13,17 @@ namespace TPA
     public static class Localization
     {
         public static TranslationAttribute 제목 = new TranslationAttribute("LGES VDA590 TPA Total Inspection");
-        public static TranslationAttribute 취소 = new TranslationAttribute("Cancel", "취소", "Wycofać");
-        public static TranslationAttribute 닫기 = new TranslationAttribute("Close", "닫기", "Zavrieť");
-        public static TranslationAttribute 저장 = new TranslationAttribute("Save", "저장", "Uložiť");
-        public static TranslationAttribute 삭제 = new TranslationAttribute("Delete", "삭제", "Odstrániť");
-        public static TranslationAttribute 확인 = new TranslationAttribute("Confirm", "확인", "Potvrďte");
-        public static TranslationAttribute 정보 = new TranslationAttribute("Infomation", "정보", "Informácie");
-        public static TranslationAttribute 경고 = new TranslationAttribute("Warning", "경고", "POZOR");
-        public static TranslationAttribute 오류 = new TranslationAttribute("Error", "오류", "Chyba");
-        public static TranslationAttribute 조회 = new TranslationAttribute("Search", "조회", "Vyhľadávanie");
-        public static TranslationAttribute 일자 = new TranslationAttribute("Day", "일자", "Deň");
-        public static TranslationAttribute 시간 = new TranslationAttribute("Time", "시간", "Čas");
+        public static TranslationAttribute 취소 = new TranslationAttribute("Cancel", "취소", "cancelación");
+        public static TranslationAttribute 닫기 = new TranslationAttribute("Close", "닫기", "cerca");
+        public static TranslationAttribute 저장 = new TranslationAttribute("Save", "저장", "ahorrar");
+        public static TranslationAttribute 삭제 = new TranslationAttribute("Delete", "삭제", "Borrar");
+        public static TranslationAttribute 확인 = new TranslationAttribute("Confirm", "확인", "Confirmar");
+        public static TranslationAttribute 정보 = new TranslationAttribute("Information", "정보", "información");
+        public static TranslationAttribute 경고 = new TranslationAttribute("Warning", "경고", "Advertencia");
+        public static TranslationAttribute 오류 = new TranslationAttribute("Error", "오류", "Error");
+        public static TranslationAttribute 조회 = new TranslationAttribute("Search", "조회", "Buscar");
+        public static TranslationAttribute 일자 = new TranslationAttribute("Day", "일자", "Día");
+        public static TranslationAttribute 시간 = new TranslationAttribute("Time", "시간", "Tiempo");
 
         public static Language CurrentLanguage { get { return (Language)Properties.Settings.Default.Language; } }
 
@@ -33,9 +33,9 @@ namespace TPA
                 MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.KO;
                 CultureInfo.CurrentCulture = new CultureInfo("ko-KR", false);
             }
-            else if (CurrentLanguage == Language.PL) {
-                MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.EN;
-                CultureInfo.CurrentCulture = new CultureInfo("pl-PL", false);
+            else if (CurrentLanguage == Language.SP) {
+                MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.SP;
+                CultureInfo.CurrentCulture = new CultureInfo("es-ES", false);
             }
             else {
                 MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.EN;
@@ -93,15 +93,15 @@ namespace TPA
         EN = 0,
         [Description("한국어")]
         KO = 1,
-        [Description("Polish")]
-        PL = 2
+        [Description("Spanish")]
+        SP = 2
     }
 
     public class TranslationAttribute : Attribute
     {
         public String KO = String.Empty;
         public String EN = String.Empty;
-        public String PL = String.Empty;
+        public String SP = String.Empty;
 
         public TranslationAttribute() { }
 
@@ -109,28 +109,28 @@ namespace TPA
         {
             this.EN = en;
             this.KO = en;
-            this.PL = en;
+            this.SP = en;
         }
 
         public TranslationAttribute(String en, String ko)
         {
             this.EN = en;
             this.KO = ko;
-            this.PL = en;
+            this.SP = en;
         }
 
-        public TranslationAttribute(String en, String ko, String pl)
+        public TranslationAttribute(String en, String ko, String sp)
         {
             this.EN = en;
             this.KO = ko;
-            this.PL = pl;
+            this.SP = sp;
         }
 
         public String GetString(Language lang)
         {
             if (lang == Language.EN) return this.EN;
             if (lang == Language.KO) return this.KO;
-            if (lang == Language.PL) return this.PL;
+            if (lang == Language.SP) return this.SP;
             return this.EN;
         }
 

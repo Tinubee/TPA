@@ -32,11 +32,11 @@
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.e카메라 = new TPA.UI.Controls.CamSettings();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.e큐알장치 = new TPA.UI.Controls.QrControls();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.e기본설정 = new TPA.UI.Controls.Config();
+            this.t기타 = new DevExpress.XtraTab.XtraTabPage();
             this.b캠트리거리셋 = new DevExpress.XtraEditors.SimpleButton();
+            this.e큐알장치 = new TPA.UI.Controls.QrControls();
+            this.t환경설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.e기본설정 = new TPA.UI.Controls.Config();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -45,8 +45,8 @@
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
+            this.t기타.SuspendLayout();
+            this.t환경설정.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -82,20 +82,31 @@
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.SelectedTabPage = this.t기타;
             this.xtraTabControl1.Size = new System.Drawing.Size(622, 1040);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.t기타,
+            this.t환경설정});
             // 
-            // xtraTabPage1
+            // t기타
             // 
-            this.xtraTabPage1.Controls.Add(this.b캠트리거리셋);
-            this.xtraTabPage1.Controls.Add(this.e큐알장치);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(620, 1009);
-            this.xtraTabPage1.Text = "Others";
+            this.t기타.Controls.Add(this.b캠트리거리셋);
+            this.t기타.Controls.Add(this.e큐알장치);
+            this.t기타.Name = "t기타";
+            this.t기타.Size = new System.Drawing.Size(620, 1009);
+            this.t기타.Text = "Others";
+            // 
+            // b캠트리거리셋
+            // 
+            this.b캠트리거리셋.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold);
+            this.b캠트리거리셋.Appearance.Options.UseFont = true;
+            this.b캠트리거리셋.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b캠트리거리셋.ImageOptions.SvgImage")));
+            this.b캠트리거리셋.Location = new System.Drawing.Point(12, 13);
+            this.b캠트리거리셋.Name = "b캠트리거리셋";
+            this.b캠트리거리셋.Size = new System.Drawing.Size(323, 40);
+            this.b캠트리거리셋.TabIndex = 1;
+            this.b캠트리거리셋.Text = "Camera Trigger Reset";
             // 
             // e큐알장치
             // 
@@ -105,12 +116,12 @@
             this.e큐알장치.Size = new System.Drawing.Size(620, 863);
             this.e큐알장치.TabIndex = 0;
             // 
-            // xtraTabPage2
+            // t환경설정
             // 
-            this.xtraTabPage2.Controls.Add(this.e기본설정);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(620, 1009);
-            this.xtraTabPage2.Text = "Config";
+            this.t환경설정.Controls.Add(this.e기본설정);
+            this.t환경설정.Name = "t환경설정";
+            this.t환경설정.Size = new System.Drawing.Size(620, 1009);
+            this.t환경설정.Text = "Config";
             // 
             // e기본설정
             // 
@@ -119,17 +130,6 @@
             this.e기본설정.Name = "e기본설정";
             this.e기본설정.Size = new System.Drawing.Size(620, 1009);
             this.e기본설정.TabIndex = 0;
-            // 
-            // b캠트리거리셋
-            // 
-            this.b캠트리거리셋.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold);
-            this.b캠트리거리셋.Appearance.Options.UseFont = true;
-            this.b캠트리거리셋.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b캠트리거리셋.ImageOptions.SvgImage")));
-            this.b캠트리거리셋.Location = new System.Drawing.Point(12, 13);
-            this.b캠트리거리셋.Name = "b캠트리거리셋";
-            this.b캠트리거리셋.Size = new System.Drawing.Size(269, 40);
-            this.b캠트리거리셋.TabIndex = 1;
-            this.b캠트리거리셋.Text = "카메라 트리거 리셋";
             // 
             // DeviceSettings
             // 
@@ -146,8 +146,8 @@
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage2.ResumeLayout(false);
+            this.t기타.ResumeLayout(false);
+            this.t환경설정.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -156,9 +156,9 @@
 
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage t기타;
         private CamSettings e카메라;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage t환경설정;
         private Config e기본설정;
         private QrControls e큐알장치;
         private DevExpress.XtraEditors.SimpleButton b캠트리거리셋;

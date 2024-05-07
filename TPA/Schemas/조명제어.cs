@@ -123,16 +123,18 @@ namespace TPA.Schemas
 
         public void Set()
         {
-            Task.Run(() => {
-                foreach (조명정보 조명 in this) {
-                    if (!조명.Set()) 조명.TurnOn();
-                    Task.Delay(200).Wait();
-                    조명.TurnOff();
-                    Task.Delay(200).Wait();
-                }
-                초기점멸작업완료여부 = true;
-                Debug.WriteLine("조명끝");
-            });
+            this.TurnOff();
+            초기점멸작업완료여부 = true;
+            //Task.Run(() => {
+            //    foreach (조명정보 조명 in this) {
+            //        if (!조명.Set()) 조명.TurnOn();
+            //        Task.Delay(200).Wait();
+            //        조명.TurnOff();
+            //        Task.Delay(200).Wait();
+            //    }
+            //    초기점멸작업완료여부 = true;
+            //    //Debug.WriteLine("조명끝");
+            //});
         }
 
         public void Set(카메라구분 카메라)

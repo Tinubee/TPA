@@ -35,9 +35,6 @@
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.eResultPreview = new TPA.UI.Controls.ResultPreview();
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
-            this.d각인 = new DevExpress.XtraBars.Docking.DockPanel();
-            this.각인_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.e노멀각인 = new CogUtils.RecordDisplay();
             this.d설삽상부 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.e커넥터설삽상부 = new CogUtils.RecordDisplay();
@@ -66,9 +63,6 @@
             this.ResultPreview.SuspendLayout();
             this.controlContainer1.SuspendLayout();
             this.dockPanel2.SuspendLayout();
-            this.d각인.SuspendLayout();
-            this.각인_Container.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.e노멀각인)).BeginInit();
             this.d설삽상부.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e커넥터설삽상부)).BeginInit();
@@ -146,7 +140,6 @@
             // 
             // dockPanel2
             // 
-            this.dockPanel2.Controls.Add(this.d각인);
             this.dockPanel2.Controls.Add(this.d설삽상부);
             this.dockPanel2.Controls.Add(this.d설삽하부);
             this.dockPanel2.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
@@ -158,57 +151,20 @@
             this.dockPanel2.Size = new System.Drawing.Size(371, 1000);
             this.dockPanel2.Text = "panelContainer3";
             // 
-            // d각인
-            // 
-            this.d각인.Controls.Add(this.각인_Container);
-            this.d각인.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
-            this.d각인.ID = new System.Guid("59db4d6b-4146-4018-b656-17dfc0187a3b");
-            this.d각인.Location = new System.Drawing.Point(0, 0);
-            this.d각인.Name = "d각인";
-            this.d각인.OriginalSize = new System.Drawing.Size(371, 227);
-            this.d각인.Size = new System.Drawing.Size(371, 199);
-            this.d각인.Text = "Normal Marking";
-            // 
-            // 각인_Container
-            // 
-            this.각인_Container.Controls.Add(this.e노멀각인);
-            this.각인_Container.Location = new System.Drawing.Point(4, 30);
-            this.각인_Container.Name = "각인_Container";
-            this.각인_Container.Size = new System.Drawing.Size(364, 165);
-            this.각인_Container.TabIndex = 0;
-            // 
-            // e노멀각인
-            // 
-            this.e노멀각인.ColorMapLowerClipColor = System.Drawing.Color.Black;
-            this.e노멀각인.ColorMapLowerRoiLimit = 0D;
-            this.e노멀각인.ColorMapPredefined = Cognex.VisionPro.Display.CogDisplayColorMapPredefinedConstants.None;
-            this.e노멀각인.ColorMapUpperClipColor = System.Drawing.Color.Black;
-            this.e노멀각인.ColorMapUpperRoiLimit = 1D;
-            this.e노멀각인.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e노멀각인.DoubleTapZoomCycleLength = 2;
-            this.e노멀각인.DoubleTapZoomSensitivity = 2.5D;
-            this.e노멀각인.Location = new System.Drawing.Point(0, 0);
-            this.e노멀각인.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1;
-            this.e노멀각인.MouseWheelSensitivity = 1D;
-            this.e노멀각인.Name = "e노멀각인";
-            this.e노멀각인.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("e노멀각인.OcxState")));
-            this.e노멀각인.Size = new System.Drawing.Size(364, 165);
-            this.e노멀각인.TabIndex = 0;
-            // 
             // d설삽상부
             // 
             this.d설삽상부.Controls.Add(this.dockPanel1_Container);
             this.d설삽상부.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.d설삽상부.FloatSize = new System.Drawing.Size(90, 162);
             this.d설삽상부.ID = new System.Guid("ff209b7a-be9c-4a2a-8dfd-8d56721e0c95");
-            this.d설삽상부.Location = new System.Drawing.Point(0, 199);
+            this.d설삽상부.Location = new System.Drawing.Point(0, 0);
             this.d설삽상부.Name = "d설삽상부";
-            this.d설삽상부.OriginalSize = new System.Drawing.Size(371, 432);
+            this.d설삽상부.OriginalSize = new System.Drawing.Size(371, 379);
             this.d설삽상부.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.d설삽상부.SavedIndex = 1;
             this.d설삽상부.SavedParent = this.dockPanel2;
             this.d설삽상부.SavedSizeFactor = 0.95869D;
-            this.d설삽상부.Size = new System.Drawing.Size(371, 379);
+            this.d설삽상부.Size = new System.Drawing.Size(371, 473);
             this.d설삽상부.Text = "Check connector (Top)";
             // 
             // dockPanel1_Container
@@ -216,7 +172,7 @@
             this.dockPanel1_Container.Controls.Add(this.e커넥터설삽상부);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 30);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(364, 345);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(364, 439);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // e커넥터설삽상부
@@ -234,7 +190,7 @@
             this.e커넥터설삽상부.MouseWheelSensitivity = 1D;
             this.e커넥터설삽상부.Name = "e커넥터설삽상부";
             this.e커넥터설삽상부.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("e커넥터설삽상부.OcxState")));
-            this.e커넥터설삽상부.Size = new System.Drawing.Size(364, 345);
+            this.e커넥터설삽상부.Size = new System.Drawing.Size(364, 439);
             this.e커넥터설삽상부.TabIndex = 0;
             // 
             // d설삽하부
@@ -242,10 +198,10 @@
             this.d설삽하부.Controls.Add(this.controlContainer2);
             this.d설삽하부.Dock = DevExpress.XtraBars.Docking.DockingStyle.Fill;
             this.d설삽하부.ID = new System.Guid("e1f78400-2888-4094-ade5-c7ea95b92dc0");
-            this.d설삽하부.Location = new System.Drawing.Point(0, 578);
+            this.d설삽하부.Location = new System.Drawing.Point(0, 473);
             this.d설삽하부.Name = "d설삽하부";
-            this.d설삽하부.OriginalSize = new System.Drawing.Size(371, 480);
-            this.d설삽하부.Size = new System.Drawing.Size(371, 422);
+            this.d설삽하부.OriginalSize = new System.Drawing.Size(371, 422);
+            this.d설삽하부.Size = new System.Drawing.Size(371, 527);
             this.d설삽하부.Text = "Check connector (Bottom)";
             // 
             // controlContainer2
@@ -253,7 +209,7 @@
             this.controlContainer2.Controls.Add(this.e커넥터설삽하부);
             this.controlContainer2.Location = new System.Drawing.Point(4, 30);
             this.controlContainer2.Name = "controlContainer2";
-            this.controlContainer2.Size = new System.Drawing.Size(364, 389);
+            this.controlContainer2.Size = new System.Drawing.Size(364, 494);
             this.controlContainer2.TabIndex = 0;
             // 
             // e커넥터설삽하부
@@ -271,7 +227,7 @@
             this.e커넥터설삽하부.MouseWheelSensitivity = 1D;
             this.e커넥터설삽하부.Name = "e커넥터설삽하부";
             this.e커넥터설삽하부.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("e커넥터설삽하부.OcxState")));
-            this.e커넥터설삽하부.Size = new System.Drawing.Size(364, 389);
+            this.e커넥터설삽하부.Size = new System.Drawing.Size(364, 494);
             this.e커넥터설삽하부.TabIndex = 0;
             // 
             // dockPanel1
@@ -523,9 +479,6 @@
             this.ResultPreview.ResumeLayout(false);
             this.controlContainer1.ResumeLayout(false);
             this.dockPanel2.ResumeLayout(false);
-            this.d각인.ResumeLayout(false);
-            this.각인_Container.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.e노멀각인)).EndInit();
             this.d설삽상부.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e커넥터설삽상부)).EndInit();
@@ -565,10 +518,7 @@
         private DevExpress.XtraBars.Docking.ControlContainer 좌측면_Container;
         private DevExpress.XtraBars.Docking.DockPanel d상부;
         private DevExpress.XtraBars.Docking.ControlContainer 상부_Container;
-        private DevExpress.XtraBars.Docking.DockPanel d각인;
-        private DevExpress.XtraBars.Docking.ControlContainer 각인_Container;
         private CogUtils.RecordDisplay e좌측면;
-        private CogUtils.RecordDisplay e노멀각인;
         private CogUtils.RecordDisplay e우측하부;
         private CogUtils.RecordDisplay e좌측하부;
         private CogUtils.RecordDisplay e상부면;

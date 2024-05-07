@@ -157,8 +157,8 @@
             this.b수량리셋.Appearance.Options.UseFont = true;
             this.b수량리셋.AppearanceDisabled.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b수량리셋.AppearanceDisabled.Options.UseFont = true;
-            this.b수량리셋.AppearanceHovered.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b수량리셋.AppearanceHovered.Options.UseFont = true;
+            //this.b수량리셋.AppearanceHovered.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.b수량리셋.AppearanceHovered.Options.UseFont = true;
             this.b수량리셋.AppearancePressed.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b수량리셋.AppearancePressed.Options.UseFont = true;
             this.tablePanel1.SetColumn(this.b수량리셋, 4);

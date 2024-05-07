@@ -16,6 +16,8 @@ namespace TPA.UI.Controls
 {
     public partial class QrControls : XtraUserControl
     {
+        private LocalizationQrControl 번역 = new LocalizationQrControl();
+
         public QrControls()
         {
             InitializeComponent();
@@ -23,9 +25,10 @@ namespace TPA.UI.Controls
 
         public void Init()
         {
+            this.SetLocalization();
             this.b큐알리딩오류1.Click += 큐알리딩오류1;
             this.b큐알리딩가능여부1.Click += 큐알리딩가능판별1;
-            this.b큐알리더1장치리셋.Click +=  큐알리더1장치리셋;
+            this.b큐알리더1장치리셋.Click += 큐알리더1장치리셋;
             this.b큐알리딩시작1.Click += 큐알리딩시작1;
             this.b큐알리딩종료1.Click += 큐알리딩종료1;
             this.g큐알통신내역1.CustomButtonClick += 큐알통신내역1_클릭;
@@ -44,16 +47,6 @@ namespace TPA.UI.Controls
             this.b큐알리딩종료3.Click += 큐알리딩종료3;
             this.g큐알통신내역3.CustomButtonClick += 큐알통신내역3_클릭;
 
-            EnumToList 라벨모델 = new EnumToList(typeof(모델구분));
-            라벨모델.SetLookUpEdit(this.e라벨모델);
-            this.e라벨모델.EditValue = Global.환경설정.선택모델;
-            this.e라벨날짜.DateTime = DateTime.Today;
-            this.e라벨번호.EditValue = 9999;
-            this.b라벨출력.Click += 라벨출력;
-            this.b라벨부착.Click += 라벨부착;
-            this.g큐알인쇄.CustomButtonClick += 큐알인쇄_CustomButtonClick;
-            this.e라벨모델.CustomDisplayText += 모델CustomDisplayText;
-
             if (Global.환경설정.동작구분 == 동작구분.Live)
             {
                 Global.큐알제어.하부큐알리더1.송신수신알림 += 큐알리더1송신수신알림;
@@ -61,7 +54,30 @@ namespace TPA.UI.Controls
                 Global.큐알제어.상부큐알리더.송신수신알림 += 큐알리더3송신수신알림;
             }
         }
+        private void SetLocalization()
+        {
+            this.b큐알리딩오류1.Text = 번역.오류상태;
+            this.b큐알리딩가능여부1.Text = 번역.리딩가능;
+            this.b큐알리더1장치리셋.Text = 번역.장치리셋;
+            this.b큐알리딩시작1.Text = 번역.리딩시작;
+            this.b큐알리딩종료1.Text = 번역.리딩종료;
 
+            this.b큐알리딩오류2.Text = 번역.오류상태;
+            this.b큐알리딩가능여부2.Text = 번역.리딩가능;
+            this.b큐알리더2장치리셋.Text = 번역.장치리셋;
+            this.b큐알리딩시작2.Text = 번역.리딩시작;
+            this.b큐알리딩종료2.Text = 번역.리딩종료;
+
+            this.b큐알리딩오류3.Text = 번역.오류상태;
+            this.b큐알리딩가능여부3.Text = 번역.리딩가능;
+            this.b큐알리더3장치리셋.Text = 번역.장치리셋;
+            this.b큐알리딩시작3.Text = 번역.리딩시작;
+            this.b큐알리딩종료3.Text = 번역.리딩종료;
+
+            this.g큐알통신내역1.Text = 번역.통신내역;
+            this.g큐알통신내역2.Text = 번역.통신내역;
+            this.g큐알통신내역3.Text = 번역.통신내역;
+        }
         public void Close()
         {
 
@@ -76,7 +92,8 @@ namespace TPA.UI.Controls
         private void 큐알통신내역1_클릭(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e) => this.e큐알통신내역1.Items.Clear();
         private void 큐알리더1송신수신알림(큐알장치.통신구분 통신, 큐알동작커맨드 커맨드, String mesg)
         {
-            if (this.e큐알통신내역1.InvokeRequired) {
+            if (this.e큐알통신내역1.InvokeRequired)
+            {
                 this.e큐알통신내역1.BeginInvoke(new Action(() => 큐알리더1송신수신알림(통신, 커맨드, mesg)));
                 return;
             }
@@ -96,7 +113,8 @@ namespace TPA.UI.Controls
         private void 큐알통신내역2_클릭(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e) => this.e큐알통신내역2.Items.Clear();
         private void 큐알리더2송신수신알림(큐알장치.통신구분 통신, 큐알동작커맨드 커맨드, String mesg)
         {
-            if (this.e큐알통신내역2.InvokeRequired) {
+            if (this.e큐알통신내역2.InvokeRequired)
+            {
                 this.e큐알통신내역2.BeginInvoke(new Action(() => 큐알리더2송신수신알림(통신, 커맨드, mesg)));
                 return;
             }
@@ -116,7 +134,8 @@ namespace TPA.UI.Controls
         private void 큐알통신내역3_클릭(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e) => this.e큐알통신내역3.Items.Clear();
         private void 큐알리더3송신수신알림(큐알장치.통신구분 통신, 큐알동작커맨드 커맨드, String mesg)
         {
-            if (this.e큐알통신내역3.InvokeRequired) {
+            if (this.e큐알통신내역3.InvokeRequired)
+            {
                 this.e큐알통신내역3.BeginInvoke(new Action(() => 큐알리더3송신수신알림(통신, 커맨드, mesg)));
                 return;
             }
@@ -127,27 +146,35 @@ namespace TPA.UI.Controls
         }
         #endregion
 
-        #region 큐알각인관련메서드
-        private void 라벨출력(object sender, EventArgs e)
+        private class LocalizationQrControl
         {
-            Global.큐알인쇄.자료전송(this.e라벨날짜.DateTime, (모델구분)this.e라벨모델.EditValue, MvUtils.Utils.IntValue(this.e라벨번호.EditValue));
+            private enum Items
+            {
+                [Translation("Error Status", "오류상태")]
+                오류상태,
+                [Translation("Reading Possible", "리딩가능")]
+                리딩가능,
+                [Translation("Device Reset", "장치리셋")]
+                장치리셋,
+                [Translation("Start Reading", "리딩시작")]
+                리딩시작,
+                [Translation("End Reading", "리딩종료")]
+                리딩종료,
+                [Translation("Communication Details", "통신내역")]
+                통신내역,
+                //[Translation("Config", "환경설정")]
+                //환경설정,
+                //[Translation("Are you want to exit the program?", "프로그램을 종료하시겠습나까?")]
+                //종료확인,
+            }
+            private String GetString(Items item) { return Localization.GetString(item); }
+            public String 오류상태 { get => GetString(Items.오류상태); }
+            public String 리딩가능 { get => GetString(Items.리딩가능); }
+            public String 장치리셋 { get => GetString(Items.장치리셋); }
+            public String 리딩시작 { get => GetString(Items.리딩시작); }
+            public String 리딩종료 { get => GetString(Items.리딩종료); }
+            public String 통신내역 { get => GetString(Items.통신내역); }
         }
 
-        private void 라벨부착(object sender, EventArgs e)
-        {
-            // org Global.제품검사수행.라벨부착수행(장치통신.PLC커맨드목록.큐알라벨부착, Utils.IntValue(this.e라벨번호.EditValue));
-            Global.제품검사수행.라벨부착수행(장치통신.PLC커맨드목록.라벨발행트리거, Utils.IntValue(this.e라벨번호.EditValue));
-        }
-        private void 큐알인쇄_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
-        {
-            Global.큐알인쇄.장치리셋();
-        }
-        private void 모델CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
-        {
-            if (e.Value == null) return;
-            모델구분 모델 = (모델구분)e.Value;
-            e.DisplayText = $"{(Int32)모델}. {MvUtils.Utils.GetDescription(모델)}";
-        }
-        #endregion
     }
 }

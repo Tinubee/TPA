@@ -32,7 +32,6 @@
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.g하부큐알리더1 = new DevExpress.XtraEditors.GroupControl();
@@ -96,20 +95,6 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.g큐알인쇄 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControl4 = new DevExpress.XtraLayout.LayoutControl();
-            this.b라벨부착 = new DevExpress.XtraEditors.SimpleButton();
-            this.b라벨출력 = new DevExpress.XtraEditors.SimpleButton();
-            this.e라벨번호 = new DevExpress.XtraEditors.TextEdit();
-            this.e라벨날짜 = new DevExpress.XtraEditors.DateEdit();
-            this.e라벨모델 = new DevExpress.XtraEditors.LookUpEdit();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -164,7 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3.Panel1)).BeginInit();
             this.splitContainerControl3.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3.Panel2)).BeginInit();
-            this.splitContainerControl3.Panel2.SuspendLayout();
             this.splitContainerControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.g상부큐알리더)).BeginInit();
             this.g상부큐알리더.SuspendLayout();
@@ -185,21 +169,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.g큐알인쇄)).BeginInit();
-            this.g큐알인쇄.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl4)).BeginInit();
-            this.layoutControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨번호.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨날짜.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨날짜.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨모델.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -683,7 +652,6 @@
             // 
             // splitContainerControl3.Panel2
             // 
-            this.splitContainerControl3.Panel2.Controls.Add(this.g큐알인쇄);
             this.splitContainerControl3.Panel2.Text = "Panel2";
             this.splitContainerControl3.Size = new System.Drawing.Size(645, 466);
             this.splitContainerControl3.SplitterPosition = 227;
@@ -903,162 +871,6 @@
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
-            // g큐알인쇄
-            // 
-            this.g큐알인쇄.Controls.Add(this.layoutControl4);
-            buttonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("buttonImageOptions4.SvgImage")));
-            buttonImageOptions4.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.g큐알인쇄.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Reset", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "Reset", -1, true, null, true, false, true, null, -1)});
-            this.g큐알인쇄.CustomHeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
-            this.g큐알인쇄.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.g큐알인쇄.Location = new System.Drawing.Point(0, 0);
-            this.g큐알인쇄.Name = "g큐알인쇄";
-            this.g큐알인쇄.Size = new System.Drawing.Size(645, 229);
-            this.g큐알인쇄.TabIndex = 0;
-            this.g큐알인쇄.Text = "Label Printer";
-            // 
-            // layoutControl4
-            // 
-            this.layoutControl4.Controls.Add(this.b라벨부착);
-            this.layoutControl4.Controls.Add(this.b라벨출력);
-            this.layoutControl4.Controls.Add(this.e라벨번호);
-            this.layoutControl4.Controls.Add(this.e라벨날짜);
-            this.layoutControl4.Controls.Add(this.e라벨모델);
-            this.layoutControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl4.Location = new System.Drawing.Point(2, 27);
-            this.layoutControl4.Name = "layoutControl4";
-            this.layoutControl4.Root = this.layoutControlGroup3;
-            this.layoutControl4.Size = new System.Drawing.Size(641, 200);
-            this.layoutControl4.TabIndex = 0;
-            this.layoutControl4.Text = "layoutControl4";
-            // 
-            // b라벨부착
-            // 
-            this.b라벨부착.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b라벨부착.ImageOptions.SvgImage")));
-            this.b라벨부착.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.b라벨부착.Location = new System.Drawing.Point(479, 44);
-            this.b라벨부착.Name = "b라벨부착";
-            this.b라벨부착.Size = new System.Drawing.Size(148, 24);
-            this.b라벨부착.StyleController = this.layoutControl4;
-            this.b라벨부착.TabIndex = 8;
-            this.b라벨부착.Text = "라벨부착";
-            // 
-            // b라벨출력
-            // 
-            this.b라벨출력.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b라벨출력.ImageOptions.SvgImage")));
-            this.b라벨출력.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.b라벨출력.Location = new System.Drawing.Point(324, 44);
-            this.b라벨출력.Name = "b라벨출력";
-            this.b라벨출력.Size = new System.Drawing.Size(147, 24);
-            this.b라벨출력.StyleController = this.layoutControl4;
-            this.b라벨출력.TabIndex = 7;
-            this.b라벨출력.Text = "라벨 출력";
-            // 
-            // e라벨번호
-            // 
-            this.e라벨번호.Location = new System.Drawing.Point(60, 44);
-            this.e라벨번호.Name = "e라벨번호";
-            this.e라벨번호.Size = new System.Drawing.Size(256, 22);
-            this.e라벨번호.StyleController = this.layoutControl4;
-            this.e라벨번호.TabIndex = 6;
-            // 
-            // e라벨날짜
-            // 
-            this.e라벨날짜.EditValue = null;
-            this.e라벨날짜.Location = new System.Drawing.Point(370, 14);
-            this.e라벨날짜.Name = "e라벨날짜";
-            this.e라벨날짜.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e라벨날짜.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e라벨날짜.Size = new System.Drawing.Size(257, 22);
-            this.e라벨날짜.StyleController = this.layoutControl4;
-            this.e라벨날짜.TabIndex = 5;
-            // 
-            // e라벨모델
-            // 
-            this.e라벨모델.Location = new System.Drawing.Point(60, 14);
-            this.e라벨모델.Name = "e라벨모델";
-            this.e라벨모델.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e라벨모델.Size = new System.Drawing.Size(256, 22);
-            this.e라벨모델.StyleController = this.layoutControl4;
-            this.e라벨모델.TabIndex = 4;
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup3.GroupBordersVisible = false;
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem7,
-            this.emptySpaceItem1,
-            this.layoutControlItem8,
-            this.layoutControlItem9,
-            this.layoutControlItem10,
-            this.layoutControlItem11});
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(641, 200);
-            this.layoutControlGroup3.TextVisible = false;
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.e라벨모델;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem7.Size = new System.Drawing.Size(310, 30);
-            this.layoutControlItem7.Text = "Model";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(34, 15);
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 62);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(621, 118);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.e라벨날짜;
-            this.layoutControlItem8.Location = new System.Drawing.Point(310, 0);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem8.Size = new System.Drawing.Size(311, 30);
-            this.layoutControlItem8.Text = "Date";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(34, 15);
-            // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.e라벨번호;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 30);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem9.Size = new System.Drawing.Size(310, 32);
-            this.layoutControlItem9.Text = "Serial";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(34, 15);
-            // 
-            // layoutControlItem10
-            // 
-            this.layoutControlItem10.Control = this.b라벨출력;
-            this.layoutControlItem10.Location = new System.Drawing.Point(310, 30);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem10.Size = new System.Drawing.Size(155, 32);
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem10.TextVisible = false;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.b라벨부착;
-            this.layoutControlItem11.Location = new System.Drawing.Point(465, 30);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem11.Size = new System.Drawing.Size(156, 32);
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem11.TextVisible = false;
-            // 
             // QrControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1119,7 +931,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3.Panel1)).EndInit();
             this.splitContainerControl3.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3.Panel2)).EndInit();
-            this.splitContainerControl3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).EndInit();
             this.splitContainerControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.g상부큐알리더)).EndInit();
@@ -1141,21 +952,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.g큐알인쇄)).EndInit();
-            this.g큐알인쇄.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl4)).EndInit();
-            this.layoutControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨번호.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨날짜.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨날짜.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e라벨모델.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1209,7 +1005,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem412;
         private DevExpress.XtraLayout.LayoutControlItem b큐알리딩가능12;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem312;
-        private DevExpress.XtraLayout.LayoutControlItem Layout;
+        private new DevExpress.XtraLayout.LayoutControlItem Layout;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem112;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.SimpleButton b큐알리딩종료1;
@@ -1225,19 +1021,5 @@
         private DevExpress.XtraEditors.SimpleButton b큐알리더3장치리셋;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
-        private DevExpress.XtraEditors.GroupControl g큐알인쇄;
-        private DevExpress.XtraLayout.LayoutControl layoutControl4;
-        private DevExpress.XtraEditors.SimpleButton b라벨출력;
-        private DevExpress.XtraEditors.TextEdit e라벨번호;
-        private DevExpress.XtraEditors.DateEdit e라벨날짜;
-        private DevExpress.XtraEditors.LookUpEdit e라벨모델;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraEditors.SimpleButton b라벨부착;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
     }
 }

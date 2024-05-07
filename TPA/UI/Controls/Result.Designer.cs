@@ -75,14 +75,12 @@
             this.e종료일자 = new DevExpress.XtraEditors.DateEdit();
             this.b자료조회 = new DevExpress.XtraEditors.SimpleButton();
             this.b엑셀파일 = new DevExpress.XtraEditors.SimpleButton();
-            this.b인덱스리셋 = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GridView2)).BeginInit();
@@ -102,7 +100,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).BeginInit();
             this.SuspendLayout();
@@ -618,7 +615,6 @@
             this.layoutControl1.Controls.Add(this.e종료일자);
             this.layoutControl1.Controls.Add(this.b자료조회);
             this.layoutControl1.Controls.Add(this.b엑셀파일);
-            this.layoutControl1.Controls.Add(this.b인덱스리셋);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -679,17 +675,6 @@
             this.b엑셀파일.TabIndex = 7;
             this.b엑셀파일.Text = "Export to Excel";
             // 
-            // b인덱스리셋
-            // 
-            this.b인덱스리셋.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b인덱스리셋.ImageOptions.SvgImage")));
-            this.b인덱스리셋.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.b인덱스리셋.Location = new System.Drawing.Point(1058, 7);
-            this.b인덱스리셋.Name = "b인덱스리셋";
-            this.b인덱스리셋.Size = new System.Drawing.Size(148, 26);
-            this.b인덱스리셋.StyleController = this.layoutControl1;
-            this.b인덱스리셋.TabIndex = 8;
-            this.b인덱스리셋.Text = "Index Reset";
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -700,7 +685,6 @@
             this.layoutControlItem3,
             this.layoutControlItem4,
             this.emptySpaceItem1,
-            this.layoutControlItem5,
             this.emptySpaceItem2});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -772,24 +756,12 @@
             this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.b인덱스리셋;
-            this.layoutControlItem5.Location = new System.Drawing.Point(1051, 0);
-            this.layoutControlItem5.MaxSize = new System.Drawing.Size(152, 30);
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(152, 30);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(152, 30);
-            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(713, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(338, 30);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(490, 30);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // BindLocalization
@@ -825,7 +797,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
             this.ResumeLayout(false);
@@ -876,9 +847,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.SimpleButton b엑셀파일;
-        private DevExpress.XtraEditors.SimpleButton b인덱스리셋;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraGrid.Columns.GridColumn col상부큐알코드1;
         private System.Windows.Forms.BindingSource BindLocalization;

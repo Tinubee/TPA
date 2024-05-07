@@ -16,21 +16,21 @@ namespace TPA.Schemas
     public enum 카메라구분
     {
         None,
-        [Description("측면1")]
+        [Description("측면1"), Translation("Side1", "측면1")]
         Cam01,
-        [Description("측면2")]
+        [Description("측면2"),Translation("Side2", "측면2")]
         Cam02,
-        [Description("상부")]
+        [Description("상부"),Translation("Top", "상부")]
         Cam03,
-        [Description("하부1")]
+        [Description("하부1"),Translation("Bottom1", "하부1")]
         Cam04,
-        [Description("하부2")]
+        [Description("하부2"), Translation("Bottom2", "하부2")]
         Cam05,
-        [Description("설삽상부")]
+        [Description("설삽상부"), Translation("Connector Top", "설삽상부")]
         Cam06,
-        [Description("설삽하부")]
+        [Description("설삽하부"), Translation("Connector Bottom", "설삽하부")]
         Cam07,
-        [Description("노멀각인")]
+        [Description("노멀각인"), Translation("Normal", "노멀각인")]
         Cam08,
     }
 

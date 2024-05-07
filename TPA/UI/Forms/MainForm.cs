@@ -231,10 +231,20 @@ namespace TPA
             this.HideWaitForm();
             Common.SetForegroundWindow(this.Handle.ToInt32());
 
-            Global.환경설정.시스템관리자로그인();
-            Global.DxLocalization();
-            this.Init();
-            Global.Start();
+            // 로그인
+            Login login = new Login();
+            if (Utils.ShowDialog(login, this) == DialogResult.OK)
+            {
+                Global.DxLocalization();
+                this.Init();
+                Global.Start();
+            }
+            else this.Close();
+
+            //Global.환경설정.시스템관리자로그인();
+            //Global.DxLocalization();
+            //this.Init();
+            //Global.Start();
         }
 
         private void Init()
