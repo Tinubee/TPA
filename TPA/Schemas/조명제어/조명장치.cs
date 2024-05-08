@@ -30,17 +30,19 @@ namespace TPA.Schemas
 
     public class 조명정보
     {
-        [JsonProperty("Camera")]
+        [JsonProperty("Camera"), Translation("Camera", "카메라")]
         public 카메라구분 카메라 { get; set; } = 카메라구분.None;
-        [JsonProperty("Port")]
+        [JsonIgnore, Translation("Camera", "카메라이름")]
+        public virtual String 카메라이름 { get; set; } = String.Empty;
+        [JsonProperty("Port"), Translation("Port", "포트")]
         public 조명포트 포트 { get; set; } = 조명포트.None;
-        [JsonProperty("Channel")]
+        [JsonProperty("Channel"), Translation("Channel", "채널")]
         public 조명채널 채널 { get; set; } = 조명채널.CH01;
-        [JsonProperty("Brightness")]
+        [JsonProperty("Brightness"), Translation("Brightness", "밝기")]
         public Int32 밝기 { get; set; } = 100;
-        [JsonProperty("Description")]
+        [JsonProperty("Description"), Translation("Description", "설명")]
         public String 설명 { get; set; } = String.Empty;
-        [JsonIgnore]
+        [JsonIgnore, Translation("Status", "상태")]
         public Boolean 상태 { get; set; } = false;
         [JsonIgnore]
         public 조명장치 컨트롤러;
@@ -48,6 +50,7 @@ namespace TPA.Schemas
         public 조명정보(카메라구분 카메라, 조명장치 컨트롤)
         {
             this.카메라 = 카메라;
+            this.카메라이름 = Localization.GetString(카메라);
             this.컨트롤러 = 컨트롤;
             this.포트 = 컨트롤.포트;
         }

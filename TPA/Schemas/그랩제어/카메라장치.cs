@@ -16,53 +16,55 @@ namespace TPA.Schemas
     public enum 카메라구분
     {
         None,
-        [Description("측면1"), Translation("Side1", "측면1")]
+        [Description("Side1"), Translation("Side1", "측면1")]
         Cam01,
-        [Description("측면2"),Translation("Side2", "측면2")]
+        [Description("Side2"),Translation("Side2", "측면2")]
         Cam02,
-        [Description("상부"),Translation("Top", "상부")]
+        [Description("Top"),Translation("Top", "상부")]
         Cam03,
-        [Description("하부1"),Translation("Bottom1", "하부1")]
+        [Description("Bottom1"),Translation("Bottom1", "하부1")]
         Cam04,
-        [Description("하부2"), Translation("Bottom2", "하부2")]
+        [Description("Bottom2"), Translation("Bottom2", "하부2")]
         Cam05,
-        [Description("설삽상부"), Translation("Connector Top", "설삽상부")]
+        [Description("Connector Top"), Translation("Connector Top", "설삽상부")]
         Cam06,
-        [Description("설삽하부"), Translation("Connector Bottom", "설삽하부")]
+        [Description("Connector Bottom"), Translation("Connector Bottom", "설삽하부")]
         Cam07,
-        [Description("노멀각인"), Translation("Normal", "노멀각인")]
+        [Description("Normal"), Translation("Normal", "노멀각인")]
         Cam08,
     }
 
     public class 카메라장치 : IDisposable
     {
-        [JsonProperty("Camera")]
+        [JsonProperty("Camera"), Translation("Camera", "카메라")]
         public virtual 카메라구분 구분 { get; set; } = 카메라구분.None;
+        [JsonIgnore, Translation("Camera", "카메라이름")]
+        public virtual String 카메라이름 { get; set; } = String.Empty;
         [JsonIgnore]
         public virtual Int32 번호 { get; set; } = 0;
-        [JsonProperty("Serial")]
+        [JsonProperty("Serial"), Translation("Serial", "시리얼번호")]
         public virtual String 코드 { get; set; } = String.Empty;
         [JsonIgnore]
         public virtual String 명칭 { get; set; } = String.Empty;
-        [JsonProperty("Description")]
+        [JsonProperty("Description"), Translation("Description", "설명")]
         public virtual String 설명 { get; set; } = String.Empty;
-        [JsonProperty("IpAddress")]
+        [JsonProperty("IpAddress"), Translation("IP Address", "IP 주소")]
         public virtual String 주소 { get; set; } = String.Empty;
-        [JsonProperty("BlackLevel")]
+        [JsonProperty("BlackLevel"), Translation("BlackLevel", "밝기")]
         public virtual UInt32 밝기 { get; set; } = 0;
-        [JsonProperty("Contrast")]
+        [JsonProperty("Contrast"), Translation("Contrast", "대비")]
         public virtual Single 대비 { get; set; } = 10;
-        [JsonProperty("Width")]
+        [JsonProperty("Width"), Translation("Width", "가로")]
         public virtual Int32 가로 { get; set; } = 0;
-        [JsonProperty("Height")]
+        [JsonProperty("Height"), Translation("Height", "세로")]
         public virtual Int32 세로 { get; set; } = 0;
-        [JsonProperty("OffsetX")]
+        [JsonProperty("OffsetX"), Translation("OffsetX", "OffsetX")]
         public virtual Int32 OffsetX { get; set; } = 0;
-        [JsonProperty("CalibX")]
+        [JsonProperty("CalibX"), Translation("X Calibration Value", "X 교정값")]
         public virtual Double 교정X { get; set; } = 0;
-        [JsonProperty("CalibY")]
+        [JsonProperty("CalibY"), Translation("Y Calibration Value", "Y 교정값")]
         public virtual Double 교정Y { get; set; } = 0;
-        [JsonIgnore]
+        [JsonIgnore, Translation("Status", "상태")]
         public virtual Boolean 상태 { get; set; } = false;
         [JsonIgnore]
         internal virtual MatType ImageType => MatType.CV_8UC1;
@@ -83,7 +85,7 @@ namespace TPA.Schemas
         [JsonIgnore]
         internal Mat Image => Images.LastOrDefault<Mat>();
         [JsonIgnore]
-        public const String 로그영역 = "Camera";
+        public static TranslationAttribute 로그영역 = new TranslationAttribute("Camera", "카메라");
 
 
         public void Dispose()
@@ -156,7 +158,7 @@ namespace TPA.Schemas
                 }
                 catch (Exception e)
                 {
-                    Global.오류로그(로그영역, "Acquisition", $"[{this.구분.ToString()}] {e.Message}", true);
+                    Global.오류로그(로그영역.GetString(), "Acquisition", $"[{this.구분.ToString()}] {e.Message}", true);
                 }
             }
         }
@@ -177,12 +179,12 @@ namespace TPA.Schemas
             }
             catch (Exception ex)
             {
-                Global.오류로그(로그영역, "Acquisition", $"[{this.구분}] {ex.Message}", true);
+                Global.오류로그(로그영역.GetString(), "Acquisition", $"[{this.구분}] {ex.Message}", true);
             }
         }
 
         internal void AcquisitionFinished(String error) =>
-            Global.오류로그(로그영역, "Acquisition", $"[{this.구분.ToString()}] {error}", true);
+            Global.오류로그(로그영역.GetString(), "Acquisition", $"[{this.구분.ToString()}] {error}", true);
         internal void AcquisitionFinished(Mat image)
         {
             if (image == null)
@@ -211,7 +213,7 @@ namespace TPA.Schemas
             }
             catch (Exception e)
             {
-                Global.오류로그(로그영역, "Acquisition", $"[{this.구분.ToString()}] {e.Message}", true);
+                Global.오류로그(로그영역.GetString(), "Acquisition", $"[{this.구분.ToString()}] {e.Message}", true);
             }
             return null;
         }

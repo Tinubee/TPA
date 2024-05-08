@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using MvUtils;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TPA.Schemas;
@@ -14,7 +15,6 @@ namespace TPA.UI.Controls
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private LocalizationInspection 번역 = new LocalizationInspection();
-
         public SetInspection()
         {
             InitializeComponent();

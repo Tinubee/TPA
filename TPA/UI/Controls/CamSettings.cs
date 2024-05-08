@@ -11,6 +11,7 @@ namespace TPA.UI.Controls
 {
     public partial class CamSettings : XtraUserControl
     {
+        LocalizationCamSetting 번역 = new LocalizationCamSetting();
         public CamSettings()
         {
             InitializeComponent();
@@ -18,6 +19,7 @@ namespace TPA.UI.Controls
 
         public void Init()
         {
+            this.SetLocalization();
             this.GridView1.Init();
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.OptionsView.ShowAutoFilterRow = false;
@@ -39,6 +41,12 @@ namespace TPA.UI.Controls
             this.GridView1.CellValueChanged += GridView1_CellValueChanged;
             this.GridView2.CellValueChanged += GridView2_CellValueChanged;
             this.e조명켜짐.Toggled += E켜짐_Toggled;
+        }
+
+        public void SetLocalization()
+        {
+            this.b켜기.Text = 번역.모두켜기;
+            this.b끄기.Text = 번역.모두끄기;
         }
 
         public void Close()
@@ -82,5 +90,19 @@ namespace TPA.UI.Controls
 
         private void 모두켜기(object sender, EventArgs e) => Global.조명제어.TurnOn();
         private void 모두끄기(object sender, EventArgs e) => Global.조명제어.TurnOff();
+
+        private class LocalizationCamSetting
+        {
+            private enum Items
+            {
+                [Translation("All Light On", "모두켜기")]
+                모두켜기,
+                [Translation("All Light Off", "모두끄기")]
+                모두끄기,
+            }
+            private String GetString(Items item) { return Localization.GetString(item); }
+            public String 모두켜기 { get => GetString(Items.모두켜기); }
+            public String 모두끄기 { get => GetString(Items.모두끄기); }
+        }
     }
 }

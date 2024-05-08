@@ -217,7 +217,7 @@
             // 
             this.col구분.AppearanceHeader.Options.UseTextOptions = true;
             this.col구분.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col구분.FieldName = "구분";
+            this.col구분.FieldName = "카메라이름";
             this.col구분.Name = "col구분";
             this.col구분.Visible = true;
             this.col구분.VisibleIndex = 0;
@@ -238,7 +238,7 @@
             this.col설명.FieldName = "설명";
             this.col설명.Name = "col설명";
             this.col설명.Visible = true;
-            this.col설명.VisibleIndex = 2;
+            this.col설명.VisibleIndex = 3;
             // 
             // col주소
             // 
@@ -468,7 +468,7 @@
             // 
             this.col카메라.AppearanceHeader.Options.UseTextOptions = true;
             this.col카메라.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col카메라.FieldName = "카메라";
+            this.col카메라.FieldName = "카메라이름";
             this.col카메라.Name = "col카메라";
             this.col카메라.OptionsColumn.AllowEdit = false;
             this.col카메라.Visible = true;
@@ -528,8 +528,9 @@
             // 
             this.col켜짐.AppearanceHeader.Options.UseTextOptions = true;
             this.col켜짐.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col켜짐.Caption = "상태";
             this.col켜짐.ColumnEdit = this.e조명켜짐;
-            this.col켜짐.FieldName = "켜짐";
+            this.col켜짐.FieldName = "상태";
             this.col켜짐.Name = "col켜짐";
             this.col켜짐.Visible = true;
             this.col켜짐.VisibleIndex = 5;

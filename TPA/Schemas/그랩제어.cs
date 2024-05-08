@@ -25,6 +25,7 @@ namespace TPA.Schemas
         public static List<카메라구분> 대상카메라 = new List<카메라구분>()
                             { 카메라구분.Cam01, 카메라구분.Cam02, 카메라구분.Cam03, 카메라구분.Cam04,
                               카메라구분.Cam05, 카메라구분.Cam06, 카메라구분.Cam07, 카메라구분.Cam08 };
+      
         public delegate void 그랩완료이벤트(카메라구분 카메라, IntPtr intPtr, Int32 width, Int32 height);
         //public event 그랩완료이벤트 OnGrabbedImage;
 
@@ -43,7 +44,7 @@ namespace TPA.Schemas
 
         public Boolean Init()
         {
-            
+
             MC.OpenDriver(); // Euresys (Multicam)
 
             // backup this.측면카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam01, 코드 = "DA1698484", 교정X = 0.014d, 교정Y = 0.014d };
@@ -54,13 +55,13 @@ namespace TPA.Schemas
             // backup this.커넥터설삽카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam06, 코드 = "DA1278379", 교정X = 0.014640d, 교정Y = 0.014640d };
             // backup this.커넥터설삽카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam07, 코드 = "DA0652350", 교정X = 0.014658d, 교정Y = 0.014658d };
 
-            this.측면카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam01, 코드 = "DA1698484", 교정X = 0.014d, 교정Y = 0.014d };
-            this.측면카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "DA1698487", 교정X = 0.014d, 교정Y = 0.014d };
-            this.상부카메라 = new EuresysLink(카메라구분.Cam03) { 코드 = "", 교정X = 0.016d, 교정Y = 0.016d };
-            this.하부카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1698488", 교정X = 0.014d, 교정Y = 0.014d };
-            this.하부카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam05, 코드 = "DA1698486", 교정X = 0.014d, 교정Y = 0.014d };
-            this.커넥터설삽카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam06, 코드 = "DA1278379", 교정X = 0.014d, 교정Y = 0.014d };
-            this.커넥터설삽카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam07, 코드 = "DA0652350", 교정X = 0.014d, 교정Y = 0.014d };
+            this.측면카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam01, 카메라이름 = Localization.GetString(카메라구분.Cam01), 코드 = "DA1698484", 교정X = 0.014d, 교정Y = 0.014d };
+            this.측면카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 카메라이름 = Localization.GetString(카메라구분.Cam02), 코드 = "DA1698487", 교정X = 0.014d, 교정Y = 0.014d };
+            this.상부카메라 = new EuresysLink(카메라구분.Cam03) { 코드 = "", 카메라이름 = Localization.GetString(카메라구분.Cam03), 교정X = 0.016d, 교정Y = 0.016d };
+            this.하부카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam04, 카메라이름 = Localization.GetString(카메라구분.Cam04), 코드 = "DA1698488", 교정X = 0.014d, 교정Y = 0.014d };
+            this.하부카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam05, 카메라이름 = Localization.GetString(카메라구분.Cam05), 코드 = "DA1698486", 교정X = 0.014d, 교정Y = 0.014d };
+            this.커넥터설삽카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam06, 카메라이름 = Localization.GetString(카메라구분.Cam06), 코드 = "DA1278379", 교정X = 0.014d, 교정Y = 0.014d };
+            this.커넥터설삽카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam07, 카메라이름 = Localization.GetString(카메라구분.Cam07), 코드 = "DA0652350", 교정X = 0.014d, 교정Y = 0.014d };
 
             this.Add(카메라구분.Cam01, this.측면카메라1);
             this.Add(카메라구분.Cam02, this.측면카메라2);
@@ -72,8 +73,10 @@ namespace TPA.Schemas
 
             카메라장치 정보;
             List<카메라장치> 자료 = Load();
-            if (자료 != null) {
-                foreach (카메라장치 설정 in 자료) {
+            if (자료 != null)
+            {
+                foreach (카메라장치 설정 in 자료)
+                {
                     정보 = this.GetItem(설정.구분);
                     if (정보 == null) continue;
                     정보.Set(설정);
@@ -86,7 +89,8 @@ namespace TPA.Schemas
             Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);
             if (!Validate("Enumerate devices fail!", nRet, true)) return false;
 
-            for (int i = 0; i < 카메라들.Count; i++) {
+            for (int i = 0; i < 카메라들.Count; i++)
+            {
                 CGigECameraInfo gigeInfo = 카메라들[i] as CGigECameraInfo;
                 HikeGigE gige = this.GetItem(gigeInfo.chSerialNumber) as HikeGigE;
                 if (gige == null) continue;
@@ -148,14 +152,14 @@ namespace TPA.Schemas
         //                else {
         //                    Global.비전검사.Run(data);
         //                }
-                
+
         //                if (카메라 == 카메라구분.Cam03)
         //                {
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 1);
         //                    Thread.Sleep(50);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].Busy주소, 0);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 0);
-                
+
         //                    return;
         //                }
         //                else if (카메라 == 카메라구분.Cam05)
