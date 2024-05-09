@@ -135,6 +135,19 @@ namespace TPA.Schemas
             }
         }
 
+        //public virtual Boolean ZeroSet()
+        //{
+        //    try
+        //    {
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        에러메시지 = $"소켓 해제 실패 : {ex.Message}";
+        //        return false;
+        //    }
+        //}
+
         protected virtual Boolean SendData(String data, Encoding encoding = null)
         {
             if (encoding == null) encoding = Encoding.UTF8;

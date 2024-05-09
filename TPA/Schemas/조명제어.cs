@@ -15,7 +15,7 @@ namespace TPA.Schemas
         public String 로그영역 = "조명제어";
         [JsonIgnore]
         private string 저장파일 { get { return Path.Combine(Global.환경설정.기본경로, "Lights.json"); } }
-        public Boolean 정상여부 { get { return this.측면조명.IsOpen() && this.상부조명.IsOpen() && this.하부조명.IsOpen();} }
+        public Boolean 정상여부 { get { return this.측면조명.IsOpen() && this.상부조명.IsOpen() && this.하부조명.IsOpen(); } }
         public Boolean 초기점멸작업완료여부 = false; // Task로 동작하기 때문에 WaitForm이 먼저 종료되어 추가한 플래그
 
         private 조명장치 측면조명;
@@ -27,7 +27,7 @@ namespace TPA.Schemas
         {
             // org this.측면조명 = new LCP30DC() { 포트 = 조명포트.COM5 };
             this.측면조명 = new LCP100DC() { 포트 = 조명포트.COM5, 통신속도 = 19200 };
-            this.상부조명 = new LCP200QC() { 포트 = 조명포트.COM3};
+            this.상부조명 = new LCP200QC() { 포트 = 조명포트.COM3 };
             this.하부조명 = new LCP100DC() { 포트 = 조명포트.COM4, 통신속도 = 19200 };
             this.커넥터조명 = new LCP24_30Q() { 포트 = 조명포트.COM2 };
 
@@ -50,7 +50,7 @@ namespace TPA.Schemas
             this.Load();
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
             this.Open();
-            this.Set();
+            Task.Run(() => { this.Set(); });
         }
 
         public 조명정보 GetItem(카메라구분 카메라)
@@ -69,37 +69,44 @@ namespace TPA.Schemas
         public void Load()
         {
             if (!File.Exists(this.저장파일)) return;
-            try {
+            try
+            {
                 List<조명정보> 자료 = JsonConvert.DeserializeObject<List<조명정보>>(File.ReadAllText(this.저장파일), Utils.JsonSetting());
-                foreach (조명정보 정보 in 자료) {
+                foreach (조명정보 정보 in 자료)
+                {
                     조명정보 조명 = this.GetItem(정보.카메라, 정보.포트, 정보.채널);
                     if (조명 == null) continue;
                     조명.Set(정보);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Global.오류로그(로그영역, "자료로드", $"조명 설정 로드 실패 : {ex.Message}", true);
             }
         }
 
         public void Save()
         {
-            if (!Utils.WriteAllText(저장파일, JsonConvert.SerializeObject(this, Utils.JsonSetting()))) {
+            if (!Utils.WriteAllText(저장파일, JsonConvert.SerializeObject(this, Utils.JsonSetting())))
+            {
                 Global.오류로그(로그영역, "자료저장", "조명 설정 저장 실패", true);
             }
         }
 
         public void Open()
         {
-            if (!this.측면조명.Open()) {
+            if (!this.측면조명.Open())
+            {
                 this.측면조명.Close();
                 Global.오류로그(로그영역, "Open", "측면조명에 연결할 수 없습니다.", true);
             }
-            if (!this.상부조명.Open()) {
+            if (!this.상부조명.Open())
+            {
                 this.상부조명.Close();
                 Global.오류로그(로그영역, "Open", "상부조명에 연결할 수 없습니다.", true);
             }
-            if (!this.하부조명.Open()) {
+            if (!this.하부조명.Open())
+            {
                 this.하부조명.Close();
                 Global.오류로그(로그영역, "Open", "하부조명에 연결할 수 없습니다.", true);
             }
@@ -123,23 +130,26 @@ namespace TPA.Schemas
 
         public void Set()
         {
-            this.TurnOff();
+            //this.TurnOff();
             초기점멸작업완료여부 = true;
-            //Task.Run(() => {
-            //    foreach (조명정보 조명 in this) {
-            //        if (!조명.Set()) 조명.TurnOn();
-            //        Task.Delay(200).Wait();
-            //        조명.TurnOff();
-            //        Task.Delay(200).Wait();
-            //    }
-            //    초기점멸작업완료여부 = true;
-            //    //Debug.WriteLine("조명끝");
+            //Task.Run(() =>
+            //{
+            foreach (조명정보 조명 in this)
+            {
+                if (!조명.Set()) 조명.TurnOn();
+                Task.Delay(200).Wait();
+                조명.TurnOff();
+                Task.Delay(200).Wait();
+            }
+            초기점멸작업완료여부 = true;
+            //Debug.WriteLine("조명끝");
             //});
         }
 
         public void Set(카메라구분 카메라)
         {
-            foreach (조명정보 조명 in this) {
+            foreach (조명정보 조명 in this)
+            {
                 if (조명.카메라 == 카메라)
                     조명.Set();
             }
@@ -147,8 +157,10 @@ namespace TPA.Schemas
 
         public void Set(카메라구분 카메라, 조명포트 포트, Int32 밝기)
         {
-            foreach (조명정보 정보 in this) {
-                if (정보.카메라 == 카메라 && 정보.포트 == 포트) {
+            foreach (조명정보 정보 in this)
+            {
+                if (정보.카메라 == 카메라 && 정보.포트 == 포트)
+                {
                     정보.밝기 = 밝기;
                     정보.Set();
                 }

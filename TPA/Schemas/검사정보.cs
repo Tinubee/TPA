@@ -115,195 +115,195 @@ namespace TPA.Schemas
         [Result(), ListBindable(false)]
         None,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "Width01")]
-        No1_1_측면부폭1 = 1000,
+        No1_1_측면부폭1 = 101,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "Width02")]
-        No1_2_측면부폭2 = 1001,
+        No1_2_측면부폭2 = 102,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "Width03")]
-        No1_3_측면부폭3 = 1002,
+        No1_3_측면부폭3 = 103,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "Width04")]
-        No1_4_측면부폭4 = 1003,
+        No1_4_측면부폭4 = 104,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "TrimHF")]
-        No2_선윤곽도H_F = 1101,
+        No2_선윤곽도H_F = 201,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimH01")]
-        No2_1_거리측정h1 = 1102,
+        No2_1_거리측정h1 = 221,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimH02")]
-        No2_2_거리측정h2 = 1103,
+        No2_2_거리측정h2 = 222,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "TrimHR")]
-        No3_선윤곽도H_R = 1104,
+        No3_선윤곽도H_R = 301,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimH03")]
-        No3_1_거리측정h3 = 1105,
+        No3_1_거리측정h3 = 321,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimH04")]
-        No3_2_거리측정h4 = 1106,
+        No3_2_거리측정h4 = 322,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness)]
-        No4_커버들뜸 = 1201,
+        No4_커버들뜸 = 401,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_1_커버상m1 = 1202,
+        No4_1_커버상m1 = 421,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_2_커버상m2 = 1203,
+        No4_2_커버상m2 = 422,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_3_커버상m3 = 1204,
+        No4_3_커버상m3 = 423,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_4_커버들뜸k1 = 1205,
+        No4_4_커버들뜸k1 = 424,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_5_커버들뜸k2 = 1206,
+        No4_5_커버들뜸k2 = 425,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_6_커버들뜸k3 = 1207,
+        No4_6_커버들뜸k3 = 426,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_7_커버들뜸k4 = 1208,
+        No4_7_커버들뜸k4 = 427,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_8_커버들뜸k5 = 1209,
+        No4_8_커버들뜸k5 = 428,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_9_커버들뜸k6 = 1210,
+        No4_9_커버들뜸k6 = 429,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_10_커버들뜸k7 = 1211,
+        No4_10_커버들뜸k7 = 430,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        No4_11_커버들뜸k8 = 1212,
+        No4_11_커버들뜸k8 = 431,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF01")]
-        No5_1_가공부높이f1 = 1301,
+        No5_1_가공부높이f1 = 501,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF02")]
-        No5_2_가공부높이f2 = 1302,
+        No5_2_가공부높이f2 = 502,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF03")]
-        No5_3_가공부높이f3 = 1303,
+        No5_3_가공부높이f3 = 503,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF04")]
-        No5_4_가공부높이f4 = 1304,
+        No5_4_가공부높이f4 = 504,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF05")]
-        No5_5_가공부높이f5 = 1305,
+        No5_5_가공부높이f5 = 505,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF06")]
-        No5_6_가공부높이f6 = 1306,
+        No5_6_가공부높이f6 = 506,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF07")]
-        No5_7_가공부높이f7 = 1307,
+        No5_7_가공부높이f7 = 507,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, "ThicknessF08")]
-        No5_8_가공부높이f8 = 1308,
+        No5_8_가공부높이f8 = 508,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF09")]
-        No5_9_가공부높이f9 = 1309,
+        No5_9_가공부높이f9 = 509,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF10")]
-        No5_10_가공부높이f10 = 1310,
+        No5_10_가공부높이f10 = 510,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF11")]
-        No5_11_가공부높이f11 = 1311,
+        No5_11_가공부높이f11 = 511,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF12")]
-        No5_12_가공부높이f12 = 1312,
+        No5_12_가공부높이f12 = 512,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF13")]
-        No5_13_가공부높이f13 = 1313,
+        No5_13_가공부높이f13 = 513,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF14")]
-        No5_14_가공부높이f14 = 1314,
+        No5_14_가공부높이f14 = 514,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF15")]
-        No5_15_가공부높이f15 = 1315,
+        No5_15_가공부높이f15 = 515,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, "ThicknessF16")]
-        No5_16_가공부높이f16 = 1316,
+        No5_16_가공부높이f16 = 516,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG01")]
-        No6_1_가공부거리g1 = 1401,
+        No6_1_가공부거리g1 = 601,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG02")]
-        No6_2_가공부거리g2 = 1402,
+        No6_2_가공부거리g2 = 602,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG03")]
-        No6_3_가공부거리g3 = 1403,
+        No6_3_가공부거리g3 = 603,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG04")]
-        No6_4_가공부거리g4 = 1404,
+        No6_4_가공부거리g4 = 604,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG05")]
-        No6_5_가공부거리g5 = 1405,
+        No6_5_가공부거리g5 = 605,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG06")]
-        No6_6_가공부거리g6 = 1406,
+        No6_6_가공부거리g6 = 606,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG07")]
-        No6_7_가공부거리g7 = 1407,
+        No6_7_가공부거리g7 = 607,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, "ThicknessG08")]
-        No6_8_가공부거리g8 = 1408,
+        No6_8_가공부거리g8 = 608,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG09")]
-        No6_9_가공부거리g9 = 1409,
+        No6_9_가공부거리g9 = 609,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG10")]
-        No6_10_가공부거리g10 = 1410,
+        No6_10_가공부거리g10 = 610,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG11")]
-        No6_11_가공부거리g11 = 1411,
+        No6_11_가공부거리g11 = 611,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG12")]
-        No6_12_가공부거리g12 = 1412,
+        No6_12_가공부거리g12 = 612,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG13")]
-        No6_13_가공부거리g13 = 1413,
+        No6_13_가공부거리g13 = 613,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG14")]
-        No6_14_가공부거리g14 = 1414,
+        No6_14_가공부거리g14 = 614,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG15")]
-        No6_15_가공부거리g15 = 1415,
+        No6_15_가공부거리g15 = 615,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, "ThicknessG16")]
-        No6_16_가공부거리g16 = 1416,
+        No6_16_가공부거리g16 = 616,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness)]
-        No7_바닥평면도 = 1501,
+        No7_바닥평면도 = 701,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a1 = 1502,
+        변위센서a1 = 721,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a2 = 1503,
+        변위센서a2 = 722,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a3 = 1504,
+        변위센서a3 = 723,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a4 = 1505,
+        변위센서a4 = 724,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a5 = 1506,
+        변위센서a5 = 725,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a6 = 1507,
+        변위센서a6 = 726,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a7 = 1508,
+        변위센서a7 = 727,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        변위센서a8 = 1509,
+        변위센서a8 = 728,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "TrimF")]
-        No8_선윤곽도_F = 1601,
+        No8_선윤곽도_F = 801,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimL")]
-        No8_1_거리측정L = 1602,
+        No8_1_거리측정L = 821,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimR")]
-        No8_2_거리측정R = 1603,
+        No8_2_거리측정R = 822,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "TrimJF")]
-        No10_1_선윤곽도J_F = 1610,
+        No10_1_선윤곽도J_F = 1001,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "TrimJR")]
-        No10_2_선윤곽도J_R = 1611,
+        No10_2_선윤곽도J_R = 1002,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimJ01")]
-        No10_1_1_거리측정J1 = 1612,
+        No10_1_1_거리측정J1 = 1021,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimJ02")]
-        No10_1_2_거리측정J2 = 1613,
+        No10_1_2_거리측정J2 = 1022,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimJ03")]
-        No10_2_1_거리측정J3 = 1614,
+        No10_2_1_거리측정J3 = 1023,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam03, "TrimJ04")]
-        No10_2_2_거리측정J4 = 1615,
+        No10_2_2_거리측정J4 = 1024,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchLDepth")]
-        No12_1_중심노치L깊이 = 1701,
+        No12_1_중심노치L깊이 = 1201,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchRDepth")]
-        No12_2_중심노치R깊이 = 1702,
+        No12_2_중심노치R깊이 = 1202,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchL_F")]
-        No13_1_중심노치L반폭F = 1703,
+        No13_1_중심노치L반폭F = 1301,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchL_R")]
-        No13_2_중심노치L반폭R = 1704,
+        No13_2_중심노치L반폭R = 1302,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchR_F")]
-        No13_3_중심노치R반폭F = 1705,
+        No13_3_중심노치R반폭F = 1303,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "CenterNotchR_R")]
-        No13_4_중심노치R반폭R = 1706,
+        No13_4_중심노치R반폭R = 1304,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchDepth01")]
-        No14_1_노치J01깊이 = 1801,
+        No14_1_노치J01깊이 = 1401,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchDepth02")]
-        No14_2_노치J02깊이 = 1802,
+        No14_2_노치J02깊이 = 1402,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchDepth03")]
-        No14_3_노치J03깊이 = 1803,
+        No14_3_노치J03깊이 = 1403,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchDepth04")]
-        No14_4_노치J04깊이 = 1804,
+        No14_4_노치J04깊이 = 1404,
 
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth01_F")]
-        No15_1_노치J01반폭F = 1805,
+        No15_1_노치J01반폭F = 1501,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth01_R")]
-        No15_2_노치J01반폭R = 1806,
+        No15_2_노치J01반폭R = 1502,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth02_F")]
-        No15_3_노치J02반폭F = 1807,
+        No15_3_노치J02반폭F = 1503,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth02_R")]
-        No15_4_노치J02반폭R = 1808,
+        No15_4_노치J02반폭R = 1504,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth03_F")]
-        No15_5_노치J03반폭F = 1809,
+        No15_5_노치J03반폭F = 1505,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth03_R")]
-        No15_6_노치J03반폭R = 1810,
+        No15_6_노치J03반폭R = 1506,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth04_F")]
-        No15_7_노치J04반폭F = 1811,
+        No15_7_노치J04반폭F = 1507,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, "JNotchHalfWidth04_R")]
-        No15_8_노치J04반폭R = 1812,
+        No15_8_노치J04반폭R = 1508,
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam06)]
         커넥터설삽상부 = 1901,
@@ -320,84 +320,84 @@ namespace TPA.Schemas
 
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode)]
-        하부큐알코드1 = 2000,
+        하부큐알코드1 = 2001,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode)]
-        하부큐알코드2 = 2001,
+        하부큐알코드2 = 2002,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode)]
-        상부큐알코드1 = 2100,
+        상부큐알코드1 = 2101,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode)]
-        상부큐알코드2 = 2101,
+        상부큐알코드2 = 2102,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
-        큐알검증 = 2200,
+        큐알검증 = 2201,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
-        중복여부 = 2201,
+        중복여부 = 2202,
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "InputDirection")]
-        역투입 = 2300,
+        역투입 = 2301,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness)]
-        면윤곽도 = 2301,
+        면윤곽도 = 2302,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MarkingResult")]
-        노멀미러 = 2302,
+        노멀미러 = 2303,
 
 
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A1_F = 2400,
+        데이텀A1_F = 2401,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A2_F = 2401,
+        데이텀A2_F = 2402,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A3_F = 2402,
+        데이텀A3_F = 2403,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A4_F = 2403,
+        데이텀A4_F = 2404,
 
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A1_R = 2500,
+        데이텀A1_R = 2501,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A2_R = 2501,
+        데이텀A2_R = 2502,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A3_R = 2502,
+        데이텀A3_R = 2503,
         [Result(검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
-        데이텀A4_R = 2503,
+        데이텀A4_R = 2504,
 
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
-        장축용접불량 = 3000,
+        장축용접불량 = 3001,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
-        단축용접불량 = 3001,
+        단축용접불량 = 3002,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
-        바닥표면불량 = 3002,
+        바닥표면불량 = 3003,
 
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "Dent")]
-        찍힘불량 = 3100,
+        찍힘불량 = 3101,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentB")]
-        찍힘불량B = 3101,
+        찍힘불량B = 3102,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentTL")]
-        찍힘불량TL = 3102,
+        찍힘불량TL = 3103,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentTR")]
-        찍힘불량TR = 3103,
+        찍힘불량TR = 3104,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentL")]
-        찍힘불량L = 3104,
+        찍힘불량L = 3105,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "DentR")]
-        찍힘불량R = 3105,
+        찍힘불량R = 3106,
 
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "Scratch")]
-        스크레치 = 3200,
+        스크레치 = 3201,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchB")]
-        스크레치B = 3201,
+        스크레치B = 3202,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchTL")]
-        스크레치TL = 3202,
+        스크레치TL = 3203,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchTR")]
-        스크레치TR = 3203,
+        스크레치TR = 3204,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchL")]
-        스크레치L = 3204,
+        스크레치L = 3205,
         [Result(검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, "ScratchR")]
-        스크레치R = 3205,
+        스크레치R = 3206,
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "PlusMarkingResult")]
-        플러스각인 = 3300,
+        플러스각인 = 3301,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "MinusMarkingResult")]
-        마이너스각인 = 3301,
+        마이너스각인 = 3302,
 
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03, "BraketMarkingResult1")]
         브라켓각인1 = 3401,

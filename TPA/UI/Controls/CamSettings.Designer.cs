@@ -219,6 +219,7 @@
             this.col구분.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col구분.FieldName = "카메라이름";
             this.col구분.Name = "col구분";
+            this.col구분.OptionsColumn.AllowEdit = false;
             this.col구분.Visible = true;
             this.col구분.VisibleIndex = 0;
             // 
@@ -228,6 +229,7 @@
             this.col코드.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col코드.FieldName = "코드";
             this.col코드.Name = "col코드";
+            this.col코드.OptionsColumn.AllowEdit = false;
             this.col코드.Visible = true;
             this.col코드.VisibleIndex = 1;
             // 
@@ -238,7 +240,7 @@
             this.col설명.FieldName = "설명";
             this.col설명.Name = "col설명";
             this.col설명.Visible = true;
-            this.col설명.VisibleIndex = 3;
+            this.col설명.VisibleIndex = 2;
             // 
             // col주소
             // 
