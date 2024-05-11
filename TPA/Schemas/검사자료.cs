@@ -59,6 +59,8 @@ namespace TPA.Schemas
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장경로, Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
 
         public void Save() => this.테이블.Save();
+
+        public void SaveAsync() => this.테이블.SaveAsync();
         private Boolean SaveJson()
         {
             DateTime 날짜 = DateTime.Today;

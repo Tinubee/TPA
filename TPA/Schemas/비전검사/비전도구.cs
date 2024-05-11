@@ -174,11 +174,22 @@ namespace TPA.Schemas
         #region Run
         public Boolean IsAccepted()
         {
-            foreach (ICogTool tool in this.AlignTools.Tools)
-                if (tool.RunStatus.Result != CogToolResultConstants.Accept) return false;
-            foreach (ICogTool tool in this.ToolBlock.Tools)
-                if (tool.RunStatus.Result != CogToolResultConstants.Accept) return false;
-            return true;
+            try
+            {
+                foreach (ICogTool tool in this.AlignTools.Tools)
+                    if (tool.RunStatus.Result != CogToolResultConstants.Accept) return false;
+                foreach (ICogTool tool in this.ToolBlock.Tools)
+                    if (tool.RunStatus.Result != CogToolResultConstants.Accept) return false;
+                return true;
+            }
+            catch (Exception ee)
+            {
+                Debug.WriteLine($"*****************************IsAccepted Error*****************************");
+                Debug.WriteLine($"{ee.Message}");
+                Debug.WriteLine($"*****************************IsAccepted Error*****************************");
+                return false;
+            }
+          
         }
 
         public Boolean Run(ICogImage image, 검사결과 검사)
@@ -194,15 +205,10 @@ namespace TPA.Schemas
                 accepted = this.IsAccepted();
                 if (this.카메라 == 카메라구분.Cam08)
                 {
-                    DisplayResult(null);
+                    //DisplayResult(null);
                 }
                 else
                 {
-                    if(this.카메라 == 카메라구분.Cam06 || this.카메라 == 카메라구분.Cam07)
-                    {
-                        Debug.WriteLine($"검사Tool Accepted 확인 : {this.카메라} - {accepted}");
-                    }
-                    //Debug.WriteLine("연산진입");
                     Global.검사자료.카메라검사(this.카메라, GetResults());
                     DisplayResult(검사);
                 }

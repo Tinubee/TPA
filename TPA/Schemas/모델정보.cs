@@ -240,14 +240,18 @@ namespace TPA.Schemas
 
                 자료.ForEach(e => {
                     검사정보 정보 = new 검사정보(e);
-                    this.Add(정보);
+                    if (정보 != null)
+                    {
+                        정보.Set(e);
+                        this.Add(정보);
+                    }
                 });
             }
             catch (Exception ex) {
                 Global.오류로그(로그영역.GetString(), "자료로드", ex.Message, false);
             }
         }
-
+        public 검사정보 GetItem(검사항목 항목) => this.Where(e => e.검사항목 == 항목).FirstOrDefault();
         public Boolean Save()
         {
             try {

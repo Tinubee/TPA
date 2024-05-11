@@ -38,21 +38,29 @@ namespace TPA.Schemas
 
         public void 전체테스트수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
         {
-            재검사여부확인(커맨드);
-            하부큐알리딩수행(커맨드, 제품인덱스);
-            바닥평면센서수행(커맨드, 제품인덱스);
-            측면촬영수행(커맨드, 제품인덱스);
-            상부촬영수행(커맨드, 제품인덱스);
-            상부큐알리딩수행(커맨드, 제품인덱스);
-            하부촬영수행(커맨드, 제품인덱스);
-            커넥터설삽촬영수행(커맨드, 제품인덱스);
-            커버조립여부요청수행(커맨드, 제품인덱스);
-            커버들뜸수행(커맨드, 제품인덱스);
-            라벨부착수행(커맨드, 제품인덱스);
-            검사결과전송수행(커맨드, 제품인덱스);
+            try
+            {
+                재검사여부확인(커맨드);
+                하부큐알리딩수행(커맨드, 제품인덱스);
+                바닥평면센서수행(커맨드, 제품인덱스);
+                측면촬영수행(커맨드, 제품인덱스);
+                상부촬영수행(커맨드, 제품인덱스);
+                상부큐알리딩수행(커맨드, 제품인덱스);
+                하부촬영수행(커맨드, 제품인덱스);
+                커넥터설삽촬영수행(커맨드, 제품인덱스);
+                커버조립여부요청수행(커맨드, 제품인덱스);
+                커버들뜸수행(커맨드, 제품인덱스);
+                //라벨부착수행(커맨드, 제품인덱스);
+                검사결과전송수행(커맨드, 제품인덱스);
+            }
+            catch (Exception ee)
+            {
+                Debug.WriteLine($"--------------------------------전체검사수행 에러 : {ee.Message}--------------------------------");
+            }
+
         }
 
-        private  void MES착공시작요청()
+        private void MES착공시작요청()
         {
             MESSAGE msg = new MESSAGE();
             msg.MSG_ID = EQPID.REQ_PROCESS_START.ToString();
@@ -211,36 +219,43 @@ namespace TPA.Schemas
 
         private void 측면촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
         {
-            if (커맨드 != PLC커맨드목록.측상촬영트리거) return;
-
-            제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
-
-            if (제품인덱스 <= 0)
+            try
             {
-                Global.오류로그(로그영역, "측면촬영수행", $"제품인덱스가 없습니다.", true);
-                return;
+                if (커맨드 != PLC커맨드목록.측상촬영트리거) return;
+
+                제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀02제품인덱스];
+
+                if (제품인덱스 <= 0)
+                {
+                    Global.오류로그(로그영역, "측면촬영수행", $"제품인덱스가 없습니다.", true);
+                    return;
+                }
+
+                this.제품인덱스큐[(Int32)카메라구분.Cam01].Enqueue(제품인덱스);
+                this.제품인덱스큐[(Int32)카메라구분.Cam02].Enqueue(제품인덱스);
+                Debug.WriteLine($"제품인덱스큐 {this.제품인덱스큐.Length} 개");
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam01);
+                    Global.그랩제어.Ready(카메라구분.Cam01);
+
+                    Debug.WriteLine($"측면촬영수행(L) : 제품인덱스 {제품인덱스}");
+                }).Start();
+                Task.Delay(20);
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam02);
+                    Global.그랩제어.Ready(카메라구분.Cam02);
+
+                    Debug.WriteLine($"측면촬영수행(R) : 제품인덱스 {제품인덱스}");
+                }).Start();
             }
-
-            this.제품인덱스큐[(Int32)카메라구분.Cam01].Enqueue(제품인덱스);
-            this.제품인덱스큐[(Int32)카메라구분.Cam02].Enqueue(제품인덱스);
-
-            new Thread(() =>
+            catch(Exception ee)
             {
-                Global.조명제어.TurnOn(카메라구분.Cam01);
-                Global.그랩제어.Ready(카메라구분.Cam01);
-
-                Debug.WriteLine($"측면촬영수행(L) : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
-
-            new Thread(() =>
-            {
-                Global.조명제어.TurnOn(카메라구분.Cam02);
-                Global.그랩제어.Ready(카메라구분.Cam02);
-
-                Debug.WriteLine($"측면촬영수행(R) : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
+                Debug.WriteLine("--------------------------------------측면촬영수행 에러--------------------------------------");
+                Debug.WriteLine($"{ee.Message}");
+                Debug.WriteLine("--------------------------------------측면촬영수행 에러--------------------------------------");
+            }
         }
 
         private void 상부촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -263,98 +278,118 @@ namespace TPA.Schemas
                 Global.조명제어.TurnOn(카메라구분.Cam03);
                 Global.그랩제어.Ready(카메라구분.Cam03);
                 Debug.WriteLine($"상부촬영수행 : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
+            }).Start();
         }
 
         private void 상부큐알리딩수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
         {
-            if (커맨드 != PLC커맨드목록.상부큐알트리거) return;
-
-            제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
-
-            if (제품인덱스 <= 0)
+            try
             {
-                Global.오류로그(로그영역, "상부큐알리딩수행", $"제품인덱스가 없습니다.", true);
-                return;
-            }
+                if (커맨드 != PLC커맨드목록.상부큐알트리거) return;
 
-            if (Global.환경설정.Only어퍼하우징검사)
-            {
-                Task.Run(() =>
+                제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
+
+                if (제품인덱스 <= 0)
                 {
-                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                    Task.Delay(50);
-                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
-                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+                    Global.오류로그(로그영역, "상부큐알리딩수행", $"제품인덱스가 없습니다.", true);
                     return;
-                });
-            }
-            else
-            {
-                new Thread(() =>
+                }
+
+                if (Global.환경설정.Only어퍼하우징검사)
                 {
-                    검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
-                    if (검사 == null) return;
-
-                    SR2000.SR2000리딩결과 상부큐알결과 = (SR2000.SR2000리딩결과)Global.큐알제어.상부큐알리더.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
-
-                    if (상부큐알결과.결과자료.정상여부)
+                    Task.Run(() =>
                     {
-                        검사.큐알정보검사(검사항목.상부큐알코드1, 상부큐알결과.결과자료.큐알별내용[0]);
-                        검사.큐알정보검사(검사항목.상부큐알코드2, 상부큐알결과.결과자료.큐알별내용[1]);
-                        Global.정보로그(로그영역, "상부큐알리딩수행", $"제품인덱스 {제품인덱스}, 결과1 : {상부큐알결과.결과자료.큐알별내용[0]}, 결과2 : {상부큐알결과.결과자료.큐알별내용[1]}", false);
-
-                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
-                        Thread.Sleep(50);
-                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
-                        Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
-                    }
-                    else
-                    {
-                        Global.정보로그(로그영역, "상부큐알리딩수행", $"큐알리딩실패 : {상부큐알결과.결과자료.오류내용}", false);
-                        Global.큐알제어.상부큐알리더.리딩종료();
-                        //리딩실패시 NG로 빼자.
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
                         Task.Delay(50);
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
                         Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
-                    }
-                })
-                { Priority = ThreadPriority.Highest }.Start();
+                        return;
+                    });
+                }
+                else
+                {
+                    new Thread(() =>
+                    {
+                        검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
+                        if (검사 == null) return;
+
+                        SR2000.SR2000리딩결과 상부큐알결과 = (SR2000.SR2000리딩결과)Global.큐알제어.상부큐알리더.커맨드전송및응답확인(큐알동작커맨드.리딩시작, 3000);
+
+                        if (상부큐알결과.결과자료.정상여부)
+                        {
+                            검사.큐알정보검사(검사항목.상부큐알코드1, 상부큐알결과.결과자료.큐알별내용[0]);
+                            검사.큐알정보검사(검사항목.상부큐알코드2, 상부큐알결과.결과자료.큐알별내용[1]);
+                            Global.정보로그(로그영역, "상부큐알리딩수행", $"제품인덱스 {제품인덱스}, 결과1 : {상부큐알결과.결과자료.큐알별내용[0]}, 결과2 : {상부큐알결과.결과자료.큐알별내용[1]}", false);
+
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                            Thread.Sleep(50);
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+                        }
+                        else
+                        {
+                            Global.정보로그(로그영역, "상부큐알리딩수행", $"큐알리딩실패 : {상부큐알결과.결과자료.오류내용}", false);
+                            Global.큐알제어.상부큐알리더.리딩종료();
+                            //리딩실패시 NG로 빼자.
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                            Task.Delay(50);
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+                        }
+                    })
+                    { Priority = ThreadPriority.Highest }.Start();
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"-------------------------------------상부큐알리딩수행에러 : {ex.Message}-------------------------------------");
+                Global.큐알제어.상부큐알리더.리딩종료();
+                //리딩실패시 NG로 빼자.
+                Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 1);
+                Task.Delay(50);
+                Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].Busy주소, 0);
+                Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[커맨드].완료주소, 0);
+            }
+
         }
 
         private void 하부촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
         {
-            if (커맨드 != PLC커맨드목록.하부촬영트리거) return;
-
-            제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
-
-            if (제품인덱스 <= 0)
+            try
             {
-                Global.오류로그(로그영역, "하부촬영수행", $"제품인덱스가 없습니다.", true);
-                return;
+                if (커맨드 != PLC커맨드목록.하부촬영트리거) return;
+
+                제품인덱스 = Global.장치통신.검사위치별제품인덱스버퍼[PLC커맨드목록.셔틀03제품인덱스];
+
+                if (제품인덱스 <= 0)
+                {
+                    Global.오류로그(로그영역, "하부촬영수행", $"제품인덱스가 없습니다.", true);
+                    return;
+                }
+
+                this.제품인덱스큐[(Int32)카메라구분.Cam04].Enqueue(제품인덱스);
+                this.제품인덱스큐[(Int32)카메라구분.Cam05].Enqueue(제품인덱스);
+                Debug.WriteLine($"제품인덱스큐 {this.제품인덱스큐.Length} 개");
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam04);
+                    Global.그랩제어.Ready(카메라구분.Cam04);
+                    Debug.WriteLine($"하부촬영수행(L) : 제품인덱스 {제품인덱스}");
+                }).Start();
+                Task.Delay(20);
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam05);
+                    Global.그랩제어.Ready(카메라구분.Cam05);
+                    Debug.WriteLine($"하부촬영수행(R) : 제품인덱스 {제품인덱스}");
+                }).Start();
             }
-
-            this.제품인덱스큐[(Int32)카메라구분.Cam04].Enqueue(제품인덱스);
-            this.제품인덱스큐[(Int32)카메라구분.Cam05].Enqueue(제품인덱스);
-
-            new Thread(() =>
+            catch(Exception ee)
             {
-                Global.조명제어.TurnOn(카메라구분.Cam04);
-                Global.그랩제어.Ready(카메라구분.Cam04);
-                Debug.WriteLine($"하부촬영수행(L) : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
-
-            new Thread(() =>
-            {
-                Global.조명제어.TurnOn(카메라구분.Cam05);
-                Global.그랩제어.Ready(카메라구분.Cam05);
-                Debug.WriteLine($"하부촬영수행(R) : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
+                Debug.WriteLine("--------------------------------------하부촬영수행 에러--------------------------------------");
+                Debug.WriteLine($"{ee.Message}");
+                Debug.WriteLine("--------------------------------------하부촬영수행 에러--------------------------------------");
+            }
         }
 
         private void 커넥터설삽촬영수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -381,8 +416,7 @@ namespace TPA.Schemas
                 Global.그랩제어.Triggering(카메라구분.Cam06);
                 Global.그랩제어.Triggering(카메라구분.Cam07);
                 Debug.WriteLine($"커넥터촬영수행 : 제품인덱스 {제품인덱스}");
-            })
-            { Priority = ThreadPriority.Highest }.Start();
+            }).Start();
         }
 
         private void 커버조립여부요청수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
