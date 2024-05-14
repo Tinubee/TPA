@@ -12,6 +12,7 @@ using 커맨드값 = System.Int32;
 using System.Diagnostics;
 using OpenCvSharp.Flann;
 using System.Runtime.Remoting.Messaging;
+using DevExpress.CodeParser;
 
 namespace TPA.Schemas
 {
@@ -147,29 +148,39 @@ namespace TPA.Schemas
 
         private Int32 GetIndex(PLC커맨드목록 커맨드)
         {
-            if (커맨드 == PLC커맨드목록.하부큐알트리거) // 하부큐알2개
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀01제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.바닥평면트리거) // 바닥평면센서
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀02제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.측상촬영트리거) // 측상촬영
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀02제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.상부큐알트리거) // 상부큐알
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀03제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.하부촬영트리거) // 하부검사
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀03제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.커넥터촬영트리거) // 커넥터설삽
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀04제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.커버조립트리거) // 커버조립
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀05제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.커버들뜸트리거) // 커버들뜸
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀06제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.라벨발행트리거) // 라벨발행
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀08제품인덱스].요청주소);
-            else if (커맨드 == PLC커맨드목록.결과요청트리거) // 결과컨베이어
-                return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀09제품인덱스].요청주소);
-            else
+            try
             {
-                Debug.WriteLine($"[{커맨드.ToString()}] : Global.장치통신.프로세스의 GetIndex 함수에서 정의하지 않은 검사위치 정보 전달받음");
+                if (커맨드 == PLC커맨드목록.하부큐알트리거) // 하부큐알2개
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀01제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.바닥평면트리거) // 바닥평면센서
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀02제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.측상촬영트리거) // 측상촬영
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀02제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.상부큐알트리거) // 상부큐알
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀03제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.하부촬영트리거) // 하부검사
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀03제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.커넥터촬영트리거) // 커넥터설삽
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀04제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.커버조립트리거) // 커버조립
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀05제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.커버들뜸트리거) // 커버들뜸
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀06제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.라벨발행트리거) // 라벨발행
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀08제품인덱스].요청주소);
+                else if (커맨드 == PLC커맨드목록.결과요청트리거) // 결과컨베이어
+                    return Global.장치통신.정보읽기(Global.장치통신.PLC커맨드[PLC커맨드목록.셔틀09제품인덱스].요청주소);
+                else
+                {
+                    Debug.WriteLine($"[{커맨드.ToString()}] : Global.장치통신.프로세스의 GetIndex 함수에서 정의하지 않은 검사위치 정보 전달받음");
+                    return 0;
+                }
+            }
+            catch(Exception ee)
+            {
+                Debug.WriteLine($"-------------------------------------------------");
+                Debug.WriteLine($"{ee.Message}");
+                Debug.WriteLine($"-------------------------------------------------");
                 return 0;
             }
         }

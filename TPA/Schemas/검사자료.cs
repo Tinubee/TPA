@@ -135,7 +135,7 @@ namespace TPA.Schemas
                     검사.측정결과 = 결과구분.IN; // 검사중으로 바꿈
                     this.자료추가(검사);
                     this.검사스플.Add(검사.검사코드, 검사);
-                    Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
+                    //Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
                 }
             }
             else {
@@ -200,11 +200,6 @@ namespace TPA.Schemas
             검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
             if (검사 == null) return null;
             검사.SetResults(카메라, results);
-
-            // // 하드코딩해보고 되면 정상코드로 기입
-            // if (Global.비전검사[카메라].CogCaliperTool1.RunStatus.Result != CogToolResultConstants.Accept) {
-            //     검사.SetResult(검사항목.가공부높이f1, (Single)Double.NaN);
-            // }
 
             if (카메라 == 카메라구분.Cam03) {
                 검사정보 H1 = 검사.GetItem(검사항목.No2_1_거리측정h1);
