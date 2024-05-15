@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using OpenCvSharp;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -18,11 +19,11 @@ namespace TPA.Schemas
         None,
         [Description("Side1"), Translation("Side1", "측면1")]
         Cam01,
-        [Description("Side2"),Translation("Side2", "측면2")]
+        [Description("Side2"), Translation("Side2", "측면2")]
         Cam02,
-        [Description("Top"),Translation("Top", "상부")]
+        [Description("Top"), Translation("Top", "상부")]
         Cam03,
-        [Description("Bottom1"),Translation("Bottom1", "하부1")]
+        [Description("Bottom1"), Translation("Bottom1", "하부1")]
         Cam04,
         [Description("Bottom2"), Translation("Bottom2", "하부2")]
         Cam05,
@@ -80,18 +81,32 @@ namespace TPA.Schemas
         internal UInt32 BufferSize = 0;
         [JsonIgnore]
         internal IntPtr BufferAddress = IntPtr.Zero;
-        [JsonIgnore]
-        internal Queue<Mat> Images = new Queue<Mat>();
+        //[JsonIgnore]
+        //internal Queue<Mat> Images = new Queue<Mat>();
         [JsonIgnore]
         internal Mat Image => Images.LastOrDefault<Mat>();
         [JsonIgnore]
         public static TranslationAttribute 로그영역 = new TranslationAttribute("Camera", "카메라");
+        [JsonIgnore]
+        internal ConcurrentQueue<Mat> Images = new ConcurrentQueue<Mat>();
 
 
         public void Dispose()
         {
-            while (this.Images.Count > 3)
-                this.Dispose(this.Images.Dequeue());
+            //while (this.Images.Count > 3)
+            //{
+            if (this.Images.TryDequeue(out Mat image))
+            {
+                this.Dispose(image);
+            }
+            //}
+            //lock (_imagesLock) // lock 추가
+            //{
+            //    while (this.Images.Count > 3)
+            //        this.Dispose(this.Images.Dequeue());
+            //}
+            //while (this.Images.Count > 3)
+            //    this.Dispose(this.Images.Dequeue());
         }
         internal void Dispose(Mat image)
         {
@@ -117,7 +132,13 @@ namespace TPA.Schemas
         public virtual Boolean Close()
         {
             while (this.Images.Count > 0)
-                this.Dispose(this.Images.Dequeue());
+            {
+                if (this.Images.TryDequeue(out Mat image))
+                {
+                    this.Dispose(image);
+                }
+            }
+            //this.Dispose(this.Images.Dequeue());
             return true;
         }
         public virtual Boolean Triggering() => false;
@@ -194,6 +215,8 @@ namespace TPA.Schemas
             }
             this.Images.Enqueue(image);
             this.Dispose();
+            //this.Images.Enqueue(image);
+            //this.Dispose();
             Global.그랩제어.그랩완료(this);
         }
 

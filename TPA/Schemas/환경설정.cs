@@ -231,6 +231,7 @@ namespace TPA.Schemas
                 //저장경로 변경
                 drive = this.ChangeSaveImageDirve();
                 FreeSpace = drive.AvailableFreeSpace / (double)drive.TotalSize * 100;
+                this.Save();
             }
 
             return Convert.ToInt32(FreeSpace);

@@ -2,16 +2,13 @@
 using DevExpress.Utils.Extensions;
 using MvUtils;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using static TPA.Schemas.MES통신;
 using static TPA.Schemas.장치통신;
-using static TPA.Schemas.큐알제어;
 
 namespace TPA.Schemas
 {
@@ -19,21 +16,30 @@ namespace TPA.Schemas
     {
         private string 로그영역 = "제품검사수행";
         private 재검사여부 재검사 = 재검사여부.FALSE;
-        public Queue<Int32>[] 제품인덱스큐;
+        public ConcurrentQueue<Int32>[] 제품인덱스큐;
+        private readonly object _queueLock = new object();
 
         public void Init()
         {
             Int32 카메라대수 = Enum.GetValues(typeof(카메라구분)).Length;
-            제품인덱스큐 = new Queue<Int32>[카메라대수];
+            제품인덱스큐 = new ConcurrentQueue<Int32>[카메라대수];
             for (Int32 구분 = 0; 구분 < 카메라대수; 구분++)
             {
-                제품인덱스큐[구분] = new Queue<Int32>();
+                제품인덱스큐[구분] = new ConcurrentQueue<Int32>();
             }
         }
 
         public Int32 촬영위치별제품인덱스(카메라구분 촬영위치)
         {
-            return this.제품인덱스큐[(Int32)촬영위치].Peek();
+            if (this.제품인덱스큐[(Int32)촬영위치].TryPeek(out Int32 제품인덱스))
+            {
+                return 제품인덱스;
+            }
+            else
+            {
+                Global.오류로그(로그영역, "촬영위치별제품인덱스", "제품인덱스큐가 비어 있습니다.", true);
+                return 0;
+            }
         }
 
         public void 전체테스트수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -50,7 +56,6 @@ namespace TPA.Schemas
                 커넥터설삽촬영수행(커맨드, 제품인덱스);
                 커버조립여부요청수행(커맨드, 제품인덱스);
                 커버들뜸수행(커맨드, 제품인덱스);
-                //라벨부착수행(커맨드, 제품인덱스);
                 검사결과전송수행(커맨드, 제품인덱스);
             }
             catch (Exception ee)
@@ -68,8 +73,6 @@ namespace TPA.Schemas
             msg.DATE_TIME = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fffff");
             msg.BARCODE_ID = $"";
             msg.KEY = "0001";
-
-            //QR검사결과 데이터 전송 및 응답 대기 후 완료보고 받고 이후 검사 진행.
         }
 
         private void 재검사여부확인(PLC커맨드목록 커맨드)
@@ -230,27 +233,31 @@ namespace TPA.Schemas
                     Global.오류로그(로그영역, "측면촬영수행", $"제품인덱스가 없습니다.", true);
                     return;
                 }
-
-                this.제품인덱스큐[(Int32)카메라구분.Cam01].Enqueue(제품인덱스);
-                this.제품인덱스큐[(Int32)카메라구분.Cam02].Enqueue(제품인덱스);
-                Debug.WriteLine($"제품인덱스큐 {this.제품인덱스큐.Length} 개");
+                lock (_queueLock)
+                {
+                    this.제품인덱스큐[(Int32)카메라구분.Cam01].Enqueue(제품인덱스);
+                    this.제품인덱스큐[(Int32)카메라구분.Cam02].Enqueue(제품인덱스);
+                }
+                //Debug.WriteLine($"제품인덱스큐 {this.제품인덱스큐.Length} 개");
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.그랩제어.Ready(카메라구분.Cam01);
 
                     Debug.WriteLine($"측면촬영수행(L) : 제품인덱스 {제품인덱스}");
-                }).Start();
-                Task.Delay(20);
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.그랩제어.Ready(카메라구분.Cam02);
 
                     Debug.WriteLine($"측면촬영수행(R) : 제품인덱스 {제품인덱스}");
-                }).Start();
+                })
+                { Priority = ThreadPriority.Highest }.Start();
             }
-            catch(Exception ee)
+            catch (Exception ee)
             {
                 Debug.WriteLine("--------------------------------------측면촬영수행 에러--------------------------------------");
                 Debug.WriteLine($"{ee.Message}");
@@ -269,16 +276,19 @@ namespace TPA.Schemas
                 Global.오류로그(로그영역, "상부촬영수행", $"제품인덱스가 없습니다.", true);
                 return;
             }
-
-            this.제품인덱스큐[(Int32)카메라구분.Cam03].Enqueue(제품인덱스);
-            this.제품인덱스큐[(Int32)카메라구분.Cam08].Enqueue(제품인덱스);
+            lock (_queueLock)
+            {
+                this.제품인덱스큐[(Int32)카메라구분.Cam03].Enqueue(제품인덱스);
+                this.제품인덱스큐[(Int32)카메라구분.Cam08].Enqueue(제품인덱스);
+            }
 
             new Thread(() =>
             {
                 Global.조명제어.TurnOn(카메라구분.Cam03);
                 Global.그랩제어.Ready(카메라구분.Cam03);
                 Debug.WriteLine($"상부촬영수행 : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 상부큐알리딩수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -366,25 +376,29 @@ namespace TPA.Schemas
                     Global.오류로그(로그영역, "하부촬영수행", $"제품인덱스가 없습니다.", true);
                     return;
                 }
-
-                this.제품인덱스큐[(Int32)카메라구분.Cam04].Enqueue(제품인덱스);
-                this.제품인덱스큐[(Int32)카메라구분.Cam05].Enqueue(제품인덱스);
+                lock (_queueLock)
+                {
+                    this.제품인덱스큐[(Int32)카메라구분.Cam04].Enqueue(제품인덱스);
+                    this.제품인덱스큐[(Int32)카메라구분.Cam05].Enqueue(제품인덱스);
+                }
                 Debug.WriteLine($"제품인덱스큐 {this.제품인덱스큐.Length} 개");
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam04);
                     Global.그랩제어.Ready(카메라구분.Cam04);
                     Debug.WriteLine($"하부촬영수행(L) : 제품인덱스 {제품인덱스}");
-                }).Start();
-                Task.Delay(20);
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam05);
                     Global.그랩제어.Ready(카메라구분.Cam05);
                     Debug.WriteLine($"하부촬영수행(R) : 제품인덱스 {제품인덱스}");
-                }).Start();
+                })
+                { Priority = ThreadPriority.Highest }.Start();
             }
-            catch(Exception ee)
+            catch (Exception ee)
             {
                 Debug.WriteLine("--------------------------------------하부촬영수행 에러--------------------------------------");
                 Debug.WriteLine($"{ee.Message}");
@@ -416,7 +430,8 @@ namespace TPA.Schemas
                 Global.그랩제어.Triggering(카메라구분.Cam06);
                 Global.그랩제어.Triggering(카메라구분.Cam07);
                 Debug.WriteLine($"커넥터촬영수행 : 제품인덱스 {제품인덱스}");
-            }).Start();
+            })
+            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private void 커버조립여부요청수행(PLC커맨드목록 커맨드, Int32 제품인덱스)
@@ -523,12 +538,6 @@ namespace TPA.Schemas
                 커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_1_커버상m1).결과값);
                 커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_2_커버상m2).결과값);
                 커버들뜸값.Add((Single)검사.GetItem(검사항목.No4_3_커버상m3).결과값);
-
-                //Single[,] 커버들뜸위치 = { // 커버상m1, 커버상m2, 커버상m3
-                //    { 0,   40, (Single)검사.GetItem(검사항목.커버상m1).결과값 },
-                //    { 0,  -60, (Single)검사.GetItem(검사항목.커버상m2).결과값 },
-                //    { 0, -125, (Single)검사.GetItem(검사항목.커버상m3).결과값 },
-                //};
 
                 Single[,] 커버윤곽위치 = {
                     {  26.7f,   74.68f, (Single)검사.GetItem(검사항목.No4_4_커버들뜸k1).결과값 },

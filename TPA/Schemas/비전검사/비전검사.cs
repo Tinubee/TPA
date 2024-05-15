@@ -103,11 +103,21 @@ namespace TPA.Schemas
 
         public Boolean Run(카메라장치 장치, 검사결과 결과)
         {
+            Int32 result;
             Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HHmmss.fff}")} [검사수행] {장치.구분}");
             if (결과 == null) return false;
             Boolean r = Run(장치.구분, 장치.CogImage(), 결과);
             Global.사진자료.SaveImage(장치, 결과);
-            Global.제품검사수행.제품인덱스큐[(Int32)장치.구분].Dequeue();
+            if (!Global.제품검사수행.제품인덱스큐[(Int32)장치.구분].TryDequeue(out result))
+            {
+                // Handle the case where the dequeue operation fails, if necessary
+                Global.오류로그("비전검사", "Run", "Failed to dequeue an item.", false);
+                Debug.WriteLine("Failed to dequeue an item.");
+            }
+            else
+            {
+                Debug.WriteLine($"{result} 인덱스큐 제거완료.");
+            }
             return r;
         }
 

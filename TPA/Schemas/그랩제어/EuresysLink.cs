@@ -12,6 +12,7 @@ using System.IO;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TPA.Schemas
 {
@@ -102,9 +103,28 @@ namespace TPA.Schemas
 
         public override Boolean Ready()
         {
-            if (this.CurrentState() != ChannelState.ACTIVE)
+            try
+            {
+                String state = this.CurrentState();
+                if (state == ChannelState.ACTIVE) return true;
+                if (state != ChannelState.READY)
+                {
+                    MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
+                    Thread.Sleep(100);
+                }
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
-            return true;
+                //this.FreeSufaceTable();
+
+                //if (this.CurrentState() != ChannelState.ACTIVE)
+                //    MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"라인카메라 Ready ERROR {e.Message}");
+                return false;
+            }
+           
         }
 
         public void Free()

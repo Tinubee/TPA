@@ -1,4 +1,5 @@
 ﻿using ActUtlType64Lib;
+using DevExpress.Diagram.Core.Themes;
 using DevExpress.XtraPrinting.Native;
 using MvUtils;
 using System;
@@ -22,10 +23,12 @@ namespace TPA.Schemas
         public void Init()
         {
             this.PLC = new ActUtlType64();
-            if (Global.환경설정.동작구분 == 동작구분.Live) {
+            if (Global.환경설정.동작구분 == 동작구분.Live)
+            {
                 this.PLC커맨드.Init(new Action<PLC커맨드목록, Int32>((커맨드주소, 커맨드값) => PLC커맨드전송(커맨드주소, 커맨드값)));
             }
-            else {
+            else
+            {
                 this.PLC커맨드.Init(null);
             }
         }
@@ -37,11 +40,12 @@ namespace TPA.Schemas
 
         public void Start()
         {
-            if (this.작업여부)  return; 
-            this.작업여부 = true; 
-            this.정상여부 = true; 
+            if (this.작업여부) return;
+            this.작업여부 = true;
+            this.정상여부 = true;
             this.시작일시 = DateTime.Now;
-            if (Global.환경설정.동작구분 == 동작구분.Live) {
+            if (Global.환경설정.동작구분 == 동작구분.Live)
+            {
                 this.PLC커맨드정보갱신();
                 this.PLC커맨드정보초기화();
                 this.검사위치별제품인덱스버퍼초기화();
@@ -53,9 +57,14 @@ namespace TPA.Schemas
         private void 장치통신작업()
         {
             Global.정보로그(로그영역, "PLC 통신", $"통신을 시작합니다.", false);
-            while (this.작업여부) {
-                PLC커맨드자료분석();
-                Task.Delay(PLC통신주기);
+            while (this.작업여부)
+            {
+                try { PLC커맨드자료분석(); }
+                catch (Exception ex) {
+                    Global.오류로그(로그영역, "장치통신작업함수", $"{ex.Message}", true);
+                    Debug.WriteLine(ex.Message, 로그영역); 
+                }
+                Thread.Sleep(PLC통신주기);
             }
 
             Global.정보로그(로그영역, "PLC 통신", $"통신이 종료되었습니다.", false);
@@ -76,11 +85,13 @@ namespace TPA.Schemas
 
         private void 연결종료()
         {
-            try {
+            try
+            {
                 PLC.Close();
                 Global.정보로그(로그영역, "PLC 연결종료", $"서버에 연결을 종료하였습니다.", false);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Global.오류로그(로그영역, "PLC 연결종료", $"서버 연결을 종료하는 중 오류가 발생하였습니다.\r\n{ex.Message}", false);
             }
         }

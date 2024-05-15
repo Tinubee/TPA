@@ -47,14 +47,6 @@ namespace TPA.Schemas
 
             MC.OpenDriver(); // Euresys (Multicam)
 
-            // backup this.측면카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam01, 코드 = "DA1698484", 교정X = 0.014d, 교정Y = 0.014d };
-            // backup this.측면카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "DA1698487", 교정X = 0.014d, 교정Y = 0.014d };
-            // backup this.상부카메라 = new EuresysLink(카메라구분.Cam03) { 코드 = "", 교정X = 0.015398409d, 교정Y = 0.016d };
-            // backup this.하부카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1698488", 교정X = 0.014d, 교정Y = 0.014d };
-            // backup this.하부카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam05, 코드 = "DA1698486", 교정X = 0.014d, 교정Y = 0.014d };
-            // backup this.커넥터설삽카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam06, 코드 = "DA1278379", 교정X = 0.014640d, 교정Y = 0.014640d };
-            // backup this.커넥터설삽카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam07, 코드 = "DA0652350", 교정X = 0.014658d, 교정Y = 0.014658d };
-
             this.측면카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam01, 카메라이름 = Localization.GetString(카메라구분.Cam01), 코드 = "DA1698484", 교정X = 0.014d, 교정Y = 0.014d };
             this.측면카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 카메라이름 = Localization.GetString(카메라구분.Cam02), 코드 = "DA1698487", 교정X = 0.014d, 교정Y = 0.014d };
             this.상부카메라 = new EuresysLink(카메라구분.Cam03) { 코드 = "", 카메라이름 = Localization.GetString(카메라구분.Cam03), 교정X = 0.016d, 교정Y = 0.016d };
@@ -127,123 +119,118 @@ namespace TPA.Schemas
 
         public void Triggering(카메라구분 카메라) => this.GetItem(카메라)?.Triggering();
 
-        //public void 그랩완료(카메라구분 카메라, IntPtr intPtr, Int32 width, Int32 height)
+        private static readonly object lockObj = new object();
+
+        public void 그랩완료(카메라장치 장치)
+        {
+            lock (lockObj)
+            {
+                try
+                {
+                    Global.조명제어.TurnOff(장치.구분);
+                    this[장치.구분].Stop();
+
+                    if (Global.장치통신.자동수동여부)
+                    {
+                        Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(장치.구분);
+                        검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
+                        DateTime 검사시간 = 검사 != null ? 검사.검사일시 : DateTime.Now;
+                        //Global.정보로그("카메라", "그랩완료", $"{장치.구분} 제품인덱스 {제품인덱스}", false);
+
+                        if (제품인덱스 > 0)
+                        {
+                            Global.비전검사.Run(장치, 검사);
+                            Task.Run(() =>
+                            {
+                                if (장치.구분 == 카메라구분.Cam03)
+                                {
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 1);
+                                    Task.Delay(50).Wait();
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].Busy주소, 0);
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 0);
+                                }
+                                else if (장치.구분 == 카메라구분.Cam05)
+                                {
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 1);
+                                    Task.Delay(50).Wait();
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].Busy주소, 0);
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 0);
+                                }
+                                else if (장치.구분 == 카메라구분.Cam07)
+                                {
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 1);
+                                    Task.Delay(50).Wait();
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].Busy주소, 0);
+                                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 0);
+                                }
+                            });
+                        }
+                        else
+                        {
+                            Global.경고로그("카메라", "제품인덱스", $"카메라 [{Utils.GetDescription(장치.구분)}]의 검사 Index가 없습니다.", false);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Global.오류로그("카메라", "그랩완료", $"그랩완료 실패: {ex.Message}, StackTrace: {ex.StackTrace}", true);
+                }
+            }
+        }
+
+        //public void 그랩완료(카메라장치 장치)
         //{
+        //    Global.조명제어.TurnOff(장치.구분);
+        //    this[장치.구분].Stop();
         //    if (Global.장치통신.자동수동여부)
         //    {
-        //        Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(카메라);
+        //        Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(장치.구분);
         //        검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
         //        DateTime 검사시간 = 검사 != null ? 검사.검사일시 : DateTime.Now;
-        //        Global.정보로그("카메라", "그랩완료", $"{카메라} 제품인덱스 {제품인덱스}", false);
+        //        Global.정보로그("카메라", "그랩완료", $"{장치.구분} 제품인덱스 {제품인덱스}", false);
         //        if (제품인덱스 > 0)
         //        {
+        //            Global.비전검사.Run(장치, 검사);
         //            Task.Run(() =>
         //            {
-        //                AcquisitionData data = new AcquisitionData(카메라);
-        //                data.SetImage(intPtr, width, height);
-
-        //                if (카메라 == 카메라구분.Cam03)
-        //                {
-        //                    Task.Run(() =>
-        //                    {
-        //                        Global.비전검사.Run(data);
-        //                    });
-        //                }
-        //                else {
-        //                    Global.비전검사.Run(data);
-        //                }
-
-        //                if (카메라 == 카메라구분.Cam03)
+        //                //Thread Sleep은 응용프로그램에 영향미칠 가능성이 있으므로 Task로 변경
+        //                //PLC와 통신부분을 제외하고는 전부 Task에서 제외시킴
+        //                if (장치.구분 == 카메라구분.Cam03)
         //                {
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 1);
-        //                    Thread.Sleep(50);
+        //                    Task.Delay(50);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].Busy주소, 0);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 0);
 
         //                    return;
         //                }
-        //                else if (카메라 == 카메라구분.Cam05)
+        //                else if (장치.구분 == 카메라구분.Cam05)
         //                {
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 1);
-        //                    Thread.Sleep(50);
+        //                    Task.Delay(50);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].Busy주소, 0);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 0);
         //                }
-        //                else if (카메라 == 카메라구분.Cam07)
+        //                else if (장치.구분 == 카메라구분.Cam07)
         //                {
         //                    Debug.WriteLine($"{카메라구분.Cam07} 그랩완료시 들어오는 else if문 들어옴");
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 1);
-        //                    Thread.Sleep(50);
+        //                    Task.Delay(50);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].Busy주소, 0);
         //                    Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 0);
         //                }
-        //                Mat mat = new Mat(height, width, MatType.CV_8U, intPtr);
-        //                그랩이미지처리.ImageSave(Global.환경설정.사진저장경로, mat, 검사시간, 카메라, 제품인덱스, true);
+
+        //                //Mat mat = new Mat(장치.ImageHeight, 장치.ImageWidth, MatType.CV_8U, 장치.BufferAddress);
+        //                //if (mat != null)
+        //                //    그랩이미지처리.ImageSave(Global.환경설정.사진저장경로, mat, 검사시간, 장치.구분, 제품인덱스, true);
         //            });
         //        }
         //        else
         //        {
-        //            Global.경고로그("카메라", "제품인덱스", $"카메라 [{Utils.GetDescription(카메라)}]의 검사 Index가 없습니다.", false);
+        //            Global.경고로그("카메라", "제품인덱스", $"카메라 [{Utils.GetDescription(장치.구분)}]의 검사 Index가 없습니다.", false);
         //        }
-        //        this[카메라].Stop();
         //    }
-        //    Global.조명제어.TurnOff(카메라);
         //}
-
-
-        public void 그랩완료(카메라장치 장치)
-        {
-            Global.조명제어.TurnOff(장치.구분);
-            this[장치.구분].Stop();
-            if (Global.장치통신.자동수동여부)
-            {
-                Int32 제품인덱스 = Global.제품검사수행.촬영위치별제품인덱스(장치.구분);
-                검사결과 검사 = Global.검사자료.검사결과찾기(제품인덱스);
-                DateTime 검사시간 = 검사 != null ? 검사.검사일시 : DateTime.Now;
-                Global.정보로그("카메라", "그랩완료", $"{장치.구분} 제품인덱스 {제품인덱스}", false);
-                if (제품인덱스 > 0)
-                {
-                    Global.비전검사.Run(장치, 검사);
-                    Task.Run(() =>
-                    {
-                        //Thread Sleep은 응용프로그램에 영향미칠 가능성이 있으므로 Task로 변경
-                        //PLC와 통신부분을 제외하고는 전부 Task에서 제외시킴
-                        if (장치.구분 == 카메라구분.Cam03)
-                        {
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 1);
-                            Task.Delay(50);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].Busy주소, 0);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.측상촬영트리거].완료주소, 0);
-
-                            return;
-                        }
-                        else if (장치.구분 == 카메라구분.Cam05)
-                        {
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 1);
-                            Task.Delay(50);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].Busy주소, 0);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.하부촬영트리거].완료주소, 0);
-                        }
-                        else if (장치.구분 == 카메라구분.Cam07)
-                        {
-                            Debug.WriteLine($"{카메라구분.Cam07} 그랩완료시 들어오는 else if문 들어옴");
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 1);
-                            Task.Delay(50);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].Busy주소, 0);
-                            Global.장치통신.강제쓰기(Global.장치통신.PLC커맨드[PLC커맨드목록.커넥터촬영트리거].완료주소, 0);
-                        }
-
-                        //Mat mat = new Mat(장치.ImageHeight, 장치.ImageWidth, MatType.CV_8U, 장치.BufferAddress);
-                        //if (mat != null)
-                        //    그랩이미지처리.ImageSave(Global.환경설정.사진저장경로, mat, 검사시간, 장치.구분, 제품인덱스, true);
-                    });
-                }
-                else
-                {
-                    Global.경고로그("카메라", "제품인덱스", $"카메라 [{Utils.GetDescription(장치.구분)}]의 검사 Index가 없습니다.", false);
-                }
-            }
-        }
 
         public 카메라장치 GetItem(카메라구분 구분)
         {
